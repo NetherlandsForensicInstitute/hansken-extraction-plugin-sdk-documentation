@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prerequisites &mdash; Hansken Extraction Plugins for plugin developers 0.6.0
+ documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/wider_pages.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Packaging" href="building.html" />
+    <link rel="prev" title="Java API Changelog" href="api_changelog.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.6.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../java.html">Java</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_changelog.html">Java API Changelog</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configure-maven">Configure Maven</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#corporate-repository-manager">Corporate repository manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-maven-locally">Configure Maven locally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="building.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snippets.html">Java code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Using the Test Framework in Java</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javadoc.html">Javadoc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../java.html">Java</a> &raquo;</li>
+      <li>Prerequisites</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/java/prerequisites.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h1>
+<section id="configure-maven">
+<h2>Configure Maven<a class="headerlink" href="#configure-maven" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://maven.apache.org/">Maven</a> is a popular tool to build Java applications. To build extraction plugins with Maven,
+Maven has to be configured properly. It has to be able to download Hansken extraction plugin SDK dependencies. This
+section describes two different ways to configure Maven:</p>
+<ul class="simple">
+<li><p>corporate repository manager;</p></li>
+<li><p>configuring Maven locally on your machine.</p></li>
+</ul>
+<section id="corporate-repository-manager">
+<h3>Corporate repository manager<a class="headerlink" href="#corporate-repository-manager" title="Permalink to this heading"></a></h3>
+<p>A corporate repository is preferred over a locally, per machine configured Maven. Access to the Hansken extraction
+plugin SDK dependencies is configured at a single place in your organisation. The repository functions as a mirror or
+proxy, so the SDK dependencies are downloaded form the corporate repository. This will reduce load on the community
+repository.</p>
+<p>If your organisation hosts a corporate repository manager, such as Sonatype Nexus, please contact the maintainer of the
+repository manager. The maintainer can contact your organisations Hansken business owner for correct settings. If you
+don’t know who to contact as your business owner, please read the <a class="reference internal" href="../../contact.html"><span class="doc">Contact</span></a> page.</p>
+</section>
+<section id="configure-maven-locally">
+<h3>Configure Maven locally<a class="headerlink" href="#configure-maven-locally" title="Permalink to this heading"></a></h3>
+<p>In cases that there is no corporate repository manager available, you have to configure Maven locally on your machine.
+You will configure Maven to download the Hansken extraction plugin dependencies from the Hansken developer community
+repository. The main steps to follow are to first get a community access token, and next configure Mavens
+<code class="docutils literal notranslate"><span class="pre">settings.xml</span></code>.</p>
+<section id="step-1-get-a-community-access-token">
+<h4>Step 1: Get a community access token<a class="headerlink" href="#step-1-get-a-community-access-token" title="Permalink to this heading"></a></h4>
+<p>The first step is to get an authentication token for the Hansken community. This token will be used by Maven when it
+downloads the required SDK dependencies.</p>
+<p>To do so, you’ll first need access to the Hansken developer community. If you don’t have access to the developer
+community, please see “<a class="reference internal" href="../faq.html#communityaccess"><span class="std std-ref">How can I access Hansken developer community</span></a>” the in the <a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a>.</p>
+<p>When you have access to the Hansken developer community, you can generate an access token. With this token, Maven can
+download dependencies from the community repository. To generate your access token, follow the next steps:</p>
+<ol class="arabic simple">
+<li><p>Log in to Hansken developer community at <a class="reference external" href="https://git.eminjenv.nl/">git.eminjenv.nl</a></p></li>
+<li><p>Go to your <a class="reference external" href="https://git.eminjenv.nl/-/profile">profile page</a> (a)</p></li>
+<li><p>Open the page <code class="docutils literal notranslate"><span class="pre">Access</span> <span class="pre">Tokens</span></code> (b)</p></li>
+<li><p>Create a token by filling in the form <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">a</span> <span class="pre">personal</span> <span class="pre">access</span> <span class="pre">token</span></code>,</p>
+<ul class="simple">
+<li><p>give the token a clear name (c)</p></li>
+<li><p>select <code class="docutils literal notranslate"><span class="pre">read_api</span></code> checkbox (d)</p></li>
+<li><p>click <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">personal</span> <span class="pre">access</span> <span class="pre">token</span></code> (e)</p></li>
+<li><p>the newly generated token is shown to you at the top of the form.</p></li>
+</ul>
+</li>
+<li><p>Keep the generated token until you have added this to <code class="docutils literal notranslate"><span class="pre">settings.xml</span></code> (next step).</p></li>
+</ol>
+<a class="reference external image-reference" href="create_token.png"><img alt="Create token" src="../../_images/create_token.png" /></a>
+<a class="reference external image-reference" href="access_token.png"><img alt="Access token" src="../../_images/access_token.png" /></a>
+</section>
+<section id="step-2-update-mavens-settings-xml">
+<h4>Step 2: Update Mavens <code class="docutils literal notranslate"><span class="pre">settings.xml</span></code><a class="headerlink" href="#step-2-update-mavens-settings-xml" title="Permalink to this heading"></a></h4>
+<p>Now that you have an access token, the Hansken extraction plugin SDK <code class="docutils literal notranslate"><span class="pre">repository</span></code> can added to your Maven configuration.
+On Linux, the Maven settings can be found at <code class="docutils literal notranslate"><span class="pre">~/.m2/settings.xml</span></code>. The following snippet shows the required fields in
+your configuration. In the snippet, replace the text <code class="docutils literal notranslate"><span class="pre">PUT_YOUR_TOKEN_HERE</span></code> by the value of your actual token.</p>
+<p>If the file <code class="docutils literal notranslate"><span class="pre">settings.xml</span></code> does not exist, you can simply create the file and put the following snippet in the file. If
+you already have a <code class="docutils literal notranslate"><span class="pre">settings.xml</span></code>, then copy the shown server and profile to the appropriate sections in your existing
+configuration.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;settings</span>
+        <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;servers&gt;</span>
+        <span class="nt">&lt;server&gt;</span>
+            <span class="nt">&lt;id&gt;</span>hansken-extraction-plugin-sdk<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;httpHeaders&gt;</span>
+                    <span class="nt">&lt;property&gt;</span>
+                        <span class="nt">&lt;name&gt;</span>Private-Token<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;value&gt;</span>PUT_YOUR_TOKEN_HERE<span class="nt">&lt;/value&gt;</span>
+                    <span class="nt">&lt;/property&gt;</span>
+                <span class="nt">&lt;/httpHeaders&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/server&gt;</span>
+    <span class="nt">&lt;/servers&gt;</span>
+
+    <span class="nt">&lt;profiles&gt;</span>
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>hansken-extraction-plugins<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;activation&gt;</span>
+                <span class="nt">&lt;activeByDefault&gt;</span>true<span class="nt">&lt;/activeByDefault&gt;</span>
+            <span class="nt">&lt;/activation&gt;</span>
+            <span class="nt">&lt;repositories&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>hansken-extraction-plugin-sdk<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        https://git.eminjenv.nl/api/v4/projects/406/packages/maven
+                    <span class="nt">&lt;/url&gt;</span>
+                <span class="nt">&lt;/repository&gt;</span>
+            <span class="nt">&lt;/repositories&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+    <span class="nt">&lt;/profiles&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please make sure to use an OpenJDK version of Java. Some certificate issues have been reported when using an
+OracleJDK version of Java. These issues could prevent Maven to download the required dependencies.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_changelog.html" class="btn btn-neutral float-left" title="Java API Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="building.html" class="btn btn-neutral float-right" title="Packaging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2022 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
