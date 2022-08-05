@@ -1,0 +1,50 @@
+# Introduction
+
+The Extraction Plugin Software Development Kit can be used to develop a [Hansken](https://hansken.org/introduction)
+extraction plugin.
+
+Hansken is designed to give access to and insight in digital data and traces originating from seized and demanded
+digital material. One aspect of the Hansken platform is the extraction engine (extraction framework). The extraction
+engine contains digital forensics knowledge, which is used to find traces in digital material. With extraction plugins
+case investigators can add new digital forensics knowledge to the extraction framework. In this way, Hansken is enabled
+to understand new digital formats, and thus is able to find new types of traces in the seized and demanded material.
+
+Examples of digital forensics knowledge that can be added to Hansken with extraction plugins:
+
+* new file formats (e.g. a new crypto currency wallet)
+* combine traces to find new information (e.g. use a windows registry entry required to read a file from disk)
+* apply algorithms on traces (e.g. speech to text from audio files)
+
+The primary goals of this SDK are:
+
+* to make it as easy as possible to add new digital forensics knowledge to Hansken.
+* be able to share digital forensics knowledge with other Hansken community members
+
+## Software Development Kit (SDK)
+
+In order to create extraction plugins, the Hansken project maintains an Extraction Plugin Software Development Kit
+(SDK).
+
+This SDK contains the following elements:
+
+* [Java API and tooling](java), to be able to write an extraction plugin with the [Java](https://www.java.com/)
+  programming language
+* [Python API and tooling](python), to be able to write an extraction plugin with [Python](https://www.python.org/)
+  programming language
+* [Test framework](concepts/test_framework.md), to be able to test extraction plugins before they are used production
+* Documentation for plugin developers to help understand the SDK and all its facets (this documentation)
+* :doc:`examples`
+
+## Development steps of a plugin
+
+To create a plugin, the plugin developer could follow the following steps. Detailed information per step will be added
+later to the documentation.
+
+1. Create a new empty plugin
+2. Implement the plugin logic
+3. Verify the plugin using the [test framework](concepts/test_framework.md), using reference data (test data) and
+   expected output
+4. Test the plugin in Hansken
+5. Use the plugin in an actual case
+6. Share the plugin with the Hansken community, so other case investigations can benefit from the plugin as well (
+   optional, but encouraged)

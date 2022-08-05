@@ -1,0 +1,23 @@
+Python
+======
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   python/api_changelog
+   python/prerequisites
+   python/getting_started
+   python/snippets
+   python/testing
+   python/hanskenpy
+   python/debugging
+
+API Documentation
+-----------------
+
+.. autosummary::
+   :toctree: python/api
+   :recursive:
+
+   hansken_extraction_plugin.api

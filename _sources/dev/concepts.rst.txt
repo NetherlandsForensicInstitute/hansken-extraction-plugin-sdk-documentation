@@ -1,0 +1,20 @@
+General concepts
+================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   concepts/extraction_plugins
+   concepts/anatomy_of_a_plugin
+   concepts/plugin_types
+   concepts/plugin_naming_convention
+   concepts/traces
+   concepts/hql_lite
+   concepts/data_transformations
+
+   concepts/test_framework
+
+   concepts/isolation
+   concepts/kubernetes_autoscaling
+

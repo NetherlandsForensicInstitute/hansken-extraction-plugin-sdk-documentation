@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plugin naming convention &mdash; Hansken Extraction Plugins for plugin developers SNAPSHOT
+ documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/wider_pages.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Traces &amp; Trace model" href="traces.html" />
+    <link rel="prev" title="Extraction plugin types" href="plugin_types.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                SNAPSHOT
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">General concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="extraction_plugins.html">Hansken Extraction Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anatomy_of_a_plugin.html">Anatomy of a plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin_types.html">Extraction plugin types</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Plugin naming convention</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plugin-identifier">Plugin identifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="traces.html">Traces &amp; Trace model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hql_lite.html">HQL-Lite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_transformations.html">Data Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_framework.html">Test framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation.html">Plugin isolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes_autoscaling.html">Kubernetes, Autoscaling, Resourcemanagement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../concepts.html">General concepts</a> &raquo;</li>
+      <li>Plugin naming convention</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/concepts/plugin_naming_convention.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plugin-naming-convention">
+<h1>Plugin naming convention<a class="headerlink" href="#plugin-naming-convention" title="Permalink to this heading"></a></h1>
+<section id="plugin-identifier">
+<h2>Plugin identifier<a class="headerlink" href="#plugin-identifier" title="Permalink to this heading"></a></h2>
+<p>Each extraction plugin has a unique identifier. The identifier consists of three fields. These three fields combined
+form the plugin name.</p>
+<p>The three fields of a plugin identifier are: <em>domain</em>, <em>category</em>, and <em>name</em>. The fields are described in more detail
+below.</p>
+<p><strong>domain</strong>
+The domain name of the organisation where the plugin is created. If an organisation has multiple domain names, the
+shortest name is preferred over the longer domain names. Examples: <code class="docutils literal notranslate"><span class="pre">nfi.nl</span></code>, <code class="docutils literal notranslate"><span class="pre">politie.nl</span></code>, <code class="docutils literal notranslate"><span class="pre">fiod.nl</span></code>, <code class="docutils literal notranslate"><span class="pre">hansken.org</span></code>.</p>
+<p><strong>category</strong>
+A type of action that the plugin performs. The category is a free text field, but the following table gives some
+recommendations.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">extract</span></code></p></td>
+<td><p>The plugin parses a clear data structure</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">carve</span></code></p></td>
+<td><p>The plugin parses data fragments to reassemble traces in the absence of filesystem metadata</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">classify</span></code></p></td>
+<td><p>The plugin categorizes a plugin based on its content, e.g. detecting money on traces of type <code class="docutils literal notranslate"><span class="pre">picture</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">digest</span></code></p></td>
+<td><p>The plugin digests data to compute a hash</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ocr</span></code></p></td>
+<td><p>The plugin applies ocr (optical character recognition) to read text on <code class="docutils literal notranslate"><span class="pre">pictures</span></code> or scanned documents</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">match</span></code></p></td>
+<td><p>The plugin matches a trace against a database, and reports whether there was hit or miss, e.g. matching a trace to a well known files database</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>name</strong>
+The name of the plugin, or in the classic sense, a description detailing what the plugin processes. Note that the name
+can contain (forward) slashes.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>The following table shows a list of plugin identifiers. The last column of the table shows the derived full plugin name.
+The derived full plugin name will be shown in Hansken.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Domain</p></th>
+<th class="head"><p>Category</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Derived plugin name</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hansken.org</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">extract</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">archive</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hansken.org/extract/archive</span></code></p></td>
+<td><p>A plugin created by the Hansken development team that extracts traces from an arbitrary <code class="docutils literal notranslate"><span class="pre">archive</span></code> format</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nfi.nl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">extract</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">archive/zip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nfi.nl/extract/archive/zip</span></code></p></td>
+<td><p>A plugin created by an NFI team that extracts traces from a specific <code class="docutils literal notranslate"><span class="pre">archive</span></code> format: <code class="docutils literal notranslate"><span class="pre">zip</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">politie.nl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">extract</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">archive/zip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">politie.nl/extract/archive/zip</span></code></p></td>
+<td><p>The same as the previous example, but now the plugin is created by a different organisation: <code class="docutils literal notranslate"><span class="pre">politie.nl</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hansken.org</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">carve</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">archive/zip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hansken.org/carve/archive/zip</span></code></p></td>
+<td><p>A plugin that carves data to detect a specific <code class="docutils literal notranslate"><span class="pre">archive</span></code> format: <code class="docutils literal notranslate"><span class="pre">zip</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hansken.org</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">digest</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sha256</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hansken.org/digest/sha256</span></code></p></td>
+<td><p>A plugin that digests data to compute a <code class="docutils literal notranslate"><span class="pre">sha256</span></code> hash</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hansken.org</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ocr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tesseract</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hansken.org/ocr/tesseract</span></code></p></td>
+<td><p>A plugin that performs ocr using <code class="docutils literal notranslate"><span class="pre">tesseract</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plugin_types.html" class="btn btn-neutral float-left" title="Extraction plugin types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="traces.html" class="btn btn-neutral float-right" title="Traces &amp; Trace model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2022 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

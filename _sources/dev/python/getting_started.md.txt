@@ -1,0 +1,73 @@
+# Getting Started in Python
+
+See the
+[doc-step-by-step repository on git.eminjenv.nl](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/doc-step-by-step)
+for a more extensive guide that takes you by the hand from the very beginning. It explains how to install all
+prerequisites, how to write your first Extraction Plugin in Python, how to test it and how to run it.
+
+This section assumes you use the same setup as is used in
+the [Extraction Plugin Examples](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/examples) and have
+installed all prerequisites.
+
+## Installation
+
+To install the Python Extraction Plugins SDK, run:
+
+```bash
+pip install hansken-extraction-plugin
+```
+
+## Building and running
+
+If you just want to build and test a python plugin code, use:
+
+```bash
+tox
+```
+
+This will show the test results for the plugin and a wheel distribution is created in the `dist/` directory.
+
+To test the plugin running in a docker image:
+
+```bash
+tox -e integration
+```
+
+To serve the plugin manually:
+
+```bash
+serve_plugin -vvv <file> <port>
+```
+
+Where `file` is the Python implementation of the plugin, and `port` is the port on which the plugin is served.
+The command line option `-vvv` prints debug information to standard output.
+
+For more information, see [Testing](testing.md).
+
+
+### Building a docker image for a Python plugin
+
+Make sure that the Extraction Plugins SDK is [installed](getting_started.md#Installation) as well as Docker.
+Then, build your plugin container image using the following command:
+
+```bash
+build_plugin PLUGIN_FILE DOCKER_FILE_DIRECTORY [DOCKER_IMAGE_NAME]
+```
+
+For example:
+```bash
+build_plugin plugin/chatplugin.py . extraction-plugins/chatplugin
+```
+
+This will generate a plugin image:
+
+* The extraction plugin is added to your local image registry (`docker images`),
+* Note that DOCKER\_IMAGE\_NAME is optional and will default to `extraction-plugin/PLUGINID`, e.g.
+  `extraction-plugin/nfi.nl/extract/chat/whatsapp`,
+* The image is tagged with two tags: `latest`, and your plugin version.
+
+To verify that the image has been built, type the following command to view all local images:
+```bash
+docker images
+```
+

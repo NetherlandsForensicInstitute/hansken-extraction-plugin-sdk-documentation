@@ -1,0 +1,108 @@
+# Advanced use of the Test Framework in Python
+
+.. _python testing:
+
+This section assumes you use the same setup as is used in
+the [Extraction Plugin Examples](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/examples).
+
+By default, the build scripts as described in the [Getting Started](getting_started.md) section will automatically run
+tests. The appropirate commands have been added to the tox.ini directly. This section gives a little more detail on the
+test commands and options.
+
+One can simply create unit tests for a plugin directly. However, we also provide a test-framework for testing them over
+gRPC. The test-framework serves a running instance of a Python plugin, and feeds it input files and compares the results
+against an expected result set.
+
+Note that the test-framework is implemented in Java, hence the Java 11 requirement. A jar file is included in the Python
+SDK which is called from a Python wrapper.
+
+## Regenerate expected test results
+
+The build and test scripts run some integration tests. To update the expected test outcome, the following command can be
+used:
+
+```bash
+tox -e regenerate
+```
+
+## Standalone testing
+
+The test runner is a script called `test_plugin` which is available in the SDK.
+
+To get started, `cd` into the directory of the plugin you want to test and run:
+
+```bash
+test_plugin --standalone plugin/chat_plugin.py
+```
+
+Note that the argument provided to the option `--standalone` must be the relative path to the plugin `py` file which is
+to be tested. This test accepts input files from the directory `testdata/input` and compares the results to the result
+files in found in `testdata/results`. Use the optional argument `--regenerate` to regenerate the expected results for
+the test when needed.
+
+This standalone test is also used by the `tox.ini` file to validate the plugin. Simply calling `tox` should be enough to
+install all dependencies and run the test.
+
+## Testing with a Docker image
+
+If there is a docker image available for the plugin you can also test it by executing:
+
+```bash
+test_plugin --docker extraction-plugin-examples-my-plugin
+```
+
+Replace the 'extraction-plugin-examples-chat' with the docker image you want to test. Run the following command to see
+which docker images are available:
+
+```bash
+docker images
+```
+
+## Manual testing
+
+The third option for testing is a manually started plugin. Start the plugin service in a terminal by executing:
+
+```bash
+serve_plugin -vvv plugin/my_plugin.py
+```
+
+This will spin up the chat plugin at port 8999. Here also the argument must be a path to the plugin's `.py` file. In
+another terminal window, run the test with:
+
+```bash
+test_plugin --manual localhost 8999
+```
+
+## Tip: Start tests in your IDE
+To start the extraction plugin from code, create a `__main__` method which calls the `_test_validate_standalone`
+method of the test framework (see the example below). This method causes the extraction plugin to be started and
+supplied with data by the FLITS test framework. In this way the test can be started from the IDE, which has the
+advantage that it is easier to debug.
+
+```python
+from hansken_extraction_plugin.test_framework.test_plugin import _test_validate_standalone
+from hansken_extraction_plugin.api.extraction_plugin import ExtractionPlugin
+
+
+class PluginToTest(ExtractionPlugin):
+
+    def plugin_info(self):
+        # return plugin info
+        pass
+
+    def process(self, trace, data_context):
+        # process the data/trace here
+        pass
+
+
+if __name__ == '__main__':
+    _test_validate_standalone(PluginToTest, 'testdata/input', 'testdata/result', False)
+```
+
+## Help
+
+Run the following for an overview of all the available options in the test script:
+
+```bash
+test_plugin --help
+```

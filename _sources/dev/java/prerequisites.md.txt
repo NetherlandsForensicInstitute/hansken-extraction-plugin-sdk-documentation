@@ -1,0 +1,102 @@
+# Prerequisites
+
+## Configure Maven
+
+[Maven](https://maven.apache.org/) is a popular tool to build Java applications. To build extraction plugins with Maven,
+Maven has to be configured properly. It has to be able to download Hansken extraction plugin SDK dependencies. This
+section describes two different ways to configure Maven:
+
+* corporate repository manager;
+* configuring Maven locally on your machine.
+
+### Corporate repository manager
+
+A corporate repository is preferred over a locally, per machine configured Maven. Access to the Hansken extraction
+plugin SDK dependencies is configured at a single place in your organisation. The repository functions as a mirror or
+proxy, so the SDK dependencies are downloaded form the corporate repository. This will reduce load on the community
+repository.
+
+If your organisation hosts a corporate repository manager, such as Sonatype Nexus, please contact the maintainer of the
+repository manager. The maintainer can contact your organisations Hansken business owner for correct settings. If you
+don't know who to contact as your business owner, please read the :doc:`../../contact` page.
+
+### Configure Maven locally
+
+In cases that there is no corporate repository manager available, you have to configure Maven locally on your machine.
+You will configure Maven to download the Hansken extraction plugin dependencies from the Hansken developer community
+repository. The main steps to follow are to first get a community access token, and next configure Mavens
+`settings.xml`.
+
+#### Step 1: Get a community access token
+
+The first step is to get an authentication token for the Hansken community. This token will be used by Maven when it
+downloads the required SDK dependencies.
+
+To do so, you'll first need access to the Hansken developer community. If you don't have access to the developer
+community, please see ":ref:`communityaccess`" the in the [FAQ](../faq.md).
+
+When you have access to the Hansken developer community, you can generate an access token. With this token, Maven can
+download dependencies from the community repository. To generate your access token, follow the next steps:
+
+1. Log in to Hansken developer community at [git.eminjenv.nl](https://git.eminjenv.nl/)
+2. Go to your [profile page](https://git.eminjenv.nl/-/profile) (a)
+3. Open the page `Access Tokens` (b)
+4. Create a token by filling in the form `Add a personal access token`,
+    * give the token a clear name (c)
+    * select `read_api` checkbox (d)
+    * click `Create personal access token` (e)
+    * the newly generated token is shown to you at the top of the form.
+5. Keep the generated token until you have added this to `settings.xml` (next step).
+
+![Create token](create_token.png)
+
+![Access token](access_token.png)
+
+#### Step 2: Update Mavens `settings.xml`
+
+Now that you have an access token, the Hansken extraction plugin SDK `repository` can added to your Maven configuration.
+On Linux, the Maven settings can be found at `~/.m2/settings.xml`. The following snippet shows the required fields in
+your configuration. In the snippet, replace the text `PUT_YOUR_TOKEN_HERE` by the value of your actual token.
+
+If the file `settings.xml` does not exist, you can simply create the file and put the following snippet in the file. If
+you already have a `settings.xml`, then copy the shown server and profile to the appropriate sections in your existing
+configuration.
+
+```xml
+<settings
+        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>hansken-extraction-plugin-sdk</id>
+            <configuration>
+                <httpHeaders>
+                    <property>
+                        <name>Private-Token</name>
+                        <value>PUT_YOUR_TOKEN_HERE</value>
+                    </property>
+                </httpHeaders>
+            </configuration>
+        </server>
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>hansken-extraction-plugins</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>hansken-extraction-plugin-sdk</id>
+                    <url>
+                        https://git.eminjenv.nl/api/v4/projects/406/packages/maven
+                    </url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+</settings>
+```
+
+.. note:: Please make sure to use an OpenJDK version of Java. Some certificate issues have been reported when using an
+   OracleJDK version of Java. These issues could prevent Maven to download the required dependencies.

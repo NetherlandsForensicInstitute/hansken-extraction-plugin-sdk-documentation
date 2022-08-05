@@ -1,0 +1,28 @@
+# Packaging
+
+Packaging an extraction plugin is handled by Maven. To package your plugin into
+a container image, the following command can be used:
+
+```bash
+mvn package docker:build
+```
+
+This will generate a plugin image:
+
+* The extraction plugin is added to your local image registry
+(`docker images`),
+* The image name is `extraction-plugin/PLUGINID`, e.g.
+`extraction-plugin/nfi.nl/extract/chat/whatsapp`,
+* The image is labeled with two tags: `latest`, and your plugin version.
+
+.. _java_superpom_podman:
+
+Note: if your build environment does not have Docker available, you can use
+[podman](https://podman.io/) as an alternative. Install podman on your machine
+or build agent, and run the following commands _before_ invoking the
+`mvn package docker:build` command:
+
+```bash
+podman system service --time=0 unix:/run/user/$(id -u)/podman/podman.sock &
+export DOCKER_HOST="unix:/run/user/$(id -u)/podman/podman.sock"
+```

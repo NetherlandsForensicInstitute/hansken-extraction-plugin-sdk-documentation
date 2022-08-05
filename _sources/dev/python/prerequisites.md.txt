@@ -1,0 +1,17 @@
+# Prerequisites
+
+Required:
+
+* Python 3.6, 3.7 or 3.8
+* Java 11 (for running the test-framework, which is implemented in Java)
+
+It is recommended you also install:
+
+* Docker - for running plugins in containers, required for integration tests
+* Gzip - for unpacking test data, required when using Flits
+
+This software has only been tested on Linux, though it may work on other systems.
+
+For a more detailed description on the prerequisites and how to install them, see
+the [doc-step-by-step repository on git.eminjenv.nl](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/doc-step-by-step)
+.

@@ -1,0 +1,32 @@
+hansken\_extraction\_plugin.api.extraction\_plugin
+==================================================
+
+.. automodule:: hansken_extraction_plugin.api.extraction_plugin
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BaseExtractionPlugin
+      DeferredExtractionPlugin
+      ExtractionPlugin
+      MetaExtractionPlugin
+   
+   
+
+   
+   
+   
+
+
+
