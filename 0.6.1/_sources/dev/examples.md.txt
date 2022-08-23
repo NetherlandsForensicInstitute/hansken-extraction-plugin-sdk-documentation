@@ -1,0 +1,7 @@
+# Examples
+
+Extraction Plugin Examples in both Java and Python can be found in the
+[Hansken Extraction Plugin Examples Repository](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/examples)
+on the Hansken developer community.
+
+If you don't have access to the Hansken developer community, please see ":ref:`communityaccess`" the in the [FAQ](faq.md).

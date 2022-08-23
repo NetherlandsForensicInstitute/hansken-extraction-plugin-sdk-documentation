@@ -1,0 +1,224 @@
+# Java code snippets
+
+This page contains Java code snippets for common patterns that will be used when writing a plugin.
+
+## RandomAccessData as InputStream
+
+In Java, `InputStream` is a common type to pass data to another class or method. The SDK provides a simple utility to
+use a `RandomAccessData` as `InputStream`.
+
+Add the following import to your code:
+
+```java
+import org.hansken.plugin.extraction.core.data.RandomAccessDatas;
+```
+
+Next we can create an `InputStream` from the `RandomAccessData` as shown in the following snippet. Note that the
+`InputStream` is created using a `try-with-resources`-statement. This ensures that the `InputStream` is correctly closed
+when the `InputStream` is no longer required.
+
+```java
+RandomAccessData traceData=...;
+    try(InputStream asInputStream=RandomAccessDatas.asInputStream(traceData)){
+    // use the InputStream here
+    }
+```
+
+Notes:
+
+* the created `InputStream` is *not* thread-safe,
+* the created `InputStream` changes state in the provided `RandomAccessData`
+  (e.g. when data is read, the position updated in both the `InputStream` *and*
+  the `RandomAccessData` instances),
+* for more details on the implementation of the `InputStream`, refer to the `RandomAccessDataInputStream` JavaDoc.
+
+
+.. _tracelets java:
+
+## Adding tracelets
+
+In the following Java example, a "classification" :ref:`tracelet<tracelets>` is added to a trace. The tracelet consists
+of a list of four properties, namely "class", "confidence", "modelName" and "modelVersion".
+
+```java
+trace.addTracelet("prediction", tracelet -> tracelet
+     .set("type", "classification")
+     .set("class", "telephone")
+     .set("label", "label")
+     .set("confidence", 0.8f)
+     .set("embedding", Vector.of(1,2,3))
+     .set("modelName", "yolo")
+     .set("modelVersion", "2.0"));
+```
+or
+```java
+trace.addTracelet(new Tracelet("prediction", List.of(
+    new TraceletProperty("prediction.type","classification"),
+    new TraceletProperty("prediction.class","telephone"),
+    new TraceletProperty("prediction.label","label"),
+    new TraceletProperty("prediction.confidence",0.8f))),
+    new TraceletProperty("prediction.embedding", Vector.of(1,2,3)),
+    new TraceletProperty("prediction.modelName","yolo"),
+    new TraceletProperty("prediction.modelVersion","2.0"));
+```
+
+
+.. _datastreams java:
+
+## Adding data to a trace
+
+Traces can have data attatched to them. See :ref:`datastreams` for more information.
+The following two snippets demonstrate how to add data to a trace.
+
+It is currently not possible to verify that a specific data stream is already set or not.
+
+### Data Transformations
+
+The most efficient way to add data to a trace is using data transformations.
+See :doc:`../concepts/data_transformations` for more details.
+
+The following example sets a new data stream with dataType `html` on a trace, by setting a ranged data transformation:
+
+```java
+trace.setData("html", RangedDataTransformation.builder().addRange(offset, length).build());
+```
+
+The following example creates a child trace and sets a new datastream with dataType `raw` on it, by setting a ranged
+data transformation with two ranges:
+
+```java
+trace.newChild(format("lineNumber %d", lineNumber), child -> {
+    child.setData("raw", RangedDataTransformation.builder()
+                  .addRange(10, 20)
+                  .addRange(50, 30)
+                  .build());
+});
+```
+
+### Blobs
+
+It is not always possible to create a transormation for the data that has to be
+added to a trace. For example the data is a result of a computation, and not
+a direct subset of another data stream..
+
+The following examples show how to creates a new data stream of dataType `raw` on a trace.
+
+In case all data is stored in a `byte[]`, we can add the byte array to the data stream with:
+
+```java
+final byte[] rawBytes = {.....};
+trace.setData("raw", writer -> writer.write(rawBytes));
+```
+
+Alternatively, if the data is available in an `InputStream` the data can be added with:
+
+```java
+final InputStream inputStream = ...;
+trace.setData("raw", inputStream);
+```
+
+## Specifying system resources
+
+In the `PluginInfo` you can specify **maximum** system resource metrics for a plugin. These are used for scaling the
+number of pods as described [here](../concepts/kubernetes_autoscaling.md#Autoscaling). To run a plugin with 0.5 cpu (=
+0.5 vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration can be added to `PluginInfo`:
+
+```java
+PluginInfo.builderFor(this)
+    ...
+    .pluginResources(PluginResources.builder()
+    .maximumCpu(0.5f)
+    .maximumMemory(1000)
+    .build())
+    .build();
+```
+
+.. _java_snippets_deferred:
+
+## Deferred Extraction Plugins
+
+Using a deferred plugin requires inheriting the `DeferredExtractionPlugin` base class. This allows access to
+a ``TraceSearcher`` object in the process function to search for traces.
+
+```java
+public class ExampleDeferred extends DeferredExtractionPlugin {
+    public PluginInfo pluginInfo();
+
+    public void process(final Trace trace, final ExtractionContext context,
+                        final TraceSearcher searcher) {
+        final SearchResult result = searcher.search("file.extension=asc", 10);
+    }
+}
+```
+
+The ``search`` method accepts a HQL query and a count, which represents the maximum number of traces to return. It may
+be useful to specifically search for traces from the image being extracted. Add ``"image:" + trace.get("image")`` to
+your query. The query of the provided example could be extended like this:
+`"file.extension = asc AND image:" + trace.get("image")`.
+
+The traces contained in the ``SearchResult`` are returned as a stream.
+
+```java
+final Stream<Trace> stream = result.getTraces();
+stream.limit(5);
+```
+
+
+## Logging
+
+The logging is provided by Log4j 2 with a SLF4J binding. The Log4j 2 SLF4J binding allows applications coded to the
+SLF4J API to use Log4j 2 as the implementation.
+
+### Usage
+
+Here is an example illustrating how to log something with SLF4J. It begins by getting a logger with the name "LOG". This
+logger is in turn used to log the message `I'm logging a variable 1234!`.
+
+```java
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class Example {
+    private static final Logger LOG = LoggerFactory.getLogger(Example.class);
+
+    public void example() {
+        final int aNumber = 1234;
+        // logs to console: I'm logging a variable 1234!
+        LOG.info("I'm logging a variable {}!", aNumber);
+    }
+}
+```
+
+### Customize logging
+
+It's easy to change the logging format with a file called `log4j2.xml`. If desired, this file must be in the `resources`
+folder, for example `src/main/resources/log4j2.xml`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appenders>
+        <console name="stdout" target="SYSTEM_OUT">
+            <patternLayout
+                    pattern="%-5p|%d{yyyy-MM-dd HH:mm:ss}|%-20.20t|%-32.32c{1}|%m%n"/>
+        </console>
+    </appenders>
+    <loggers>
+        <root level="info">
+            <appenderRef ref="stdout"/>
+        </root>
+    </loggers>
+</configuration>
+```
+
+.. warning:: Be careful with logging sensitive information.
+
+.. note:: More information about customizing the logging can be found `here <https://logging.apache.org/log4j/2.x>`_.
+
+.. note:: The default logger is pre-configured to log `INFO` to `STDOUT` (see the configuration above)
+
+.. note:: Log4j 2 supports various logging formats, including xml, yaml, json, properties, etc.
+   Currently, only the xml format is supported.
+
+.. note:: Contact your Hansken administrator for more information on where to find logs for your Hansken environment.
+
