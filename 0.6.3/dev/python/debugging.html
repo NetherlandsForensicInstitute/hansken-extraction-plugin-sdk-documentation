@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to debug an Extraction Plugin &mdash; Hansken Extraction Plugins for plugin developers 0.6.3
+ documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/wider_pages.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="hansken_extraction_plugin.api" href="api/hansken_extraction_plugin.api.html" />
+    <link rel="prev" title="Run plugins with Hansken.py" href="hanskenpy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.6.3
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../python.html">Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_changelog.html">Python API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snippets.html">Python code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Advanced use of the Test Framework in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hanskenpy.html">Run plugins with Hansken.py</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to debug an Extraction Plugin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#locally">Locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#locally-with-docker">Locally with Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-debugpy">Install <code class="docutils literal notranslate"><span class="pre">debugpy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-debugpy-in-python">Configuring <code class="docutils literal notranslate"><span class="pre">debugpy</span></code> in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-a-docker-image">Build a Docker image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-the-connection-to-the-docker-container">Configuring the connection to the Docker container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-breakpoints-in-the-code">Setting breakpoints in the code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-in-docker">Logging in Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging-in-kubernetes">Logging in Kubernetes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-hql">Debug HQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#api-documentation">API Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python.html">Python</a></li>
+      <li class="breadcrumb-item active">How to debug an Extraction Plugin</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/python/debugging.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-debug-an-extraction-plugin">
+<h1>How to debug an Extraction Plugin<a class="headerlink" href="#how-to-debug-an-extraction-plugin" title="Permalink to this heading"></a></h1>
+<p>Debugging is the art of removing bugs — hopefully quickly.</p>
+<section id="locally">
+<h2>Locally<a class="headerlink" href="#locally" title="Permalink to this heading"></a></h2>
+<p>To debug a plugin locally, it is recommended to start the plugin via the IDE. This has the advantage that breakpoints
+can easily be put in the code instead of printing log statements, for example. To start a plugin locally, a piece of
+code must be added, see <a class="reference internal" href="testing.html"><span class="doc">Testing</span></a> for more information.</p>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
+<p>The logging of the extraction plugin is displayed in the console.</p>
+</section>
+</section>
+<section id="locally-with-docker">
+<h2>Locally with Docker<a class="headerlink" href="#locally-with-docker" title="Permalink to this heading"></a></h2>
+<p>Debugging an extraction plugin via docker is a bit trickier. In order to debug in Python, a debugger must be added to
+the extraction plugin. There are several debug modules for Python available, but one debug module that works well with
+Visual Studio Code is <a class="reference external" href="https://github.com/microsoft/debugpy">debugpy</a>. This package is developed by Microsoft
+specifically for use in Visual Studio Code with Python.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><cite>debugpy</cite> implements the Debug Adapter Protocol (DAP), which is a standardised way for development tools to
+communicate with debuggers.</p>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">debugpy</span></code> with Docker containers requires 4 distinct steps:</p>
+<ol class="arabic simple">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">debugpy</span></code></p></li>
+<li><p>Configuring <code class="docutils literal notranslate"><span class="pre">debugpy</span></code> in Python</p></li>
+<li><p>Build a docker image</p></li>
+<li><p>Configuring the connection to the Docker container</p></li>
+<li><p>Setting breakpoints in your code</p></li>
+</ol>
+<section id="install-debugpy">
+<h3>Install <code class="docutils literal notranslate"><span class="pre">debugpy</span></code><a class="headerlink" href="#install-debugpy" title="Permalink to this heading"></a></h3>
+<p>First, add <code class="docutils literal notranslate"><span class="pre">debugpy</span></code> to your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="c1"># ...</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;hansken-extraction-plugin==0.4.7&quot;</span><span class="p">,</span>  <span class="c1"># the plugin SDK</span>
+        <span class="s2">&quot;debugpy==1.5.1&quot;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="configuring-debugpy-in-python">
+<h3>Configuring <code class="docutils literal notranslate"><span class="pre">debugpy</span></code> in Python<a class="headerlink" href="#configuring-debugpy-in-python" title="Permalink to this heading"></a></h3>
+<p>At the beginning of your script, import <code class="docutils literal notranslate"><span class="pre">debugpy</span></code>, and call <code class="docutils literal notranslate"><span class="pre">debugpy.listen()</span></code> to start the debug adapter, passing
+a <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code> tuple as the first argument. Use the <code class="docutils literal notranslate"><span class="pre">debugpy.wait_for_client()</span></code> function to block program execution
+until the client is attached.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">debugpy</span>
+
+<span class="n">debugpy</span><span class="o">.</span><span class="n">listen</span><span class="p">((</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="mi">5678</span><span class="p">))</span>
+<span class="n">debugpy</span><span class="o">.</span><span class="n">wait_for_client</span><span class="p">()</span>  <span class="c1"># blocks execution until client is attached</span>
+
+<span class="c1"># your extraction plugin code</span>
+</pre></div>
+</div>
+</section>
+<section id="build-a-docker-image">
+<h3>Build a Docker image<a class="headerlink" href="#build-a-docker-image" title="Permalink to this heading"></a></h3>
+<p>If the Docker image is not built, first build the image as described
+<a class="reference internal" href="getting_started.html"><span class="doc">here</span></a>.</p>
+</section>
+<section id="configuring-the-connection-to-the-docker-container">
+<h3>Configuring the connection to the Docker container<a class="headerlink" href="#configuring-the-connection-to-the-docker-container" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">debugpy</span></code> is now set up to accept connections inside a Docker container. To connect to <code class="docutils literal notranslate"><span class="pre">debugpy</span></code> in the docker
+container, port 5678 must be published. To make a port available to services outside of Docker, use the –publish or -p
+flag. This creates a firewall rule which maps a container port to a port on the Docker host to the outside world.</p>
+<p>To run the extraction plugin with the published port the following command can be used:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">5678</span>:5678<span class="w"> </span>your_extraction_plugin_name
+</pre></div>
+</div>
+<p>The next step is to configure Visual Studio Code. A <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> file must be created in order for Visual Studio Code
+to connect to the extraction plugin in Docker. This minimal <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> example below tells the debugger to attach
+to <code class="docutils literal notranslate"><span class="pre">localhost</span></code> on port <code class="docutils literal notranslate"><span class="pre">5678</span></code>.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python: Remote Attach&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;attach&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;connect&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5678</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;pathMappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;localRoot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;remoteRoot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="setting-breakpoints-in-the-code">
+<h3>Setting breakpoints in the code<a class="headerlink" href="#setting-breakpoints-in-the-code" title="Permalink to this heading"></a></h3>
+<p>The last step is to add breakpoints in the code.</p>
+</section>
+<section id="logging-in-docker">
+<h3>Logging in Docker<a class="headerlink" href="#logging-in-docker" title="Permalink to this heading"></a></h3>
+<p>The logging of the extraction plugin is displayed in the console after running the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> command. In addition,
+the logging is also displayed in the Visual Studio Code console while debugging.</p>
+</section>
+</section>
+<section id="kubernetes">
+<h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this heading"></a></h2>
+<p>In kubernetes it is currently <em>not</em> possible to debug via <code class="docutils literal notranslate"><span class="pre">debugpy</span></code> because no debug ports are published.</p>
+<section id="logging-in-kubernetes">
+<h3>Logging in Kubernetes<a class="headerlink" href="#logging-in-kubernetes" title="Permalink to this heading"></a></h3>
+<p>If there is authorization to the kubernetes cluster, the logging can be viewed with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>hansken-extraction-plugins/your_extraction_plugin_pod
+</pre></div>
+</div>
+</section>
+</section>
+<section id="debug-hql">
+<h2>Debug HQL<a class="headerlink" href="#debug-hql" title="Permalink to this heading"></a></h2>
+<p>An HQL query can be debugged by running the test framework with the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option enabled. The found HQL matches
+will then be displayed in the console. To test a plugin in python with the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option enabled use the following
+command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>test_plugin<span class="w"> </span>--standalone<span class="w"> </span>plugin/your_plugin.py<span class="w"> </span>--regenerate<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p>The following output will then be displayed in the console:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>HQL match found for:
+$data.type=jpg
+With trace:
+dataType=jpg
+types={file, data}
+properties={data.raw.mimeType=image/jpg, path=/test-input-trace, file.name=image.jpg, name=test-input-trace, id=0}
+</pre></div>
+</div>
+<p>If the HQL query contains an error, it will be shown in the generated test results. An example of an invalid query
+is <code class="docutils literal notranslate"><span class="pre">$data.mimeType=image/jpg</span></code> (slash not escaped). This query will produce an error like the one shown below.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.hansken.plugin.extraction.hql_lite.lang.ParseException&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HqlLiteHumanQueryParser: line 1:20 token recognition error at: &#39;/jpg&#39;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The error is only shown in the generated trace, so to find out the <cite>ParseException</cite> run the <code class="docutils literal notranslate"><span class="pre">test_plugin</span></code>
+command with the <code class="docutils literal notranslate"><span class="pre">--regenerate</span></code> option enabled.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hanskenpy.html" class="btn btn-neutral float-left" title="Run plugins with Hansken.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/hansken_extraction_plugin.api.html" class="btn btn-neutral float-right" title="hansken_extraction_plugin.api" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2023 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
