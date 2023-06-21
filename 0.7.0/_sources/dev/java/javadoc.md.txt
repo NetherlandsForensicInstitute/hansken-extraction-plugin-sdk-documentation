@@ -1,0 +1,3 @@
+# Javadoc
+
+Visit the `Javadoc of the Extraction Plugins SDK API <../../_static/javadoc/index.html>`_.

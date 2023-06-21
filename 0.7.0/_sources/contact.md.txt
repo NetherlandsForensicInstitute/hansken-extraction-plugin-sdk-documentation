@@ -1,0 +1,16 @@
+# Contact
+
+Please get in touch with us:
+
+* if you have questions about the SDK,
+* have found a bug,
+* have a feature request,
+* see other opportunity to improve,
+* want to contribute,
+* ...
+
+Chat with us on [Discord](https://www.discord.com). You can find members of the extraction plugin SDK development team
+in the Hansken Community server, in the `extraction-plugins` channel. This is a Hansken community-private server. If you
+don't have access to the Hansken Community server, please contact your Hansken business owner. He or she can invite you
+to the Hansken Community server. If you don't know who to contact, feel free to fill in
+the [contact form](https://www.hansken.nl/contact) for further questions/contact.

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Java code snippets &mdash; Hansken Extraction Plugins for plugin developers 0.7.0
+ documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/wider_pages.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using the Test Framework in Java" href="testing.html" />
+    <link rel="prev" title="Packaging" href="packaging.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.7.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../java.html">Java</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_changelog.html">Java API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging.html">Packaging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Java code snippets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#randomaccessdata-as-inputstream">RandomAccessData as InputStream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-tracelets">Adding tracelets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-data-to-a-trace">Adding data to a trace</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data-transformations">Data Transformations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blobs">Blobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-system-resources">Specifying system resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deferred-extraction-plugins">Deferred Extraction Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#customize-logging">Customize logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#experimental-feature-adding-previews-to-a-trace">[EXPERIMENTAL FEATURE] Adding previews to a trace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Using the Test Framework in Java</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javadoc.html">Javadoc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../java.html">Java</a></li>
+      <li class="breadcrumb-item active">Java code snippets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/java/snippets.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="java-code-snippets">
+<h1>Java code snippets<a class="headerlink" href="#java-code-snippets" title="Permalink to this heading"></a></h1>
+<p>This page contains Java code snippets for common patterns that will be used when writing a plugin.</p>
+<section id="randomaccessdata-as-inputstream">
+<h2>RandomAccessData as InputStream<a class="headerlink" href="#randomaccessdata-as-inputstream" title="Permalink to this heading"></a></h2>
+<p>In Java, <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> is a common type to pass data to another class or method. The SDK provides a simple utility to
+use a <code class="docutils literal notranslate"><span class="pre">RandomAccessData</span></code> as <code class="docutils literal notranslate"><span class="pre">InputStream</span></code>.</p>
+<p>Add the following import to your code:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.hansken.plugin.extraction.core.data.RandomAccessDatas</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next we can create an <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> from the <code class="docutils literal notranslate"><span class="pre">RandomAccessData</span></code> as shown in the following snippet. Note that the
+<code class="docutils literal notranslate"><span class="pre">InputStream</span></code> is created using a <code class="docutils literal notranslate"><span class="pre">try-with-resources</span></code>-statement. This ensures that the <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> is correctly closed
+when the <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> is no longer required.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">RandomAccessData</span><span class="w"> </span><span class="n">traceData</span><span class="o">=</span><span class="p">...;</span>
+<span class="w">    </span><span class="k">try</span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">asInputStream</span><span class="o">=</span><span class="n">RandomAccessDatas</span><span class="p">.</span><span class="na">asInputStream</span><span class="p">(</span><span class="n">traceData</span><span class="p">)){</span>
+<span class="w">    </span><span class="c1">// use the InputStream here</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>the created <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> is <em>not</em> thread-safe,</p></li>
+<li><p>the created <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> changes state in the provided <code class="docutils literal notranslate"><span class="pre">RandomAccessData</span></code>
+(e.g. when data is read, the position updated in both the <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> <em>and</em>
+the <code class="docutils literal notranslate"><span class="pre">RandomAccessData</span></code> instances),</p></li>
+<li><p>for more details on the implementation of the <code class="docutils literal notranslate"><span class="pre">InputStream</span></code>, refer to the <code class="docutils literal notranslate"><span class="pre">RandomAccessDataInputStream</span></code> JavaDoc.</p></li>
+</ul>
+</section>
+<section id="adding-tracelets">
+<span id="tracelets-java"></span><h2>Adding tracelets<a class="headerlink" href="#adding-tracelets" title="Permalink to this heading"></a></h2>
+<p>In the following Java example, a “classification” <a class="reference internal" href="../concepts/traces.html#tracelets"><span class="std std-ref">tracelet</span></a> is added to a trace. The tracelet consists
+of a list of four properties, namely “class”, “confidence”, “modelName” and “modelVersion”.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">addTracelet</span><span class="p">(</span><span class="s">&quot;prediction&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tracelet</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tracelet</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;classification&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;class&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;telephone&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;label&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;label&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;confidence&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;embedding&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vector</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;modelName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;yolo&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;modelVersion&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2.0&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">addTracelet</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Tracelet</span><span class="p">(</span><span class="s">&quot;prediction&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">TraceletProperty</span><span class="p">(</span><span class="s">&quot;prediction.type&quot;</span><span class="p">,</span><span class="s">&quot;classification&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">TraceletProperty</span><span class="p">(</span><span class="s">&quot;prediction.class&quot;</span><span class="p">,</span><span class="s">&quot;telephone&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">TraceletProperty</span><span class="p">(</span><span class="s">&quot;prediction.label&quot;</span><span class="p">,</span><span class="s">&quot;label&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">TraceletProperty</span><span class="p">(</span><span class="s">&quot;prediction.confidence&quot;</span><span class="p">,</span><span class="mf">0.8f</span><span class="p">))),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">TraceletProperty</span><span class="p">(</span><span class="s">&quot;prediction.embedding&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vector</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">TraceletProperty</span><span class="p">(</span><span class="s">&quot;prediction.modelName&quot;</span><span class="p">,</span><span class="s">&quot;yolo&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">TraceletProperty</span><span class="p">(</span><span class="s">&quot;prediction.modelVersion&quot;</span><span class="p">,</span><span class="s">&quot;2.0&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-data-to-a-trace">
+<span id="datastreams-java"></span><h2>Adding data to a trace<a class="headerlink" href="#adding-data-to-a-trace" title="Permalink to this heading"></a></h2>
+<p>Traces can have data attached to them. See <a class="reference internal" href="../concepts/traces.html#datastreams"><span class="std std-ref">Data streams</span></a> for more information.
+The following two snippets demonstrate how to add data to a trace.</p>
+<p>It is currently not possible to verify that a specific data stream is already set or not.</p>
+<section id="data-transformations">
+<h3>Data Transformations<a class="headerlink" href="#data-transformations" title="Permalink to this heading"></a></h3>
+<p>The most efficient way to add data to a trace is using data transformations.
+See <a class="reference internal" href="../concepts/data_transformations.html"><span class="doc">Data Transformations</span></a> for more details.</p>
+<p>The following example sets a new data stream with dataType <code class="docutils literal notranslate"><span class="pre">html</span></code> on a trace, by setting a ranged data transformation:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="s">&quot;html&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RangedDataTransformation</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">addRange</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">).</span><span class="na">build</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The following example creates a child trace and sets a new datastream with dataType <code class="docutils literal notranslate"><span class="pre">raw</span></code> on it, by setting a ranged
+data transformation with two ranges:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">newChild</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;lineNumber %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lineNumber</span><span class="p">),</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">child</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="s">&quot;raw&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RangedDataTransformation</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+<span class="w">                  </span><span class="p">.</span><span class="na">addRange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="w">                  </span><span class="p">.</span><span class="na">addRange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
+<span class="w">                  </span><span class="p">.</span><span class="na">build</span><span class="p">());</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="blobs">
+<h3>Blobs<a class="headerlink" href="#blobs" title="Permalink to this heading"></a></h3>
+<p>It is not always possible to create a transormation for the data that has to be
+added to a trace. For example the data is a result of a computation, and not
+a direct subset of another data stream..</p>
+<p>The following examples show how to creates a new data stream of dataType <code class="docutils literal notranslate"><span class="pre">raw</span></code> on a trace.</p>
+<p>In case all data is stored in a <code class="docutils literal notranslate"><span class="pre">byte[]</span></code>, we can add the byte array to the data stream with:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">rawBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{.....};</span>
+<span class="n">trace</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="s">&quot;raw&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">rawBytes</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Alternatively, if the data is available in an <code class="docutils literal notranslate"><span class="pre">InputStream</span></code> the data can be added with:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">final</span><span class="w"> </span><span class="n">InputStream</span><span class="w"> </span><span class="n">inputStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="n">trace</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="s">&quot;raw&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inputStream</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="specifying-system-resources">
+<h2>Specifying system resources<a class="headerlink" href="#specifying-system-resources" title="Permalink to this heading"></a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code> you can specify <strong>maximum</strong> system resource metrics for a plugin. These are used for scaling the
+number of pods as described <a class="reference internal" href="../concepts/kubernetes_autoscaling.html"><span class="doc">here</span></a>. To run a plugin with 0.5 cpu (=
+0.5 vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration can be added to <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">PluginInfo</span><span class="p">.</span><span class="na">builderFor</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="p">.</span><span class="na">pluginResources</span><span class="p">(</span><span class="n">PluginResources</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">maximumCpu</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">maximumMemory</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">())</span>
+<span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="deferred-extraction-plugins">
+<span id="java-snippets-deferred"></span><h2>Deferred Extraction Plugins<a class="headerlink" href="#deferred-extraction-plugins" title="Permalink to this heading"></a></h2>
+<p>Using a deferred plugin requires inheriting the <code class="docutils literal notranslate"><span class="pre">DeferredExtractionPlugin</span></code> base class. This allows access to
+a <code class="docutils literal notranslate"><span class="pre">TraceSearcher</span></code> object in the process function to search for traces.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExampleDeferred</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">DeferredExtractionPlugin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PluginInfo</span><span class="w"> </span><span class="nf">pluginInfo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Trace</span><span class="w"> </span><span class="n">trace</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ExtractionContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span>
+<span class="w">                        </span><span class="kd">final</span><span class="w"> </span><span class="n">TraceSearcher</span><span class="w"> </span><span class="n">searcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">SearchResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searcher</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="s">&quot;file.extension=asc&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">search</span></code> method accepts a HQL query and a count, which represents the maximum number of traces to return. It may
+be useful to specifically search for traces from the image being extracted. Add <code class="docutils literal notranslate"><span class="pre">&quot;image:&quot;</span> <span class="pre">+</span> <span class="pre">trace.get(&quot;image&quot;)</span></code> to
+your query. The query of the provided example could be extended like this:
+<code class="docutils literal notranslate"><span class="pre">&quot;file.extension</span> <span class="pre">=</span> <span class="pre">asc</span> <span class="pre">AND</span> <span class="pre">image:&quot;</span> <span class="pre">+</span> <span class="pre">trace.get(&quot;image&quot;)</span></code>.</p>
+<p>The traces contained in the <code class="docutils literal notranslate"><span class="pre">SearchResult</span></code> are returned as a stream.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">final</span><span class="w"> </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Trace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getTraces</span><span class="p">();</span>
+<span class="n">stream</span><span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h2>
+<p>The logging is provided by Log4j 2 with a SLF4J binding. The Log4j 2 SLF4J binding allows applications coded to the
+SLF4J API to use Log4j 2 as the implementation.</p>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<p>Here is an example illustrating how to log something with SLF4J. It begins by getting a logger with the name “LOG”. This
+logger is in turn used to log the message <code class="docutils literal notranslate"><span class="pre">I'm</span> <span class="pre">logging</span> <span class="pre">a</span> <span class="pre">variable</span> <span class="pre">1234!</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">Example</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">example</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">aNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// logs to console: I&#39;m logging a variable 1234!</span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;I&#39;m logging a variable {}!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">aNumber</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="customize-logging">
+<h3>Customize logging<a class="headerlink" href="#customize-logging" title="Permalink to this heading"></a></h3>
+<p>It’s easy to change the logging format with a file called <code class="docutils literal notranslate"><span class="pre">log4j2.xml</span></code>. If desired, this file must be in the <code class="docutils literal notranslate"><span class="pre">resources</span></code>
+folder, for example <code class="docutils literal notranslate"><span class="pre">src/main/resources/log4j2.xml</span></code></p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+<span class="w">    </span><span class="nt">&lt;appenders&gt;</span>
+<span class="w">        </span><span class="nt">&lt;console</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;stdout&quot;</span><span class="w"> </span><span class="na">target=</span><span class="s">&quot;SYSTEM_OUT&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;patternLayout</span>
+<span class="w">                    </span><span class="na">pattern=</span><span class="s">&quot;%-5p|%d{yyyy-MM-dd HH:mm:ss}|%-20.20t|%-32.32c{1}|%m%n&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/console&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/appenders&gt;</span>
+<span class="w">    </span><span class="nt">&lt;loggers&gt;</span>
+<span class="w">        </span><span class="nt">&lt;root</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;info&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;appenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;stdout&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/root&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/loggers&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful with logging sensitive information.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>More information about customizing the logging can be found <a class="reference external" href="https://logging.apache.org/log4j/2.x">here</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default logger is pre-configured to log <cite>INFO</cite> to <cite>STDOUT</cite> (see the configuration above)</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Log4j 2 supports various logging formats, including xml, yaml, json, properties, etc.
+Currently, only the xml format is supported.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Contact your Hansken administrator for more information on where to find logs for your Hansken environment.</p>
+</div>
+</section>
+</section>
+<section id="experimental-feature-adding-previews-to-a-trace">
+<h2>[EXPERIMENTAL FEATURE] Adding previews to a trace<a class="headerlink" href="#experimental-feature-adding-previews-to-a-trace" title="Permalink to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is an experimental feature, which might change or get removed in future releases.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExamplePlugin</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ExtractionPlugin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nd">@Override</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">PluginInfo</span><span class="w"> </span><span class="nf">pluginInfo</span><span class="p">();</span>
+
+<span class="w">  </span><span class="nd">@Override</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Trace</span><span class="w"> </span><span class="n">trace</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DataContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">previewData</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// set the preview data for the image/png MIME-type</span>
+<span class="w">    </span><span class="n">trace</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;preview.image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">previewData</span><span class="p">);</span>
+<span class="w">    </span><span class="n">trace</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;preview.image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">previewData</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="packaging.html" class="btn btn-neutral float-left" title="Packaging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="testing.html" class="btn btn-neutral float-right" title="Using the Test Framework in Java" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2023 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
