@@ -55,17 +55,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../java.html">Java</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Java API Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#version">0.7.0
-</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">0.6.1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">0.6.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">0.5.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">0.4.13</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">0.4.7</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">0.4.6</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">0.4.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">0.3.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">0.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">0.7.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">0.6.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">0.6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">0.6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">0.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">0.4.13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">0.4.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">0.4.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">0.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">0.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">0.2.0</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
@@ -113,9 +113,8 @@
 <p>This document summarizes all important API changes in the Extraction Plugin API. This document only shows changes that
 are important to plugin developers. For a full list of changes per version, please refer to the general
 <a class="reference internal" href="../../changes.html#changelog"><span class="std std-ref">changelog</span></a>.</p>
-<section id="version">
-<h2>0.7.0
-<a class="headerlink" href="#version" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h2>0.7.0<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Escaping the <code class="docutils literal notranslate"><span class="pre">/</span></code> character in matchers is optional.
 This simplifies and aims for better HQL and HQL-Lite compatability.
@@ -130,14 +129,22 @@ See for more information and examples the <a class="reference internal" href="..
 Example: <code class="docutils literal notranslate"><span class="pre">trace.get(&quot;file.path&quot;)</span></code> now returns <code class="docutils literal notranslate"><span class="pre">&quot;/dev/null&quot;</span></code>, this was <code class="docutils literal notranslate"><span class="pre">[&quot;dev&quot;,</span> <span class="pre">&quot;null&quot;]</span></code>.</p></li>
 </ul>
 </section>
-<section id="id1">
-<h2>0.6.1<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<section id="id2">
+<h2>0.6.3<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>A plugin can now write multiple data streams to a single trace concurrently,
+e.g. write both <code class="docutils literal notranslate"><span class="pre">decrypted</span></code> and <code class="docutils literal notranslate"><span class="pre">ocr</span></code> at the same time. See the “<a class="reference internal" href="snippets.html#datastreams-java"><span class="std std-ref">Adding data to a trace</span></a>” code snippets for
+general examples on adding data to a trace.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>0.6.1<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>The JAVA SDK is now distributed through maven central instead of the Hansken community.</p></li>
 </ul>
 </section>
-<section id="id2">
-<h2>0.6.0<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="id4">
+<h2>0.6.0<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>It is highly recommended to upgrade your plugin to this new version.
@@ -182,8 +189,8 @@ details.</p>
 </li>
 </ul>
 </section>
-<section id="id3">
-<h2>0.5.0<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<section id="id5">
+<h2>0.5.0<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Add new tracelet api <code class="docutils literal notranslate"><span class="pre">Trace.addTracelet(type,</span> <span class="pre">consumer)</span></code>.
 It can be used like this:</p>
@@ -201,15 +208,15 @@ It can be used like this:</p>
 <li><p>Support vector data type in trace properties.</p></li>
 </ul>
 </section>
-<section id="id4">
-<h2>0.4.13<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<section id="id6">
+<h2>0.4.13<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>When writing input search traces for tests, it is no longer required to explicitly set an <code class="docutils literal notranslate"><span class="pre">id</span></code> property.
 These are automatically generated when executing tests.</p></li>
 </ul>
 </section>
-<section id="id5">
-<h2>0.4.7<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<section id="id7">
+<h2>0.4.7<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>A new convenience method <code class="docutils literal notranslate"><span class="pre">id(String,</span> <span class="pre">String,</span> <span class="pre">String)</span></code> is added to the PluginInfo builder. This removes some
 boilerplate code when setting the pluginId. More details on the plugin naming conventions can be found at the
@@ -223,8 +230,8 @@ boilerplate code when setting the pluginId. More details on the plugin naming co
 </li>
 </ul>
 </section>
-<section id="id6">
-<h2>0.4.6<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<section id="id8">
+<h2>0.4.6<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>It is now possible to specify maximum system resources in the <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>. To run a plugin with 0.5 cpu (= 0.5
 vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration can be added to <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>:</p>
@@ -240,8 +247,8 @@ vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration
 </li>
 </ul>
 </section>
-<section id="id7">
-<h2>0.4.0<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<section id="id9">
+<h2>0.4.0<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Extraction Plugins are now identified with a <code class="docutils literal notranslate"><span class="pre">PluginInfo.PluginId</span></code> containing a domain, category and name. The
 method <code class="docutils literal notranslate"><span class="pre">PluginInfo.name(pluginName)</span></code> has been replaced by <code class="docutils literal notranslate"><span class="pre">PluginInfo.id(new</span> <span class="pre">PluginId(domain,</span> <span class="pre">category,</span> <span class="pre">name)</span></code>. More
@@ -266,8 +273,8 @@ the <code class="docutils literal notranslate"><span class="pre">Apache</span> <
 </li>
 </ul>
 </section>
-<section id="id8">
-<h2>0.3.0<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<section id="id10">
+<h2>0.3.0<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Extraction Plugins can now create new datastreams on a Trace through data transformations. Data transformations
 describe how data can be obtained from a source.</p>
@@ -296,8 +303,8 @@ data transformation with two ranges:</p>
 </li>
 </ul>
 </section>
-<section id="id9">
-<h2>0.2.0<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<section id="id11">
+<h2>0.2.0<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This is an API breaking change. Plugins created with an earlier version of the extraction plugin SDK are

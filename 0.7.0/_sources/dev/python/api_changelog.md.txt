@@ -6,7 +6,10 @@ are important to plugin developers. For a full list of changes per version, plea
 
 .. If present, remove `..` before `## |version|` if you create a new entry after a previous release.
 
-## |version|
+.. ## |version|
+
+
+## 0.7.0
 
 * Escaping the `/` character in matchers is optional.
   This simplifies and aims for better HQL and HQL-Lite compatability.
@@ -24,6 +27,20 @@ are important to plugin developers. For a full list of changes per version, plea
 
 * Improved plugin loading when using `serve_plugin` and `build_plugin`:
   `import` statements now work for modules (python files) that are located the same directory structure of a plugin.
+
+* A plugin can now stream data to a trace using `trace.open(mode='wb')`.
+  This removes the limit on the size of data that could be written.
+  See also :ref:`the python code snippet<python_snippets_data_streaming>`.
+
+  Example:
+
+  ```python
+  with trace.open(mode='wb') as writer:
+      writer.write(b'a string')
+      writer.write(bytes(another_string, 'utf-8'))
+  ```
+
+  _note_: this does not work when using `run_with_hanskenpy`.
 
 ## 0.6.1
 

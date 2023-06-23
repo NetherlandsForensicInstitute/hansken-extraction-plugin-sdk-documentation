@@ -6,7 +6,10 @@ are important to plugin developers. For a full list of changes per version, plea
 
 .. If present, remove `..` before `## |version|` if you create a new entry after a previous release.
 
-## |version|
+.. ## |version|
+
+
+## 0.7.0
 
 * Escaping the `/` character in matchers is optional.
   This simplifies and aims for better HQL and HQL-Lite compatability.
@@ -20,6 +23,11 @@ are important to plugin developers. For a full list of changes per version, plea
 * Hansken returns `file.path` properties as a `String` property, instead of a `List<String>`.
   Example: `trace.get("file.path")` now returns `"/dev/null"`, this was `["dev", "null"]`.
 
+## 0.6.3
+
+* A plugin can now write multiple data streams to a single trace concurrently,
+  e.g. write both `decrypted` and `ocr` at the same time. See the ":ref:`datastreams java`" code snippets for
+  general examples on adding data to a trace.
 
 ## 0.6.1
 

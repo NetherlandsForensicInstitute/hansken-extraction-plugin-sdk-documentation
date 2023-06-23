@@ -56,22 +56,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../python.html">Python</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Python API Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#version">0.7.0
-</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">0.6.1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">0.6.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">0.7.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">0.6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">0.6.0</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#build-pipeline-change">Build pipeline change</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#api-changes">API changes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">0.5.1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">0.5.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">0.4.13</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">0.4.7</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">0.4.6</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">0.4.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">0.3.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">0.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">0.5.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">0.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">0.4.13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">0.4.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">0.4.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">0.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">0.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">0.2.0</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
@@ -120,9 +119,8 @@
 <p>This document summarizes all important API changes in the Extraction Plugin API. This document only shows changes that
 are important to plugin developers. For a full list of changes per version, please refer to the general
 <a class="reference internal" href="../../changes.html#changelog"><span class="std std-ref">changelog</span></a>.</p>
-<section id="version">
-<h2>0.7.0
-<a class="headerlink" href="#version" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h2>0.7.0<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Escaping the <code class="docutils literal notranslate"><span class="pre">/</span></code> character in matchers is optional.
 This simplifies and aims for better HQL and HQL-Lite compatability.
@@ -139,10 +137,21 @@ instead of a list of strings.
 Example: <code class="docutils literal notranslate"><span class="pre">trace.get('file.path')</span></code> now returns <code class="docutils literal notranslate"><span class="pre">'/dev/null'</span></code>, this was <code class="docutils literal notranslate"><span class="pre">['dev',</span> <span class="pre">'null']</span></code>.</p></li>
 <li><p>Improved plugin loading when using <code class="docutils literal notranslate"><span class="pre">serve_plugin</span></code> and <code class="docutils literal notranslate"><span class="pre">build_plugin</span></code>:
 <code class="docutils literal notranslate"><span class="pre">import</span></code> statements now work for modules (python files) that are located the same directory structure of a plugin.</p></li>
+<li><p>A plugin can now stream data to a trace using <code class="docutils literal notranslate"><span class="pre">trace.open(mode='wb')</span></code>.
+This removes the limit on the size of data that could be written.
+See also <a class="reference internal" href="snippets.html#python-snippets-data-streaming"><span class="std std-ref">the python code snippet</span></a>.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">trace</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;a string&#39;</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">another_string</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><em>note</em>: this does not work when using <code class="docutils literal notranslate"><span class="pre">run_with_hanskenpy</span></code>.</p>
+</li>
 </ul>
 </section>
-<section id="id1">
-<h2>0.6.1<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<section id="id2">
+<h2>0.6.1<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>The docker image build script <code class="docutils literal notranslate"><span class="pre">build_plugin</span></code> has been updated to allow for extension of the docker command.
 This can be especially handy for specifying a proxy. You should build your plugin container image with the following
@@ -158,8 +167,8 @@ command:</p>
 </li>
 </ul>
 </section>
-<section id="id2">
-<h2>0.6.0<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h2>0.6.0<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This is an API breaking change.
@@ -277,8 +286,8 @@ Then, you should build your plugin container image with the following command:</
 </ul>
 </section>
 </section>
-<section id="id3">
-<h2>0.5.1<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<section id="id4">
+<h2>0.5.1<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Simplify tracelet properties by making the tracelet type prefix optional.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># using a Tracelet object</span>
@@ -294,8 +303,8 @@ Then, you should build your plugin container image with the following command:</
 <li><p>Enabled <em>manual</em> plugin testing, as described on <a class="reference internal" href="testing.html#python-testing"><span class="std std-ref">advanced use of the test framework in Python</span></a>.</p></li>
 </ul>
 </section>
-<section id="id4">
-<h2>0.5.0<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<section id="id5">
+<h2>0.5.0<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Support vector data type in trace properties.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">Vector</span><span class="o">.</span><span class="n">from_sequence</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
@@ -309,23 +318,23 @@ Then, you should build your plugin container image with the following command:</
 </li>
 </ul>
 </section>
-<section id="id5">
-<h2>0.4.13<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<section id="id6">
+<h2>0.4.13<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>When writing input search traces for tests, it is no longer required to explicitly set an <code class="docutils literal notranslate"><span class="pre">id</span></code> property.
 These are automatically generated when executing tests.</p></li>
 </ul>
 </section>
-<section id="id6">
-<h2>0.4.7<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<section id="id7">
+<h2>0.4.7<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>More <code class="docutils literal notranslate"><span class="pre">$data</span></code> matchers are supported in Hansken.py plugin runner. Before this improvement it was only possible to match
 on <code class="docutils literal notranslate"><span class="pre">$data.type</span></code>. Now it is also possible to match for example on <code class="docutils literal notranslate"><span class="pre">$data.mimeType</span></code> and <code class="docutils literal notranslate"><span class="pre">$data.mimeClass</span></code>. The <code class="docutils literal notranslate"><span class="pre">$data</span></code>
 matcher should still be at the end of the query as before.</p></li>
 </ul>
 </section>
-<section id="id7">
-<h2>0.4.6<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<section id="id8">
+<h2>0.4.6<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>It is now possible to specify maximum system resources in the <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>. To run a plugin with 0.5 cpu (= 0.5
 vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration can be added to <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>:</p>
@@ -336,8 +345,8 @@ vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration
 </li>
 </ul>
 </section>
-<section id="id8">
-<h2>0.4.0<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<section id="id9">
+<h2>0.4.0<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Extraction Plugins are now identified with a <code class="docutils literal notranslate"><span class="pre">PluginInfo.PluginId</span></code> containing a domain, category and name. The
 method <code class="docutils literal notranslate"><span class="pre">PluginInfo.name(pluginName)</span></code> has been replaced by <code class="docutils literal notranslate"><span class="pre">PluginInfo.id(new</span> <span class="pre">PluginId(domain,</span> <span class="pre">category,</span> <span class="pre">name)</span></code>. More
@@ -363,8 +372,8 @@ the <code class="docutils literal notranslate"><span class="pre">Apache</span> <
 </li>
 </ul>
 </section>
-<section id="id9">
-<h2>0.3.0<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<section id="id10">
+<h2>0.3.0<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Extraction Plugins can now create new datastreams on a Trace through data transformations. Data transformations
 describe how data can be obtained from a source.</p>
@@ -393,8 +402,8 @@ data transformation with two ranges:</p>
 </li>
 </ul>
 </section>
-<section id="id10">
-<h2>0.2.0<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<section id="id11">
+<h2>0.2.0<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This is an API breaking change.

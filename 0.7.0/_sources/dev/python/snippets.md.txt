@@ -130,6 +130,8 @@ data = {'raw': b'...'}
 trace.update(data=data);
 ```
 
+.. _python_snippets_data_streaming:
+
 #### Streaming data
 
 .. warning:: Streaming data does not work with the Hansken.py runner because Hansken.py does not support it. It does 
@@ -142,7 +144,7 @@ To do this, use the `with trace.open(data_type=..., mode='wb')` syntax. Here are
 Stream strings to `raw` (default) datastream:
 
 ```python
-with trace.open(mode='wb') as writer:    
+with trace.open(mode='wb') as writer:
     writer.write(b'a string')
     writer.write(bytes(another_string, 'utf-8'))
 ```
