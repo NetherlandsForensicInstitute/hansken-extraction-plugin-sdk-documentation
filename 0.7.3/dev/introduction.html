@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Hansken Extraction Plugins for plugin developers 0.7.3
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c98573da"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="General concepts" href="concepts.html" />
+    <link rel="prev" title="Hansken extraction plugin SDK documentation for plugin developers" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.7.3
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#software-development-kit-sdk">Software Development Kit (SDK)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-steps-of-a-plugin">Development steps of a plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/dev/introduction.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>The Extraction Plugin Software Development Kit can be used to develop a <a class="reference external" href="https://www.hansken.nl/an-introduction-to-hansken">Hansken</a>
+extraction plugin.</p>
+<p>Hansken is designed to give access to and insight in digital data and traces originating from seized and demanded
+digital material. One aspect of the Hansken platform is the extraction engine (extraction framework). The extraction
+engine contains digital forensics knowledge, which is used to find traces in digital material. With extraction plugins
+case investigators can add new digital forensics knowledge to the extraction framework. In this way, Hansken is enabled
+to understand new digital formats, and thus is able to find new types of traces in the seized and demanded material.</p>
+<p>Examples of digital forensics knowledge that can be added to Hansken with extraction plugins:</p>
+<ul class="simple">
+<li><p>new file formats (e.g. a new crypto currency wallet)</p></li>
+<li><p>combine traces to find new information (e.g. use a windows registry entry required to read a file from disk)</p></li>
+<li><p>apply algorithms on traces (e.g. speech to text from audio files)</p></li>
+</ul>
+<p>The primary goals of this SDK are:</p>
+<ul class="simple">
+<li><p>to make it as easy as possible to add new digital forensics knowledge to Hansken.</p></li>
+<li><p>be able to share digital forensics knowledge with other Hansken community members</p></li>
+</ul>
+<section id="software-development-kit-sdk">
+<h2>Software Development Kit (SDK)<a class="headerlink" href="#software-development-kit-sdk" title="Link to this heading"></a></h2>
+<p>In order to create extraction plugins, the Hansken project maintains an Extraction Plugin Software Development Kit
+(SDK).</p>
+<p>This SDK contains the following elements:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="java.html"><span class="doc">Java API and tooling</span></a>, to be able to write an extraction plugin with the <a class="reference external" href="https://www.java.com/">Java</a>
+programming language</p></li>
+<li><p><a class="reference internal" href="python.html"><span class="doc">Python API and tooling</span></a>, to be able to write an extraction plugin with <a class="reference external" href="https://www.python.org/">Python</a>
+programming language</p></li>
+<li><p><a class="reference internal" href="concepts/test_framework.html"><span class="doc">Test framework</span></a>, to be able to test extraction plugins before they are used production</p></li>
+<li><p>Documentation for plugin developers to help understand the SDK and all its facets (this documentation)</p></li>
+<li><p><a class="reference internal" href="examples.html"><span class="doc">Examples</span></a></p></li>
+</ul>
+</section>
+<section id="development-steps-of-a-plugin">
+<h2>Development steps of a plugin<a class="headerlink" href="#development-steps-of-a-plugin" title="Link to this heading"></a></h2>
+<p>To create a plugin, the plugin developer could follow the following steps. Detailed information per step will be added
+later to the documentation.</p>
+<ol class="arabic simple">
+<li><p>Create a new empty plugin</p></li>
+<li><p>Implement the plugin logic</p></li>
+<li><p>Verify the plugin using the <a class="reference internal" href="concepts/test_framework.html"><span class="doc">test framework</span></a>, using reference data (test data) and
+expected output</p></li>
+<li><p>Test the plugin in Hansken</p></li>
+<li><p>Use the plugin in an actual case</p></li>
+<li><p>Share the plugin with the Hansken community, so other case investigations can benefit from the plugin as well (
+optional, but encouraged)</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Hansken extraction plugin SDK documentation for plugin developers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="concepts.html" class="btn btn-neutral float-right" title="General concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

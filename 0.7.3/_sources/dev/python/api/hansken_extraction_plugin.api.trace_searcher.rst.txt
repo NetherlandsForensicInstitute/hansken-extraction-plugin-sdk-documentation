@@ -1,0 +1,29 @@
+hansken\_extraction\_plugin.api.trace\_searcher
+===============================================
+
+.. automodule:: hansken_extraction_plugin.api.trace_searcher
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      TraceSearcher
+   
+   
+
+   
+   
+   
+
+
+

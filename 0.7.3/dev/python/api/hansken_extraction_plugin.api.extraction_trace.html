@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hansken_extraction_plugin.api.extraction_trace &mdash; Hansken Extraction Plugins for plugin developers 0.7.3
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=c98573da"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hansken_extraction_plugin.api.plugin_info" href="hansken_extraction_plugin.api.plugin_info.html" />
+    <link rel="prev" title="hansken_extraction_plugin.api.extraction_plugin" href="hansken_extraction_plugin.api.extraction_plugin.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.7.3
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../java.html">Java</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../python.html">Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api_changelog.html">Python API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../snippets.html">Python code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html">Advanced use of the Test Framework in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hanskenpy.html">Run plugins with Hansken.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../python.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="hansken_extraction_plugin.api.html">hansken_extraction_plugin.api</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.data_context.html">hansken_extraction_plugin.api.data_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.extraction_plugin.html">hansken_extraction_plugin.api.extraction_plugin</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">hansken_extraction_plugin.api.extraction_trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.plugin_info.html">hansken_extraction_plugin.api.plugin_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.search_result.html">hansken_extraction_plugin.api.search_result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.trace_searcher.html">hansken_extraction_plugin.api.trace_searcher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.tracelet.html">hansken_extraction_plugin.api.tracelet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.transformation.html">hansken_extraction_plugin.api.transformation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../python.html">Python</a></li>
+          <li class="breadcrumb-item"><a href="hansken_extraction_plugin.api.html">hansken_extraction_plugin.api</a></li>
+      <li class="breadcrumb-item active">hansken_extraction_plugin.api.extraction_trace</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/dev/python/api/hansken_extraction_plugin.api.extraction_trace.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-hansken_extraction_plugin.api.extraction_trace">
+<span id="hansken-extraction-plugin-api-extraction-trace"></span><h1>hansken_extraction_plugin.api.extraction_trace<a class="headerlink" href="#module-hansken_extraction_plugin.api.extraction_trace" title="Link to this heading"></a></h1>
+<p>This module contains the different Trace apis.</p>
+<dl class="simple">
+<dt>Note that there are a couple of different traces:</dt><dd><ul class="simple">
+<li><p>The ExtractionTrace and MetaExtractionTrace, which are offered to the process function.</p></li>
+<li><p>ExtractionTraceBuilder, which is a trace that can be built; it does not exist in hansken yet, but it is added after
+building.</p></li>
+<li><p>SearchTrace, which represents an immutable trace which is returned after searching for traces.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTrace" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTrace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtractionTrace</span></code></a>()</p></td>
+<td><p>Trace offered to be processed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtractionTraceBuilder</span></code></a>()</p></td>
+<td><p>ExtractionTrace that can be build.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace" title="hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MetaExtractionTrace</span></code></a>()</p></td>
+<td><p>MetaExtractionTraces contain only metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.SearchTrace" title="hansken_extraction_plugin.api.extraction_trace.SearchTrace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SearchTrace</span></code></a>()</p></td>
+<td><p>SearchTraces represent traces returned when searching for traces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.Trace" title="hansken_extraction_plugin.api.extraction_trace.Trace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Trace</span></code></a>()</p></td>
+<td><p>All trace classes should be able to return values.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExtractionTraceBuilder</span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>ExtractionTrace that can be build.</p>
+<p>Represents child traces.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.update">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_or_updates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder"><span class="pre">ExtractionTraceBuilder</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.update" title="Link to this definition"></a></dt>
+<dd><p>Update or add metadata properties for this <cite>.ExtractionTraceBuilder</cite>.</p>
+<p>Can be used to update the name of the Trace represented by this builder,
+if not already set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_or_updates</strong> – either a <cite>str</cite> (the metadata property to be
+updated) or a mapping supplying both keys and values to be updated</p></li>
+<li><p><strong>value</strong> – the value to update metadata property <em>key</em> to (used
+only when <em>key_or_updates</em> is a <cite>str</cite>, an exception will be thrown
+if <em>key_or_updates</em> is a mapping)</p></li>
+<li><p><strong>data</strong> – a <cite>dict</cite> mapping data type / stream name to bytes to be
+added to the trace</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>this <cite>.ExtractionTraceBuilder</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.add_tracelet">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_tracelet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tracelet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="hansken_extraction_plugin.api.tracelet.html#hansken_extraction_plugin.api.tracelet.Tracelet" title="hansken_extraction_plugin.api.tracelet.Tracelet"><span class="pre">Tracelet</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder"><span class="pre">ExtractionTraceBuilder</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder.add_tracelet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.add_tracelet" title="Link to this definition"></a></dt>
+<dd><p>Add a <cite>.Tracelet</cite> to this <cite>.ExtractionTraceBuilder</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tracelet</strong> – the Tracelet or tracelet type (supplied as a <cite>str</cite>) to add</p></li>
+<li><p><strong>value</strong> – the tracelet properties to add (only applicable when <em>tracelet</em> is a <cite>str</cite>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>this <cite>.ExtractionTraceBuilder</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.add_transformation">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.Transformation" title="hansken_extraction_plugin.api.transformation.Transformation"><span class="pre">Transformation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder"><span class="pre">ExtractionTraceBuilder</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder.add_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.add_transformation" title="Link to this definition"></a></dt>
+<dd><p>Update or add transformations for this <cite>.ExtractionTraceBuilder</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_type</strong> – data type of the Transformation</p></li>
+<li><p><strong>transformation</strong> – the Transformation to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>this <cite>.ExtractionTraceBuilder</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.child_builder">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child_builder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder"><span class="pre">ExtractionTraceBuilder</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder.child_builder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.child_builder" title="Link to this definition"></a></dt>
+<dd><p>Create a new <cite>.TraceBuilder</cite> to build a child trace to the trace to be represented by this builder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Traces should be created and built in depth first order,
+parent before child (pre-order).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a <cite>.TraceBuilder</cite> set up to save a new trace as the child
+trace of this builder</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.add_data">
+<span class="sig-name descname"><span class="pre">add_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder"><span class="pre">ExtractionTraceBuilder</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder.add_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.add_data" title="Link to this definition"></a></dt>
+<dd><p>Add data to this trace as a named stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> – name of the data stream to be added</p></li>
+<li><p><strong>data</strong> – data to be attached</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>this <cite>.ExtractionTraceBuilder</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.open">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rb'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'wb'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rb'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BufferedReader</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">BufferedWriter</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.open" title="Link to this definition"></a></dt>
+<dd><p>Open a data stream to read or write data from or to the <cite>.ExtractionTrace</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_type</strong> – the data type of the datastream, ‘raw’ by default</p></li>
+<li><p><strong>offset</strong> – byte offset to start the stream on when reading</p></li>
+<li><p><strong>size</strong> – the number of bytes to make available when reading</p></li>
+<li><p><strong>mode</strong> – ‘rb’ for reading, ‘wb’ for writing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a file-like object to read or write bytes from the named stream</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.build">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTraceBuilder.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.build" title="Link to this definition"></a></dt>
+<dd><p>Save the trace being built by this builder to remote.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Building more than once will result in an error being raised.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the new trace’ id</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.Trace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Trace</span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#Trace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.Trace" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>All trace classes should be able to return values.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.Trace.get">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#Trace.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.Trace.get" title="Link to this definition"></a></dt>
+<dd><p>Return metadata properties for this <cite>.ExtractionTrace</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – the metadata property to be retrieved</p></li>
+<li><p><strong>default</strong> – value returned if property is not set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the value of the requested metadata property</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.SearchTrace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SearchTrace</span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#SearchTrace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.SearchTrace" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.Trace" title="hansken_extraction_plugin.api.extraction_trace.Trace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trace</span></code></a></p>
+<p>SearchTraces represent traces returned when searching for traces.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.SearchTrace.open">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'raw'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BufferedReader</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#SearchTrace.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.SearchTrace.open" title="Link to this definition"></a></dt>
+<dd><p>Open a data stream of the data that is being processed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> – data stream of trace to open. defaults to raw. other examples are html, text, etc.</p></li>
+<li><p><strong>offset</strong> – byte offset to start the stream on</p></li>
+<li><p><strong>size</strong> – the number of bytes to make available</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a file-like object to read bytes from the named stream</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MetaExtractionTrace</span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#MetaExtractionTrace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.Trace" title="hansken_extraction_plugin.api.extraction_trace.Trace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trace</span></code></a></p>
+<p>MetaExtractionTraces contain only metadata.</p>
+<p>This class represenst traces during the extraction of an extraction plugin without a data stream.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.update">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_or_updates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#MetaExtractionTrace.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.update" title="Link to this definition"></a></dt>
+<dd><p>Update or add metadata properties for this <cite>.ExtractionTrace</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_or_updates</strong> – either a <cite>str</cite> (the metadata property to be
+updated) or a mapping supplying both keys and values to be updated</p></li>
+<li><p><strong>value</strong> – the value to update metadata property <em>key</em> to (used
+only when <em>key_or_updates</em> is a <cite>str</cite>, an exception will be thrown
+if <em>key_or_updates</em> is a mapping)</p></li>
+<li><p><strong>data</strong> – a <cite>dict</cite> mapping data type / stream name to bytes to be
+added to the trace</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.add_tracelet">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_tracelet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tracelet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="hansken_extraction_plugin.api.tracelet.html#hansken_extraction_plugin.api.tracelet.Tracelet" title="hansken_extraction_plugin.api.tracelet.Tracelet"><span class="pre">Tracelet</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#MetaExtractionTrace.add_tracelet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.add_tracelet" title="Link to this definition"></a></dt>
+<dd><p>Add a <cite>.Tracelet</cite> to this <cite>.MetaExtractionTrace</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tracelet</strong> – the Tracelet or tracelet type to add</p></li>
+<li><p><strong>value</strong> – the tracelet properties to add (only applicable when <em>tracelet</em> is a tracelet type)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.add_transformation">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.Transformation" title="hansken_extraction_plugin.api.transformation.Transformation"><span class="pre">Transformation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#MetaExtractionTrace.add_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.add_transformation" title="Link to this definition"></a></dt>
+<dd><p>Update or add transformations for this <cite>.ExtractionTraceBuilder</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_type</strong> – data type of the Transformation</p></li>
+<li><p><strong>transformation</strong> – the Transformation to add</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.child_builder">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child_builder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder"><span class="pre">ExtractionTraceBuilder</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#MetaExtractionTrace.child_builder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace.child_builder" title="Link to this definition"></a></dt>
+<dd><p>Create a <cite>.TraceBuilder</cite> to build a trace to be saved as a child of this <cite>.Trace</cite>.</p>
+<p>A new trace will only be added to the index once explicitly saved (e.g.
+through <cite>.TraceBuilder.build</cite>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Traces should be created and built in depth first order,
+parent before child (pre-order).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – the name for the trace being built</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a <cite>.TraceBuilder</cite> set up to create a child trace of this <cite>.MetaExtractionTrace</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTrace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExtractionTrace</span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTrace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTrace" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace" title="hansken_extraction_plugin.api.extraction_trace.MetaExtractionTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetaExtractionTrace</span></code></a></p>
+<p>Trace offered to be processed.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.extraction_trace.ExtractionTrace.open">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rb'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'wb'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rb'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BufferedReader</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">BufferedWriter</span></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/extraction_trace.html#ExtractionTrace.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.extraction_trace.ExtractionTrace.open" title="Link to this definition"></a></dt>
+<dd><p>Open a data stream to read or write data from or to the <cite>.ExtractionTrace</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_type</strong> – the data type of the datastream, ‘raw’ by default</p></li>
+<li><p><strong>offset</strong> – byte offset to start the stream on when reading</p></li>
+<li><p><strong>size</strong> – the number of bytes to make available when reading</p></li>
+<li><p><strong>mode</strong> – ‘rb’ for reading, ‘wb’ for writing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a file-like object to read or write bytes from the named stream</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hansken_extraction_plugin.api.extraction_plugin.html" class="btn btn-neutral float-left" title="hansken_extraction_plugin.api.extraction_plugin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hansken_extraction_plugin.api.plugin_info.html" class="btn btn-neutral float-right" title="hansken_extraction_plugin.api.plugin_info" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
