@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packaging &mdash; Hansken Extraction Plugins for plugin developers 0.7.4
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=020ce317"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Python code snippets" href="snippets.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.7.4
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../python.html">Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_changelog.html">Python API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#label-plugin"><code class="docutils literal notranslate"><span class="pre">label_plugin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-plugin"><code class="docutils literal notranslate"><span class="pre">build_plugin</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="snippets.html">Python code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Advanced use of the Test Framework in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hanskenpy.html">Run plugins with Hansken.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#api-documentation">API Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python.html">Python</a></li>
+      <li class="breadcrumb-item active">Packaging</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/python/packaging.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="packaging">
+<h1>Packaging<a class="headerlink" href="#packaging" title="Link to this heading"></a></h1>
+<p>Extraction plugins are packaged as OCI images (also known as Docker images).
+The OCI images are <em>labeled</em> with the PluginInfo.
+To automate packaging of a Python plugin and labeling the OCI image,
+the Extraction Plugin SDK comes with two utility applications: <code class="docutils literal notranslate"><span class="pre">label_plugin</span></code>,
+and the deprecated <code class="docutils literal notranslate"><span class="pre">build_plugin</span></code>.</p>
+<p>To package a plugin, make sure that the Extraction Plugins SDK is <a class="reference internal" href="getting_started.html"><span class="doc">installed</span></a>, as well as Docker.
+Next build and label your plugin as described in the following sections.</p>
+<p>To verify that the image has been built, use the following command to view all local images:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>images
+</pre></div>
+</div>
+<p>Once your plugin is packaged and labelled, it can be published or ‘uploaded’ to Hansken.
+See “<a class="reference internal" href="../concepts/extraction_plugins.html#upload-plugin"><span class="std std-ref">Upload the plugin to Hansken</span></a>” for instructions.</p>
+<section id="label-plugin">
+<h2><code class="docutils literal notranslate"><span class="pre">label_plugin</span></code><a class="headerlink" href="#label-plugin" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">label_plugin</span></code> is a utility to add labels to an extraction plugin image.
+To label a plugin, first build the plugin image with <a class="reference external" href="https://docs.docker.com/reference/cli/docker/image/build/">docker build</a>;
+for example by using one of the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>.<span class="w"> </span>-t<span class="w"> </span>my_plugin
+docker<span class="w"> </span>build<span class="w"> </span>.<span class="w"> </span>-t<span class="w"> </span>my_plugin<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">https_proxy</span><span class="o">=</span>http://your_proxy:8080
+</pre></div>
+</div>
+<p>Next, run the <code class="docutils literal notranslate"><span class="pre">label_plugin</span></code> utility to label the build plugin container:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>label_plugin<span class="w"> </span>my_plugin
+</pre></div>
+</div>
+<p>This utility will briefly start your plugin using Docker, and requests the PluginInfo from the plugin.
+The information from the PluginInfo will be added as <a class="reference external" href="https://docs.docker.com/config/labels-custom-metadata/">labels</a> to the plugin image.
+The result of <code class="docutils literal notranslate"><span class="pre">label_plugin</span></code> is a plugin image that can be published to a docker/OCI image registry.</p>
+</section>
+<section id="build-plugin">
+<h2><code class="docutils literal notranslate"><span class="pre">build_plugin</span></code><a class="headerlink" href="#build-plugin" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method is deprecated!
+<cite>label_plugin</cite> is preferred over <cite>build_plugin</cite>, as it does not require a full (virtual) environment
+with all plugin dependencies and resources. This is especially preferred when the plugin uses (big)
+data models or (external) dependencies.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">build_plugin</span></code> script will take your plugin file and Docker-file directory
+as input, and build the plugin and label the generated image.</p>
+<p>To build your plugin container image you can use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>build_plugin<span class="w"> </span>PLUGIN_FILE<span class="w"> </span>DOCKER_FILE_DIRECTORY<span class="w"> </span><span class="o">[</span>DOCKER_IMAGE_NAME<span class="o">]</span><span class="w"> </span><span class="o">[</span>DOCKER_ARGS<span class="o">]</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>build_plugin<span class="w"> </span>chatplugin.py<span class="w"> </span>.<span class="w"> </span>chatplugin<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$http_proxy</span><span class="s2">&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$https_proxy</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>This will generate a plugin image:</p>
+<ul class="simple">
+<li><p>The extraction plugin is added to your local image registry (<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code>),</p></li>
+<li><p>Note that the variables <code class="docutils literal notranslate"><span class="pre">$http_proxy</span></code> and <code class="docutils literal notranslate"><span class="pre">$https_proxy</span></code> are put in quotes, this is needed in case they contain
+spaces,</p></li>
+<li><p>The image is tagged with two tags: <code class="docutils literal notranslate"><span class="pre">latest</span></code>, and your plugin version.</p></li>
+</ul>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PLUGIN_FILE</span></code>: Path to the python file of the plugin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DOCKER_FILE_DIRECTORY</span></code>: Path to the directory containing the Dockerfile of the plugin.</p></li>
+<li><p>(Optional) <code class="docutils literal notranslate"><span class="pre">DOCKER\_IMAGE\_NAME</span></code>: Name of the docker image without tag. Note that docker image names cannot start with
+a period or dash. If it starts with a dash, it will be interpreted as an additional docker argument (see
+DOCKER_ARGS). If no name is given the name defaults to <code class="docutils literal notranslate"><span class="pre">extraction-plugin/PLUGINID</span></code>, e.g.
+<code class="docutils literal notranslate"><span class="pre">extraction-plugin/nfi.nl/extract/chat/whatsapp</span></code>.</p></li>
+<li><p>(Optional) <code class="docutils literal notranslate"><span class="pre">DOCKER\_ARGS</span></code>: Additional arguments for the docker command, which can be as many arguments as you like.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="snippets.html" class="btn btn-neutral float-right" title="Python code snippets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

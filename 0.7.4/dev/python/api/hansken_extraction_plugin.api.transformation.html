@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hansken_extraction_plugin.api.transformation &mdash; Hansken Extraction Plugins for plugin developers 0.7.4
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=020ce317"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Examples" href="../../examples.html" />
+    <link rel="prev" title="hansken_extraction_plugin.api.tracelet" href="hansken_extraction_plugin.api.tracelet.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.7.4
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../java.html">Java</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../python.html">Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api_changelog.html">Python API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../snippets.html">Python code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html">Advanced use of the Test Framework in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hanskenpy.html">Run plugins with Hansken.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../python.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="hansken_extraction_plugin.api.html">hansken_extraction_plugin.api</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.data_context.html">hansken_extraction_plugin.api.data_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.extraction_plugin.html">hansken_extraction_plugin.api.extraction_plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.extraction_trace.html">hansken_extraction_plugin.api.extraction_trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.plugin_info.html">hansken_extraction_plugin.api.plugin_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.search_result.html">hansken_extraction_plugin.api.search_result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.trace_searcher.html">hansken_extraction_plugin.api.trace_searcher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.tracelet.html">hansken_extraction_plugin.api.tracelet</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">hansken_extraction_plugin.api.transformation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../python.html">Python</a></li>
+          <li class="breadcrumb-item"><a href="hansken_extraction_plugin.api.html">hansken_extraction_plugin.api</a></li>
+      <li class="breadcrumb-item active">hansken_extraction_plugin.api.transformation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/dev/python/api/hansken_extraction_plugin.api.transformation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-hansken_extraction_plugin.api.transformation">
+<span id="hansken-extraction-plugin-api-transformation"></span><h1>hansken_extraction_plugin.api.transformation<a class="headerlink" href="#module-hansken_extraction_plugin.api.transformation" title="Link to this heading"></a></h1>
+<p>This module contains the definition of a Transformation.</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.transformation.Range" title="hansken_extraction_plugin.api.transformation.Range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Range</span></code></a>(offset, length)</p></td>
+<td><p>A Range describes a range of bytes with a offset and length.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.transformation.RangedTransformation" title="hansken_extraction_plugin.api.transformation.RangedTransformation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RangedTransformation</span></code></a>(ranges)</p></td>
+<td><p>A :class:RangedTransformation describes a data transformation consisting of a list of :class:Range.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.transformation.Transformation" title="hansken_extraction_plugin.api.transformation.Transformation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Transformation</span></code></a>()</p></td>
+<td><p>A super class for data transformations.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.Transformation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Transformation</span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/transformation.html#Transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.Transformation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>A super class for data transformations. Currently only :class:RangedTransformation is supported.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.Range">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/transformation.html#Range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.Range" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Range describes a range of bytes with a offset and length.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.Range.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.Range.offset" title="Link to this definition"></a></dt>
+<dd><p>the starting point of the data</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.Range.length">
+<span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.Range.length" title="Link to this definition"></a></dt>
+<dd><p>the size of the data</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.RangedTransformation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RangedTransformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ranges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hansken_extraction_plugin.api.transformation.Range" title="hansken_extraction_plugin.api.transformation.Range"><span class="pre">Range</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/transformation.html#RangedTransformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.RangedTransformation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hansken_extraction_plugin.api.transformation.Transformation" title="hansken_extraction_plugin.api.transformation.Transformation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Transformation</span></code></a></p>
+<p>A :class:RangedTransformation describes a data transformation consisting of a list of :class:Range.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.RangedTransformation.builder">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">builder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/transformation.html#RangedTransformation.builder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.RangedTransformation.builder" title="Link to this definition"></a></dt>
+<dd><p>:return a Builder.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.RangedTransformation.Builder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Builder</span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/transformation.html#RangedTransformation.Builder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.RangedTransformation.Builder" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Helper class that implements a transformation builder.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.RangedTransformation.Builder.add_range">
+<span class="sig-name descname"><span class="pre">add_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.transformation.RangedTransformation.Builder" title="hansken_extraction_plugin.api.transformation.RangedTransformation.Builder"><span class="pre">Builder</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/transformation.html#RangedTransformation.Builder.add_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.RangedTransformation.Builder.add_range" title="Link to this definition"></a></dt>
+<dd><p>Add a range to a ranged transformation by providing the range’s offset and length.</p>
+<p>:param offset the offset of the data transformation
+:param length the length of the data transformation
+:return: this <cite>.RangedTransformation.Builder</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.transformation.RangedTransformation.Builder.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hansken_extraction_plugin.api.transformation.RangedTransformation" title="hansken_extraction_plugin.api.transformation.RangedTransformation"><span class="pre">RangedTransformation</span></a></span></span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/transformation.html#RangedTransformation.Builder.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.transformation.RangedTransformation.Builder.build" title="Link to this definition"></a></dt>
+<dd><p>Return a RangedTransformation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a :class:RangedTransformation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hansken_extraction_plugin.api.tracelet.html" class="btn btn-neutral float-left" title="hansken_extraction_plugin.api.tracelet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+hansken\_extraction\_plugin.api.search\_result
+==============================================
+
+.. automodule:: hansken_extraction_plugin.api.search_result
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SearchResult
+   
+   
+
+   
+   
+   
+
+
+

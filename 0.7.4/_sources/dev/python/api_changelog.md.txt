@@ -1,0 +1,382 @@
+# Python API Changelog
+
+This document summarizes all important API changes in the Extraction Plugin API. This document only shows changes that
+are important to plugin developers. For a full list of changes per version, please refer to the general
+:ref:`changelog <changelog>`.
+
+.. If present, remove `..` before `## |version|` if you create a new entry after a previous release.
+
+.. ## |version|
+
+* This version introduces a new docker image build utility `label_plugin`.
+  This utility will eventually replace `build_plugin`. `build_plugin` is now deprecated.
+
+  `label_plugin` is a utility to add labels to an extraction plugin image. Labeling a plugin is required for
+  Hansken to detect extraction plugins in a plugin image registry.
+
+  To label a plugin, first build the plugin image with [docker build](https://docs.docker.com/reference/cli/docker/image/build/);
+  for example by using one of the following commands:
+
+  ```shell
+  docker build . -t my_plugin
+  docker build . -t my_plugin --build-arg https_proxy=http://your_proxy:8080
+  ```
+
+  Next, run the `label_plugin` utility to label the build plugin container:
+  ```shell
+  label_plugin my_plugin
+  ```
+
+  The result of `label_plugin` is a plugin image that can be :ref:`uploaded to Hansken<upload_plugin>`.
+
+  `label_plugin` is preferred over `build_plugin`, as it does not require a full (virtual) environment
+  with all plugin dependencies and resources. This is especially preferred when the plugin uses (big)
+  data models or (external) dependencies.
+
+  For usage read further in [packaging](packaging.md).
+
+
+## 0.7.0
+
+* Escaping the `/` character in matchers is optional.
+  This simplifies and aims for better HQL and HQL-Lite compatability.
+  See for more information and examples the :ref:`HQL-Lite syntax documentation<hqllite syntax>`.
+
+  Examples:
+
+  * Old: `file.path:\/Users\/*\/AppData` -> new: `file.path:/Users/*/AppData`
+  * Old: `file.path:\\/Users\\/*\\/AppData` ->  new: `file.path:/Users/*/AppData`
+  * Old: `registryEntry.key:\/Software\/Dropbox\/ks*\/Client-p` ->  new: `registryEntry.key:/Software/Dropbox/ks*/Client-p`
+
+* Hansken returns `file.path` properties (outside the scope of matchers) as a `String` property,
+  instead of a list of strings.
+  Example: `trace.get('file.path')` now returns `'/dev/null'`, this was `['dev', 'null']`.
+
+* Improved plugin loading when using `serve_plugin` and `build_plugin`:
+  `import` statements now work for modules (python files) that are located the same directory structure of a plugin.
+
+* A plugin can now stream data to a trace using `trace.open(mode='wb')`.
+  This removes the limit on the size of data that could be written.
+  See also :ref:`the python code snippet<python_snippets_data_streaming>`.
+
+  Example:
+
+  ```python
+  with trace.open(mode='wb') as writer:
+      writer.write(b'a string')
+      writer.write(bytes(another_string, 'utf-8'))
+  ```
+
+  _note_: this does not work when using `run_with_hanskenpy`.
+
+## 0.6.1
+
+* The docker image build script `build_plugin` has been updated to allow for extension of the docker command.
+  This can be especially handy for specifying a proxy. You should build your plugin container image with the following
+  command:
+
+  ```bash
+  build_plugin PLUGIN_FILE DOCKER_FILE_DIRECTORY [DOCKER_IMAGE_NAME] [DOCKER_ARGS]
+  ```
+
+  .. warning:: Note that the `DOCKER_IMAGE_NAME` argument no longer requires a `-n` parameter to be specified.
+
+  For usage read further in [packaging](packaging.md).
+
+## 0.6.0
+
+.. warning:: This is an API breaking change.
+   Upgrading your plugin to this version will require code changes.
+   Plugins built with previous versions of the SDK from `0.3.0` will still work with Hansken.
+
+.. warning:: It is strongly recommended to upgrade your plugins to this new version because it significantly improves
+   the start-up time of Hansken. See the migration steps below.
+
+This release contains both build pipeline changes and API changes.
+Please read all changes carefully.
+
+### Build pipeline change
+
+* Extraction plugin container images are now labeled with PluginInfo. This
+  allows Hansken to efficiently load extraction plugins.
+  Migration steps from earlier versions:
+
+  1. Update the SDK version in your `setup.py` / `requirements.txt`
+  2. If you come from a version prior to `0.4.0`, or if you use a plugin name
+     instead of a plugin id in your `pluginInfo()`, switch to the plugin id style
+     (read  instructions for version `0.4.0`)
+  3. Update your build scripts to build your plugin (Docker) container image.
+     Be sure to [have the Extraction Plugins SDK installed](getting_started.md#Installation).
+     Then, you should build your plugin container image with the following command:
+
+     ```bash
+     build_plugin PLUGIN_FILE DOCKER_FILE_DIRECTORY -n [DOCKER_IMAGE_NAME]
+     ```
+
+     For example:
+     ```bash
+     build_plugin plugin/chatplugin.py . -n extraction-plugins/chatplugin
+     ```
+
+     This will generate a plugin image:
+
+    * The extraction plugin is added to your local image registry (`docker images`),
+    * Note that DOCKER\_IMAGE\_NAME is optional and will default to `extraction-plugin/PLUGINID`, e.g.
+     `extraction-plugin/nfi.nl/extract/chat/whatsapp`,
+    * The image is tagged with two tags: `latest`, and your plugin version.
+
+
+### API changes
+
+* The field `plugin` has been removed from `PluginInfo`.
+* The field `pluginId` should now be the first argument of PluginInfo (when using unnamed arguments).
+
+  Old (unnamed arguments):
+
+  ```python
+  def plugin_info(self):
+      return PluginInfo(self, '1.0.0', 'description', author,
+                        MaturityLevel.PROOF_OF_CONCEPT, '*, 'https://hansken.org',
+                        PluginId(...), 'Apache License 2.0')
+  ```
+
+  New (removed `self`, and moved `PluginId(...)` to first argument position):
+
+  ```python
+  def plugin_info(self):
+      return PluginInfo(PluginId(...), '1.0.0', 'description',
+                        author, MaturityLevel.PROOF_OF_CONCEPT,
+                        '*', 'https://hansken.org', 'Apache License 2.0')
+  ```
+
+  Old (named arguments):
+
+  ```python
+  def plugin_info(self):
+      return PluginInfo(plugin=self,
+                        version='1.0.0',
+                        ...)
+  ```
+
+  New (removed `plugin=self`):
+
+  ```python
+  def plugin_info(self):
+      return PluginInfo(version='1.0.0',
+                        ...)
+  ```
+
+* Plugin `data_context.data_size` is now a variable instead of a method:
+
+  Old:
+
+  ```python
+  def process(self, trace: ExtractionTrace, data_context: DataContext):
+      size = data_context.data_size()
+  ```
+
+  New:
+
+  ```python
+  def process(self, trace: ExtractionTrace, data_context: DataContext):
+      size = data_context.data_size
+  ```
+
+* Simplify declaring required runtime resources in a plugin's info.
+
+  Extraction plugin resources don't use the builder pattern anymore.
+
+  Old:
+
+  ```python
+  return PluginInfo(
+      ...,
+      resources=PluginResources.builder().maximum_cpu(0.5).maximum_memory(1000).build())
+  )
+  ```
+
+  New:
+
+  ```python
+  # no need for a builder, declare resources by direct instantiation
+  return PluginInfo(
+      ...,
+      resources=PluginResources(maximum_cpu=2.0, maximum_memory=2048)
+  )
+  # or, as before, specify just on resource
+  return PluginInfo(
+      ...,
+      resources=PluginResources(maximum_memory=4096)
+  )
+  ```
+
+## 0.5.1
+
+* Simplify tracelet properties by making the tracelet type prefix optional.
+
+  ```python
+  # using a Tracelet object
+  trace.add_tracelet(Tracelet("prediction", {
+      "type": "example",
+      "confidence": 0.8
+  }))
+  # or without a Tracelet object
+  trace.add_tracelet("identity", {"name": "John Doe", "status": "online"})
+  ```
+
+* Enabled _manual_ plugin testing, as described on :ref:`advanced use of the test framework in Python<python testing>`.
+
+## 0.5.0
+
+* Support vector data type in trace properties.
+
+  ```python
+  embedding = Vector.from_sequence((width, height))
+  tracelet = Tracelet("prediction", {
+      "prediction.type": "example-vector",
+      "prediction.embedding": embedding
+  })
+  trace.add_tracelet(tracelet)
+  ```
+
+## 0.4.13
+
+* When writing input search traces for tests, it is no longer required to explicitly set an `id` property.
+  These are automatically generated when executing tests.
+
+## 0.4.7
+
+* More `$data` matchers are supported in Hansken.py plugin runner. Before this improvement it was only possible to match
+  on `$data.type`. Now it is also possible to match for example on `$data.mimeType` and `$data.mimeClass`. The `$data`
+  matcher should still be at the end of the query as before.
+
+## 0.4.6
+
+* It is now possible to specify maximum system resources in the `PluginInfo`. To run a plugin with 0.5 cpu (= 0.5
+  vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration can be added to `PluginInfo`:
+
+  ```python
+  plugin_info = PluginInfo(...,
+                           resources=PluginResources.builder().maximum_cpu(0.5).maximum_memory(1000).build())
+  ```
+
+## 0.4.0
+
+* Extraction Plugins are now identified with a `PluginInfo.PluginId` containing a domain, category and name. The
+  method `PluginInfo.name(pluginName)` has been replaced by `PluginInfo.id(new PluginId(domain, category, name)`. More
+  details on the plugin naming conventions can be found at the :doc:`../concepts/plugin_naming_convention` section.
+
+* `PluginInfo.name()` is now deprecated (but will still work for backwards compatibility).
+
+* A new license field `PluginInfo.license` has also been added in this release.
+
+* The following example creates a PluginInfo for a plugin with the name `TestPlugin`, licensed under
+  the `Apache License 2.0` license:
+
+  ```python
+  class TestPlugin(ExtractionPlugin):
+      def plugin_info(self) -> PluginInfo:
+          return PluginInfo(self,
+                            version='1.0.0',
+                            description='A plugin for testing.',
+                            author=Author('The Externals', 'tester@holmes.nl', 'NFI'),
+                            maturity=MaturityLevel.PROOF_OF_CONCEPT,
+                            webpage_url='https://hansken.org',
+                            matcher='file.extension=txt',
+                            id=PluginId(domain='nfi.nl', category='test', name='TestPlugin'),
+                            license='Apache License 2.0'
+                            )
+  ```
+
+## 0.3.0
+
+* Extraction Plugins can now create new datastreams on a Trace through data transformations. Data transformations
+  describe how data can be obtained from a source.
+
+  An example case is an extraction plugin that processes an archive file. The plugin creates a child trace per entry in
+  the archive file. Each child trace will have a datastream that is a transformation that marks the start and length of
+  the entry in the original archive data. By just describing the data instead of specifying the actual data, a lot of
+  space is saved.
+
+  Although Hansken supports various transformations, the Extraction Plugins SDK for now only supports ranged data
+  transformations. Ranged data transformations define data as a list of ranges, each range with an offset and length in
+  a bytearray.
+
+  The following example sets a new datastream with dataType `html` on a trace, by setting a ranged data transformation:
+
+  ```python
+  trace.add_transformation('html', RangedTransformation(Range(offset, length)))
+  ```
+
+  The following example creates a child trace and sets a new datastream with dataType `raw` on it, by setting a ranged
+  data transformation with two ranges:
+
+  ```python
+  child = trace.child_builder('new trace')
+  child.add_transformation('raw', RangedTransformation.builder()
+                                                      .add_range(10, 20)
+                                                      .add_range(50, 30)
+                                                      .build())
+  });
+  ```
+
+  More detailed documentation will follow in an upcoming SDK release.
+
+## 0.2.0
+
+.. warning:: This is an API breaking change.
+   Plugins created with an earlier version of the extraction plugin
+   SDK are not compatible with Hansken that uses `0.2.0` or later.
+
+* Introduced a new extraction plugin type `api.extraction_plugin.DeferredExtractioPlugin`.
+  Deferred Extraction plugins can be run at a different extraction stage.
+  This type of plugin also allows accessing other traces using the searcher.
+
+* The class `api.extraction_context.ExtractionContext` has been renamed to `api.data_context.DataContext`.
+  The new name `DataContext` represents the class contents better.
+  Plugins have to update matching import statements accordingly.
+  Plugins should also update the named argument `context` to `data_context` of the plugin `process()` method.
+  This change has no functional changes.
+
+  Old:
+
+  ```python
+  from hansken_extraction_plugin.api.extraction_context import ExtractionContext
+
+  def process(self, trace, context):
+    pass
+  ```
+
+  New:
+
+  ```python
+  from hansken_extraction_plugin.api.data_context import DataContext
+
+  def process(self, trace, data_context):
+    pass
+  ```
+
+* Moved `api.author.Author` to `api.plugin_info.Author`, and moved `api.maturity_level.MaturityLevel`
+  to `api.plugin_info.MaturityLevel`
+  This is a more *pythonic* way of grouping of classes into modules. This change has no functional side effects.
+
+  Plugins have to update matching import statements accordingly.
+
+  Old:
+
+  ```python
+  from hansken_extraction_plugin.api.author import Author
+  from hansken_extraction_plugin.api.maturity_level import MaturityLevel
+  from hansken_extraction_plugin.api.plugin_info import PluginInfo
+  ```
+
+  New:
+
+  ```python
+  from hansken_extraction_plugin.api.plugin_info import Author, MaturityLevel, PluginInfo
+  ```
+
+* Removed `DataContext.get_first_bytes()` from the public API.
+
+* Removed `api.extraction_trace.validate_update_arguments(..)` from the public API. This method is still invoked
+  implicitly when setting trace properties.
