@@ -1,0 +1,33 @@
+# Debugging locally with Hansken All in One (AIO)
+
+.. note:: this feature is available from Hansken 46.4.0
+
+.. warning:: `DeferredExtractionPlugin` are currently NOT supported
+
+It is also possible to debug an Extraction Plugin with a locally running Hansken AIO. This requires a few steps:
+
+1. Start your plugin in your IDE (default port 8999)
+   ![1_debug_start_plugin_in_ide.png](1_debug_start_plugin_in_ide.png)
+2. Set some breakpoint(s)
+   ![2_debug_set_breakpoints.png](2_debug_set_breakpoints.png)
+3. Prepare an extraction in the AIO **with advanced** options
+   ![3_debug_prepare_extraction.png](3_debug_prepare_extraction.png)
+4. Enable the `DebugExtractionPluginTool` for this extraction
+   ![4_debug_enable_debug_tool.png](4_debug_enable_debug_tool.png)
+5. Start extraction, and happy debugging!
+
+### Tips/notes:
+
+- You can only debug 1 plugin at a time
+  - .. note:: If you are debugging `MyPlugin`, and it is also visible in the tools list, then you need to **disable** it, and **only enable** the `DebugExtractionPluginTool`
+- Test your plugin with a small image. Otherwise, it might take long before you reach your breakpoint.
+- Be careful when using this debugger with `APPEND` extractions:
+    - Similar to other tools/plugins, the `DebugExtractionPluginTool` will only run once per trace
+    - So if you need to re-run your debug session, then we advise you to re-extract `(INDEX)` your project instead
+- Hansken runs multiple instances of every Tool, so the same breakpoint can be hit multiple times concurrently by
+  different instances
+  - limiting the number of plugin threads/workers can minimize this
+    - see [Specifying system resources (Python)](../python/snippets.md#Specifying system resources)
+- Only restart your plugin before starting an extraction. Restarting your plugin **during** an extraction can
+  produce
+  **undefined behaviour**.  

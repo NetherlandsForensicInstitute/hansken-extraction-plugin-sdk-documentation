@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to debug an Extraction Plugin &mdash; Hansken Extraction Plugins for plugin developers 0.8.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=486e5634"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Javadoc" href="javadoc.html" />
+    <link rel="prev" title="Using the Test Framework in Java" href="testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.8.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../java.html">Java</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_changelog.html">Java API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snippets.html">Java code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Using the Test Framework in Java</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to debug an Extraction Plugin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#locally">Locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#locally-with-docker">Locally with Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-a-docker-image">Build a Docker image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-the-docker-image-with-specific-java-tool-options">Run the Docker image with specific Java tool options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-breakpoints-in-the-code">Setting breakpoints in the code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-in-docker">Logging in Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging-in-kubernetes">Logging in Kubernetes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-hql">Debug HQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="javadoc.html">Javadoc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../java.html">Java</a></li>
+      <li class="breadcrumb-item active">How to debug an Extraction Plugin</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/java/debugging.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-debug-an-extraction-plugin">
+<h1>How to debug an Extraction Plugin<a class="headerlink" href="#how-to-debug-an-extraction-plugin" title="Link to this heading"></a></h1>
+<p>Debugging is the art of removing bugs — hopefully quickly.</p>
+<section id="locally">
+<h2>Locally<a class="headerlink" href="#locally" title="Link to this heading"></a></h2>
+<p>To debug a plugin locally, it is recommended to start the plugin via the IDE by running the integration test. This has
+the advantage that breakpoints can easily be put in the code instead of printing log statements, for example.</p>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
+<p>The logging of the extraction plugin is displayed in the console.</p>
+</section>
+</section>
+<section id="locally-with-docker">
+<h2>Locally with Docker<a class="headerlink" href="#locally-with-docker" title="Link to this heading"></a></h2>
+<p>Debugging an extraction plugin via docker is a bit trickier. Java has the advantage that remote debugging is already
+baked in.</p>
+<p>Using Java Remote Debug with Docker containers requires 3 distinct steps:</p>
+<ol class="arabic simple">
+<li><p>Build a Docker image</p></li>
+<li><p>Run the Docker image with specific Java tool options</p></li>
+<li><p>Setting breakpoints in your code</p></li>
+</ol>
+<section id="build-a-docker-image">
+<h3>Build a Docker image<a class="headerlink" href="#build-a-docker-image" title="Link to this heading"></a></h3>
+<p>If the Docker image is not built, run the following command to build the Docker image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>package<span class="w"> </span>docker:build
+</pre></div>
+</div>
+</section>
+<section id="run-the-docker-image-with-specific-java-tool-options">
+<h3>Run the Docker image with specific Java tool options<a class="headerlink" href="#run-the-docker-image-with-specific-java-tool-options" title="Link to this heading"></a></h3>
+<p>In Java, the remote debug functionality is not enabled by default. To enable the remote debug functionality, the
+following environments variable must be set in the Docker container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">JAVA_TOOL_OPTIONS</span><span class="o">=</span><span class="s2">&quot;-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005&quot;</span>
+</pre></div>
+</div>
+<p>This environment variable allows the debugger to connect to the debuggee (application being debugged). To start the
+Docker image with the <code class="docutils literal notranslate"><span class="pre">JAVA_TOOL_OPTIONS</span></code> environment variable, the following command can be used:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">5005</span>:5005<span class="w"> </span>-e<span class="w"> </span><span class="nv">JAVA_TOOL_OPTIONS</span><span class="o">=</span><span class="s2">&quot;-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005&quot;</span><span class="w"> </span>your_extraction_plugin_name
+</pre></div>
+</div>
+<p>The next step is to attach the debugger to the debuggee.
+For Intellij, the instructions are clearly described on the following
+page: <a class="reference external" href="https://www.jetbrains.com/help/idea/tutorial-remote-debug.html#49be7f04">Tutorial: Remote debug</a></p>
+</section>
+<section id="setting-breakpoints-in-the-code">
+<h3>Setting breakpoints in the code<a class="headerlink" href="#setting-breakpoints-in-the-code" title="Link to this heading"></a></h3>
+<p>The last step is to add breakpoints in the code.</p>
+</section>
+<section id="logging-in-docker">
+<h3>Logging in Docker<a class="headerlink" href="#logging-in-docker" title="Link to this heading"></a></h3>
+<p>The logging of the extraction plugin is displayed in the console after running the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> command. In addition,
+the logging is also displayed in the IntelliJ console while debugging.</p>
+</section>
+</section>
+<section id="kubernetes">
+<h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Link to this heading"></a></h2>
+<p>In kubernetes it is currently <em>not</em> possible to debug via Java Remote Debug because:</p>
+<ul class="simple">
+<li><p>no debug ports are published;</p></li>
+<li><p>the container was not started with the environment variable <code class="docutils literal notranslate"><span class="pre">JAVA_TOOL_OPTIONS</span></code> so debugging is not enabled.</p></li>
+</ul>
+<section id="logging-in-kubernetes">
+<h3>Logging in Kubernetes<a class="headerlink" href="#logging-in-kubernetes" title="Link to this heading"></a></h3>
+<p>If there is authorization to the kubernetes cluster, the logging can be viewed with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>hansken-extraction-plugins/your_extraction_plugin_pod
+</pre></div>
+</div>
+</section>
+</section>
+<section id="debug-hql">
+<h2>Debug HQL<a class="headerlink" href="#debug-hql" title="Link to this heading"></a></h2>
+<p>An HQL query can be debugged by overriding the <code class="docutils literal notranslate"><span class="pre">isVerboseLoggingEnabled()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">ExtractionPluginFlits</span></code> class.
+The example below shows an example of an embedded FLITS test with verbose logging enabled.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestPluginFlitsIT</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">EmbeddedExtractionPluginFlits</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="nf">testPath</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">srcPath</span><span class="p">(</span><span class="s">&quot;integration/inputs/plugin&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="nf">resultPath</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">srcPath</span><span class="p">(</span><span class="s">&quot;integration/results/embedded/plugin&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">ExtractionPlugin</span><span class="w"> </span><span class="nf">pluginToTest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestPlugin</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">regenerate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isVerboseLoggingEnabled</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following output will then be displayed in the console:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>HQL match found for:
+$data.type=jpg
+With trace:
+dataType=jpg
+types={file, data}
+properties={data.raw.mimeType=image/jpg, path=/test-input-trace, file.name=image.jpg, name=test-input-trace, id=0}
+</pre></div>
+</div>
+<p>If the HQL query contains an error, it will be shown in the generated test results. An example of an invalid query
+is <code class="docutils literal notranslate"><span class="pre">$data.mimeType=image/jpg</span></code> (slash not escaped). This query will produce an error like the one shown below.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.hansken.plugin.extraction.hql_lite.lang.ParseException&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HqlLiteHumanQueryParser: line 1:20 token recognition error at: &#39;/jpg&#39;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The error is only shown in the generated trace, so to find out the <cite>ParseException</cite> override
+the <code class="docutils literal notranslate"><span class="pre">regenerate()</span></code> method from <code class="docutils literal notranslate"><span class="pre">Flits</span></code> and then let this method return <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="testing.html" class="btn btn-neutral float-left" title="Using the Test Framework in Java" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="javadoc.html" class="btn btn-neutral float-right" title="Javadoc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

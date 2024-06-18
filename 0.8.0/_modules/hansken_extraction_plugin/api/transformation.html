@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hansken_extraction_plugin.api.transformation &mdash; Hansken Extraction Plugins for plugin developers 0.8.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=486e5634"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.8.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">hansken_extraction_plugin.api.transformation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hansken_extraction_plugin.api.transformation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains the definition of a Transformation.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+
+<div class="viewcode-block" id="Transformation">
+<a class="viewcode-back" href="../../../dev/python/api/hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.Transformation">[docs]</a>
+<span class="k">class</span> <span class="nc">Transformation</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A super class for data transformations. Currently only :class:RangedTransformation is supported.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="Range">
+<a class="viewcode-back" href="../../../dev/python/api/hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.Range">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Range</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Range describes a range of bytes with a offset and length.&quot;&quot;&quot;</span>
+
+    <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: the starting point of the data</span>
+    <span class="n">length</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: the size of the data</span></div>
+
+
+
+<div class="viewcode-block" id="RangedTransformation">
+<a class="viewcode-back" href="../../../dev/python/api/hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.RangedTransformation">[docs]</a>
+<span class="k">class</span> <span class="nc">RangedTransformation</span><span class="p">(</span><span class="n">Transformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A :class:RangedTransformation describes a data transformation consisting of a list of :class:Range.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Range</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:type ranges: list of :class:Range.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span>
+
+<div class="viewcode-block" id="RangedTransformation.builder">
+<a class="viewcode-back" href="../../../dev/python/api/hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.RangedTransformation.builder">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">builder</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:return a Builder.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RangedTransformation</span><span class="o">.</span><span class="n">Builder</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RangedTransformation.Builder">
+<a class="viewcode-back" href="../../../dev/python/api/hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.RangedTransformation.Builder">[docs]</a>
+    <span class="k">class</span> <span class="nc">Builder</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper class that implements a transformation builder.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Initialize a Builder.&quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ranges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Range</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="RangedTransformation.Builder.add_range">
+<a class="viewcode-back" href="../../../dev/python/api/hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.RangedTransformation.Builder.add_range">[docs]</a>
+        <span class="k">def</span> <span class="nf">add_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RangedTransformation.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Add a range to a ranged transformation by providing the range&#39;s offset and length.</span>
+
+<span class="sd">            :param offset the offset of the data transformation</span>
+<span class="sd">            :param length the length of the data transformation</span>
+<span class="sd">            :return: this `.RangedTransformation.Builder`</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">offset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;offset is required&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;length is required&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ranges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Range</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="RangedTransformation.Builder.build">
+<a class="viewcode-back" href="../../../dev/python/api/hansken_extraction_plugin.api.transformation.html#hansken_extraction_plugin.api.transformation.RangedTransformation.Builder.build">[docs]</a>
+        <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RangedTransformation&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return a RangedTransformation.</span>
+
+<span class="sd">            :return: a :class:RangedTransformation</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">RangedTransformation</span><span class="p">(</span><span class="n">ranges</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ranges</span><span class="p">)</span></div>
+</div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
