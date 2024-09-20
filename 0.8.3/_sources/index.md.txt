@@ -1,0 +1,52 @@
+Hansken extraction plugin SDK documentation for plugin developers
+=================================================================
+
+.. image:: cartoon.png
+   :width: 500
+
+## Quick links
+
+* [Latest version of this documentation](https://netherlandsforensicinstitute.github.io/hansken-extraction-plugin-sdk-documentation/latest)
+
+* Python:
+  [API Changelog](dev/python/api_changelog.md) |
+  [Code snippets](dev/python/snippets.md) |
+  [Python Examples](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/examples/-/tree/master/python)
+
+* Java:
+  [API Changelog](dev/java/api_changelog.md) |
+  [Code snippets](dev/java/snippets.md) |
+  [Java Examples](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/examples/-/tree/master/java)
+
+* [Extraction Plugins created by other community members](https://git.eminjenv.nl/hanskaton/extraction-plugins)
+* Chat with us on [Discord](https://discord.com/channels/785509947416772649/796720708096360478)
+
+N.B. For access to any of the above external resources, please see ":ref:`communityaccess`" the in the [FAQ](dev/faq.md).
+
+## Welcome
+
+Welcome to the Hansken extraction plugin SDK documentation for plugin developers.
+This documentation describes the Hansken extraction plugin Software Development Kit (SDK).
+If you are new here, you can start by reading the [introduction](dev/introduction).
+
+.. ATTENTION::
+   Hansken extraction plugins is a technology preview.
+   Please don't consider the SDK and integration in Hansken to be fully stable.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   dev/introduction
+   dev/concepts
+   dev/spec
+   dev/java
+   dev/python
+   dev/examples
+   dev/faq
+   contact
+   changes
+
+<font size="2">
+Cartoon by <a href="https://www.instagram.com/remembirb/">@jorgb</a>, all rights reserved
+</font>

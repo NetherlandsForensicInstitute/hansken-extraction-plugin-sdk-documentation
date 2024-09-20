@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hansken_extraction_plugin.api.plugin_info &mdash; Hansken Extraction Plugins for plugin developers 0.8.3
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=7f96dc5e"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hansken_extraction_plugin.api.search_result" href="hansken_extraction_plugin.api.search_result.html" />
+    <link rel="prev" title="hansken_extraction_plugin.api.extraction_trace" href="hansken_extraction_plugin.api.extraction_trace.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.8.3
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../java.html">Java</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../python.html">Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api_changelog.html">Python API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../snippets.html">Python code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html">Advanced use of the Test Framework in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hanskenpy.html">Run plugins with Hansken.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../python.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="hansken_extraction_plugin.api.html">hansken_extraction_plugin.api</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.data_context.html">hansken_extraction_plugin.api.data_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.extraction_plugin.html">hansken_extraction_plugin.api.extraction_plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.extraction_trace.html">hansken_extraction_plugin.api.extraction_trace</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">hansken_extraction_plugin.api.plugin_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.search_result.html">hansken_extraction_plugin.api.search_result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.trace_searcher.html">hansken_extraction_plugin.api.trace_searcher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.tracelet.html">hansken_extraction_plugin.api.tracelet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hansken_extraction_plugin.api.transformation.html">hansken_extraction_plugin.api.transformation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../python.html">Python</a></li>
+          <li class="breadcrumb-item"><a href="hansken_extraction_plugin.api.html">hansken_extraction_plugin.api</a></li>
+      <li class="breadcrumb-item active">hansken_extraction_plugin.api.plugin_info</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/dev/python/api/hansken_extraction_plugin.api.plugin_info.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-hansken_extraction_plugin.api.plugin_info">
+<span id="hansken-extraction-plugin-api-plugin-info"></span><h1>hansken_extraction_plugin.api.plugin_info<a class="headerlink" href="#module-hansken_extraction_plugin.api.plugin_info" title="Link to this heading"></a></h1>
+<p>This module contains all definitions to describe meta data of a plugin, a.k.a. PluginInfo.</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.Author" title="hansken_extraction_plugin.api.plugin_info.Author"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Author</span></code></a>(name, email, organisation)</p></td>
+<td><p>The author of an Extraction Plugin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.MaturityLevel" title="hansken_extraction_plugin.api.plugin_info.MaturityLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaturityLevel</span></code></a>(value)</p></td>
+<td><p>This class represents the maturity level of an extraction plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.PluginId" title="hansken_extraction_plugin.api.plugin_info.PluginId"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PluginId</span></code></a>(domain, category, name)</p></td>
+<td><p>Identifier of a plugin, consisting of domain, category and name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo" title="hansken_extraction_plugin.api.plugin_info.PluginInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PluginInfo</span></code></a>(id, version, description, author, ...)</p></td>
+<td><p>This information is used by Hansken to identify and run the plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.PluginResources" title="hansken_extraction_plugin.api.plugin_info.PluginResources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PluginResources</span></code></a>([maximum_cpu, ...])</p></td>
+<td><p>PluginResources contains information about how many resources will be used for a plugin.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.Author">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Author</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organisation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/plugin_info.html#Author"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.Author" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The author of an Extraction Plugin.</p>
+<p>This information can be retrieved by an end-user from Hansken.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.Author.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.Author.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.Author.email">
+<span class="sig-name descname"><span class="pre">email</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.Author.email" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.Author.organisation">
+<span class="sig-name descname"><span class="pre">organisation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.Author.organisation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.MaturityLevel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaturityLevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/plugin_info.html#MaturityLevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.MaturityLevel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>This class represents the maturity level of an extraction plugin.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.MaturityLevel.PROOF_OF_CONCEPT">
+<span class="sig-name descname"><span class="pre">PROOF_OF_CONCEPT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.MaturityLevel.PROOF_OF_CONCEPT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.MaturityLevel.READY_FOR_TEST">
+<span class="sig-name descname"><span class="pre">READY_FOR_TEST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.MaturityLevel.READY_FOR_TEST" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.MaturityLevel.PRODUCTION_READY">
+<span class="sig-name descname"><span class="pre">PRODUCTION_READY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.MaturityLevel.PRODUCTION_READY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginId">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PluginId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/plugin_info.html#PluginId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginId" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Identifier of a plugin, consisting of domain, category and name. Needs to be unique among all tools/plugins.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginId.domain">
+<span class="sig-name descname"><span class="pre">domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginId.domain" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginId.category">
+<span class="sig-name descname"><span class="pre">category</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginId.category" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginId.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginId.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginResources">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PluginResources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maximum_cpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/plugin_info.html#PluginResources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginResources" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>PluginResources contains information about how many resources will be used for a plugin.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginResources.maximum_cpu">
+<span class="sig-name descname"><span class="pre">maximum_cpu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginResources.maximum_cpu" title="Link to this definition"></a></dt>
+<dd><p>CPU resources are measured in cpu units. One cpu is equivalent to 1 vCPU/Core for cloud providers and 1 hyperthread
+on bare-metal Intel processors. Also, fractional requests are allowed. A plugin that asks 0.5 CPU uses half as
+much CPU as one that asks for 1 CPU.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginResources.maximum_memory">
+<span class="sig-name descname"><span class="pre">maximum_memory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginResources.maximum_memory" title="Link to this definition"></a></dt>
+<dd><p>Max usable memory for a plugin, measured in megabytes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginResources.maximum_workers">
+<span class="sig-name descname"><span class="pre">maximum_workers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginResources.maximum_workers" title="Link to this definition"></a></dt>
+<dd><p>The number of concurrent workers(i.e. traces that can be processed).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PluginInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.PluginId" title="hansken_extraction_plugin.api.plugin_info.PluginId"><span class="pre">PluginId</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">author</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.Author" title="hansken_extraction_plugin.api.plugin_info.Author"><span class="pre">Author</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">maturity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.MaturityLevel" title="hansken_extraction_plugin.api.plugin_info.MaturityLevel"><span class="pre">MaturityLevel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">matcher</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">webpage_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deferred_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.PluginResources" title="hansken_extraction_plugin.api.plugin_info.PluginResources"><span class="pre">PluginResources</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hansken_extraction_plugin/api/plugin_info.html#PluginInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This information is used by Hansken to identify and run the plugin.</p>
+<p>Note that the build_plugin.py build script is used to build a plugin docker image with PluginInfo docker labels.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.PluginId" title="hansken_extraction_plugin.api.plugin_info.PluginId"><span class="pre">PluginId</span></a></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.id" title="Link to this definition"></a></dt>
+<dd><p>a plugin’s unique identifier, see PluginId</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.version">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.version" title="Link to this definition"></a></dt>
+<dd><p>version of the plugin</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.description" title="Link to this definition"></a></dt>
+<dd><p>short description of the functionality of the plugin</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.author">
+<span class="sig-name descname"><span class="pre">author</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.Author" title="hansken_extraction_plugin.api.plugin_info.Author"><span class="pre">Author</span></a></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.author" title="Link to this definition"></a></dt>
+<dd><p>the plugin’s author, see Author</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.maturity">
+<span class="sig-name descname"><span class="pre">maturity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.MaturityLevel" title="hansken_extraction_plugin.api.plugin_info.MaturityLevel"><span class="pre">MaturityLevel</span></a></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.maturity" title="Link to this definition"></a></dt>
+<dd><p>maturity level, see MaturityLevel</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.matcher">
+<span class="sig-name descname"><span class="pre">matcher</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.matcher" title="Link to this definition"></a></dt>
+<dd><p>this matcher selects the traces offered to the plugin</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.webpage_url">
+<span class="sig-name descname"><span class="pre">webpage_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.webpage_url" title="Link to this definition"></a></dt>
+<dd><p>plugin url</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.license">
+<span class="sig-name descname"><span class="pre">license</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.license" title="Link to this definition"></a></dt>
+<dd><p>license of this plugin</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.deferred_iterations">
+<span class="sig-name descname"><span class="pre">deferred_iterations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.deferred_iterations" title="Link to this definition"></a></dt>
+<dd><p>number of deferred iterations (1 to 20), nly for deferred plugins (optional)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hansken_extraction_plugin.api.plugin_info.PluginInfo.resources">
+<span class="sig-name descname"><span class="pre">resources</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hansken_extraction_plugin.api.plugin_info.PluginResources" title="hansken_extraction_plugin.api.plugin_info.PluginResources"><span class="pre">PluginResources</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hansken_extraction_plugin.api.plugin_info.PluginInfo.resources" title="Link to this definition"></a></dt>
+<dd><p>resources to be reserved for a plugin (optional)</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hansken_extraction_plugin.api.extraction_trace.html" class="btn btn-neutral float-left" title="hansken_extraction_plugin.api.extraction_trace" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hansken_extraction_plugin.api.search_result.html" class="btn btn-neutral float-right" title="hansken_extraction_plugin.api.search_result" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

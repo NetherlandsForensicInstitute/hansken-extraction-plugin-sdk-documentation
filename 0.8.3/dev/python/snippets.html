@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python code snippets &mdash; Hansken Extraction Plugins for plugin developers 0.8.3
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=7f96dc5e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced use of the Test Framework in Python" href="testing.html" />
+    <link rel="prev" title="Packaging" href="packaging.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+              <div class="version">
+                0.8.3
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../python.html">Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_changelog.html">Python API Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging.html">Packaging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Python code snippets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-properties-to-a-trace">Adding properties to a trace</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#date-properties">Date properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#category-for-extra-properties">Category for extra properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-tracelets">Adding tracelets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-child-traces-to-a-trace">Adding child traces to a trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-data-to-a-trace">Adding data to a trace</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data-transformations">Data Transformations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blobs">Blobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-system-resources">Specifying system resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deferred-plugins">Deferred Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#experimental-feature-adding-previews-to-a-trace">[EXPERIMENTAL FEATURE] Adding previews to a trace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Advanced use of the Test Framework in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hanskenpy.html">Run plugins with Hansken.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#api-documentation">API Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python.html">Python</a></li>
+      <li class="breadcrumb-item active">Python code snippets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/python/snippets.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-code-snippets">
+<h1>Python code snippets<a class="headerlink" href="#python-code-snippets" title="Link to this heading"></a></h1>
+<section id="adding-properties-to-a-trace">
+<h2>Adding properties to a trace<a class="headerlink" href="#adding-properties-to-a-trace" title="Link to this heading"></a></h2>
+<p>Use <a class="reference internal" href="api/hansken_extraction_plugin.api.extraction_trace.html#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.update" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update</span></code></a>
+to add trace types and their properties to an
+<a class="reference internal" href="api/hansken_extraction_plugin.api.extraction_trace.html#hansken_extraction_plugin.api.extraction_trace.ExtractionTrace" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtractionTrace</span></code></a>.
+Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">data_context</span><span class="p">):</span>
+    <span class="c1"># get the name of the file</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file.name&#39;</span><span class="p">)</span>
+    <span class="c1"># set the chat application property on the trace</span>
+    <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;chatConversation.application&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;DemoApp </span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All types and properties that can be set are defined in the <a class="reference internal" href="../concepts/traces.html#hansken-trace-model"><span class="std std-ref">Hansken trace model</span></a>.</p>
+<section id="date-properties">
+<h3>Date properties<a class="headerlink" href="#date-properties" title="Link to this heading"></a></h3>
+<p>When adding a property which holds a value of data-type Date, always define timezone as being UTC. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">data_context</span><span class="p">):</span>
+    <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;file.modifiedOn&#39;</span><span class="p">,</span>
+                 <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mi">1630510809</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="category-for-extra-properties">
+<h3>Category for extra properties<a class="headerlink" href="#category-for-extra-properties" title="Link to this heading"></a></h3>
+<p>If the information, which must be added as a property, does not match any of the existing properties of Hansken trace
+model, use the category “misc” (miscellaneous). When part of the category “misc”, any name can be given to a property.
+The values of miscellaneous properties are expected to be of data-type string. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">data_context</span><span class="p">):</span>
+    <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;file.misc.notes&#39;</span><span class="p">:</span> <span class="s1">&#39;Some additional notes about the file trace.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;file.misc.anyName&#39;</span><span class="p">:</span> <span class="s1">&#39;Even more notes.&#39;</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-tracelets">
+<span id="tracelets-python"></span><h3>Adding tracelets<a class="headerlink" href="#adding-tracelets" title="Link to this heading"></a></h3>
+<p>In the following Python example, a “prediction” <a class="reference internal" href="../concepts/traces.html#tracelets"><span class="std std-ref">tracelet</span></a> is added to a trace. The tracelet consists
+of a list of four properties, namely “class”, “confidence”, “modelName” and “modelVersion”.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="o">.</span><span class="n">add_tracelet</span><span class="p">(</span><span class="n">Tracelet</span><span class="p">(</span><span class="s1">&#39;prediction&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;telephone&#39;</span><span class="p">,</span>
+                                           <span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+                                           <span class="s1">&#39;modelName&#39;</span><span class="p">:</span> <span class="s1">&#39;yolo&#39;</span><span class="p">,</span>
+                                           <span class="s1">&#39;modelVersion&#39;</span><span class="p">:</span> <span class="s1">&#39;2.0&#39;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="adding-child-traces-to-a-trace">
+<h2>Adding child traces to a trace<a class="headerlink" href="#adding-child-traces-to-a-trace" title="Link to this heading"></a></h2>
+<p>Adding child traces to the trace can be done by creating a builder with
+<a class="reference internal" href="api/hansken_extraction_plugin.api.extraction_trace.html#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.child_builder" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.child_builder"><code class="xref py py-meth docutils literal notranslate"><span class="pre">child_builder</span></code></a>.
+Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">data_context</span><span class="p">):</span>
+    <span class="n">child_builder</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">child_builder</span><span class="p">(</span><span class="s1">&#39;childTrace-1&#39;</span><span class="p">)</span>
+    <span class="n">child_builder</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;chatMessage.application&#39;</span><span class="p">:</span> <span class="s1">&#39;DemoApp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;chatMessage.from&#39;</span><span class="p">:</span> <span class="s1">&#39;Ann&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;chatMessage.to&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Mark&#39;</span><span class="p">],</span>
+        <span class="c1"># list, because there can be multiple receivers</span>
+        <span class="s1">&#39;chatMessage.message&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello, are you there?&#39;</span><span class="p">,</span>
+    <span class="p">})</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+    <span class="n">grandchild_builder</span> <span class="o">=</span> <span class="n">child_builder</span><span class="o">.</span><span class="n">child_builder</span><span class="p">(</span><span class="s1">&#39;grandchild&#39;</span><span class="p">)</span>
+    <span class="n">grandchild_builder</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;byte&#39;</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;some bytes&#39;</span><span class="p">})</span>
+    <span class="n">grandchild_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This adds a single child trace with name <code class="docutils literal notranslate"><span class="pre">childTrace-1</span></code> with four properties and a grandchild trace with name
+<code class="docutils literal notranslate"><span class="pre">grandchild</span></code> and a byte data stream.</p>
+</section>
+<section id="adding-data-to-a-trace">
+<span id="datastreams-python"></span><h2>Adding data to a trace<a class="headerlink" href="#adding-data-to-a-trace" title="Link to this heading"></a></h2>
+<p>Traces can have data attached to them. See <a class="reference internal" href="../concepts/traces.html#datastreams"><span class="std std-ref">Data streams</span></a> for more information.
+The following two snippets demonstrate how to add data to a trace.</p>
+<p>It is currently not possible to verify that a specific data stream is already set or not.</p>
+<section id="data-transformations">
+<h3>Data Transformations<a class="headerlink" href="#data-transformations" title="Link to this heading"></a></h3>
+<p>The most efficient way to add data to a trace is using data transformations.
+See <a class="reference internal" href="../concepts/data_transformations.html"><span class="doc">Data Transformations</span></a> for more details.</p>
+<p>The following example sets a new datastream with dataType <code class="docutils literal notranslate"><span class="pre">html</span></code> on a trace, by setting a ranged data transformation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="n">RangedTransformation</span><span class="p">(</span><span class="n">Range</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">length</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>The following example creates a child trace and sets a new datastream with dataType <code class="docutils literal notranslate"><span class="pre">raw</span></code> on it, by setting a ranged
+data transformation with two ranges:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">child</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">child_builder</span><span class="p">(</span><span class="s1">&#39;new trace&#39;</span><span class="p">)</span>
+<span class="n">child</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="n">RangedTransformation</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+                         <span class="o">.</span><span class="n">add_range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+                         <span class="o">.</span><span class="n">add_range</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+                         <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="blobs">
+<h3>Blobs<a class="headerlink" href="#blobs" title="Link to this heading"></a></h3>
+<p>It is not always possible to create a transformation for the data that has to be
+added to a trace. For example, if the data is a result of a computation, and not
+a direct subset of another data stream..</p>
+<p>The following snippet shows how to create a new data stream of dataType <code class="docutils literal notranslate"><span class="pre">raw</span></code> on a trace from a blob stored in <code class="docutils literal notranslate"><span class="pre">bytes</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;...&#39;</span><span class="p">}</span>
+<span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<section id="streaming-data">
+<span id="python-snippets-data-streaming"></span><h4>Streaming data<a class="headerlink" href="#streaming-data" title="Link to this heading"></a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Streaming data does not work with the Hansken.py runner because Hansken.py does not support it. It does
+work when running your plugin in Hansken and in the test framework.</p>
+</div>
+<p>When dealing with large quantities of data, it is possible to keep the memory usage
+of the plugin within manageable limits by streaming the data from the plugin to Hansken in smaller chunks.
+To do this, use the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">trace.open(data_type=...,</span> <span class="pre">mode='wb')</span></code> syntax. Here are some examples:</p>
+<p>Stream strings to <code class="docutils literal notranslate"><span class="pre">raw</span></code> (default) datastream:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">trace</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;a string&#39;</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">another_string</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Stream a BufferedReader object to a <code class="docutils literal notranslate"><span class="pre">text</span></code> datastream:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">trace</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;input.text&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="streaming-text">
+<h4>Streaming text<a class="headerlink" href="#streaming-text" title="Link to this heading"></a></h4>
+<p>To write <code class="docutils literal notranslate"><span class="pre">str</span></code> values directly, use mode <code class="docutils literal notranslate"><span class="pre">w</span></code> (or <code class="docutils literal notranslate"><span class="pre">wt</span></code>).
+By default, it is assumed that the written text is ‘utf-8’ encoded. The default encoding can be overwritten by using the <code class="docutils literal notranslate"><span class="pre">'encoding='</span></code> argument.</p>
+<p>(In a future Hansken update) Hansken will set the correct data-stream properties for your text stream (<code class="docutils literal notranslate"><span class="pre">mimeType</span></code>, <code class="docutils literal notranslate"><span class="pre">mimeClass</span></code>, and <code class="docutils literal notranslate"><span class="pre">fileType</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">trace</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">text_writer</span><span class="p">:</span>
+    <span class="n">text_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello.world&#39;</span><span class="p">)</span>  <span class="c1"># write strings directly to the writer</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">},</span> <span class="n">text_writer</span><span class="p">)</span>  <span class="c1"># or pass the writer to json.dump</span>
+</pre></div>
+</div>
+<p>It is recommended to pass <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> explictly as encoding.</p>
+</section>
+</section>
+</section>
+<section id="specifying-system-resources">
+<h2>Specifying system resources<a class="headerlink" href="#specifying-system-resources" title="Link to this heading"></a></h2>
+<p>It is possible to specify system resources hints in the <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>. To run a plugin with at least 0.5 cpu (= 0.5
+vCPU/Core/hyperthread), 1 gb memory and 10 (concurrent) cpu workers (threads), for example, the following configuration can be added to <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
+                         <span class="n">resources</span><span class="o">=</span><span class="n">PluginResources</span><span class="p">(</span><span class="n">maximum_cpu</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">maximum_memory</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">maximum_workers</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="deferred-plugins">
+<span id="python-snippets-deferred"></span><h2>Deferred Plugins<a class="headerlink" href="#deferred-plugins" title="Link to this heading"></a></h2>
+<p>Implementing a deferred extraction plugin requires inheriting the
+<a class="reference internal" href="api/hansken_extraction_plugin.api.extraction_plugin.html#hansken_extraction_plugin.api.extraction_plugin.DeferredExtractionPlugin" title="hansken_extraction_plugin.api.extraction_plugin.DeferredExtractionPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeferredExtractionPlugin</span></code></a>
+base class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DeferredPlugin</span><span class="p">(</span><span class="n">DeferredExtractionPlugin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">searcher</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>This allows accessing a third <a class="reference internal" href="api/hansken_extraction_plugin.api.trace_searcher.html#hansken_extraction_plugin.api.trace_searcher.TraceSearcher" title="hansken_extraction_plugin.api.trace_searcher.TraceSearcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">TraceSearcher</span></code></a>
+parameter in the process function. This can be used to search for traces:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">searcher</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;file.extension:html&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">searchresult</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">searchresult</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;extension </span><span class="si">{</span><span class="n">trace</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;file.extension&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">search</span></code> method accepts three arguments;</p>
+<ol class="arabic simple">
+<li><p>a HQL query (note: this is the traditional HQL query, and not the matchers HQL-lite variant),</p></li>
+<li><p>(optional) the maximum number of traces to return (currently hard-limited to a maximum of 50 traces),</p></li>
+<li><p>(optional) a scope, which can be either <code class="docutils literal notranslate"><span class="pre">image</span></code>, or <code class="docutils literal notranslate"><span class="pre">project</span></code>. When set to <code class="docutils literal notranslate"><span class="pre">image</span></code>, the searcher will only search for traces
+within the same image as the trace that is being processed.</p></li>
+</ol>
+<p>The returned <a class="reference internal" href="api/hansken_extraction_plugin.api.search_result.html#hansken_extraction_plugin.api.search_result.SearchResult" title="hansken_extraction_plugin.api.search_result.SearchResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchResult</span></code></a>
+should be closed, for example by using <code class="docutils literal notranslate"><span class="pre">with</span></code>. The resulting search result is an iterable, which will be exhausted when
+no more traces are available. The search result allows taking one or more traces by calling :py:
+meth:<code class="docutils literal notranslate"><span class="pre">take</span> <span class="pre">&lt;hansken_extraction_plugin.api.search_result.SearchResult.take&gt;</span></code> or
+<a class="reference internal" href="api/hansken_extraction_plugin.api.search_result.html#hansken_extraction_plugin.api.search_result.SearchResult.takeone" title="hansken_extraction_plugin.api.search_result.SearchResult.takeone"><code class="xref py py-meth docutils literal notranslate"><span class="pre">takeone</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The command <cite>trace.open(datastream_type)</cite> will fail on search result traces that do not originate from the
+same image (evidence item) as the trace that is being processed.</p>
+</div>
+</section>
+<section id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h2>
+<p>We use Logbook to log messages in Python. Logbook is a logging system for Python that replaces the standard library’s
+logging module.</p>
+<p>To enable logging in your plugin, add the following to the top of your plugin code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">Logger</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>From there on the logging is pretty straight forward:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Logging a variable: </span><span class="si">{</span><span class="n">my_variable</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The default log level is WARNING. You can use the <code class="docutils literal notranslate"><span class="pre">-v</span></code> (or <code class="docutils literal notranslate"><span class="pre">-vv</span></code> or <code class="docutils literal notranslate"><span class="pre">-vvv</span></code>) option of <code class="docutils literal notranslate"><span class="pre">serve_plugin.py</span></code> to increase the
+log level. This is typically done in the plugin <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful with logging sensitive information.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Contact your Hansken administrator for more information on where to find logs for your Hansken environment.</p>
+</div>
+</section>
+<section id="experimental-feature-adding-previews-to-a-trace">
+<h2>[EXPERIMENTAL FEATURE] Adding previews to a trace<a class="headerlink" href="#experimental-feature-adding-previews-to-a-trace" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is an experimental feature, which might change or get removed in future releases.</p>
+</div>
+<p>Use <a class="reference internal" href="api/hansken_extraction_plugin.api.extraction_trace.html#hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.update" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTraceBuilder.update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update</span></code></a>
+to add previews to an
+<a class="reference internal" href="api/hansken_extraction_plugin.api.extraction_trace.html#hansken_extraction_plugin.api.extraction_trace.ExtractionTrace" title="hansken_extraction_plugin.api.extraction_trace.ExtractionTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtractionTrace</span></code></a>.
+Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">data_context</span><span class="p">):</span>
+    <span class="c1"># set the preview data for the image/png MIME-type</span>
+    <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;preview.image/png&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00\xff</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="packaging.html" class="btn btn-neutral float-left" title="Packaging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="testing.html" class="btn btn-neutral float-right" title="Advanced use of the Test Framework in Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
