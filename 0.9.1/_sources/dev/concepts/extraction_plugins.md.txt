@@ -1,0 +1,60 @@
+# Hansken Extraction Plugins
+
+Hansken Extraction Plugins enable Hansken users to add their own extraction tools to Hansken.
+
+To use an Extraction Plugin in Hansken, the following steps have to be done:
+
+1. Build the plugin
+2. Upload the plugin to Hansken
+3. Refresh the Hansken tools list
+4. Start an extraction with the plugin enabled
+
+## Building a plugin
+
+Hansken Extraction Plugins can be built in Java or Python by implementing an interface. Which interface you choose
+depends on the type of plugin you choose to make, see [Plugin Types](plugin_types.md). For more information on coding
+your own plugin, see the [Extraction Plugin Examples](https://git.eminjenv.nl/hanskaton/hansken-extraction-plugin-sdk/examples).
+
+The plugin can then be tested using the [Test Framework](test_framework.md). This way you make sure everything works as
+expected before taking further steps.
+
+## Package the plugin
+
+To upload a plugin into Hansken, a docker image for this plugin must be uploaded to the docker registry. First, the
+plugin container image must be packaged.
+A plugin is packaged into an OCI image (also known as Docker image).
+
+* [Package a docker image for a Python plugin](../python/packaging.md)
+* [Package a docker image for a Java plugin](../java/packaging.md)
+
+
+.. _upload_plugin:
+
+## Upload the plugin to Hansken
+
+Hansken finds the plugins by scanning a docker registry. It will try to load all docker images with a certain prefix as
+Extraction Plugins. The settings for this are defined in Hansken properties:
+
+* `registry.extraction.plugins.registry.uri` defines the registry
+* `registry.extraction.plugins.registry.prefix` defines the prefix plugins must have
+
+When the image is packaged locally, it needs to be pushed (uploaded) to the docker registry. These commands provide an 
+outline of how to do this:
+
+* `docker login <docker-registry>` (make sure you are logged in to the registry)
+* `docker push <docker-registry><prefix><pluginname>` (push the plugin docker image to the registry)
+
+.. note:: For more information about uploading plugins and running them in Hansken, see the 'Using extraction plugins in
+   Hansken' chapter of the *Hansken User Guide*.
+
+## Refresh the Hansken tools list
+
+Hansken checks which plugins are available at startup. The list of available plugins can also be refreshed by calling
+the following endpoint: `<hansken-domain>/gatekeeper/tools?refresh=true`
+
+This can be invoked via an internet browser.
+
+## Start an extraction with the plugin enabled
+
+If everything went well, the list of available tools in Hansken should now feature your plugin. To run the plugin in an
+extraction, be sure to select its checkbox in the extraction tools dialog.

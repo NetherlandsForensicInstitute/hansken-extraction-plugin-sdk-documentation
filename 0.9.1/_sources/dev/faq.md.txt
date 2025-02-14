@@ -1,0 +1,64 @@
+# Frequently Asked Questions
+
+.. _communityaccess:
+
+## How can I access Hansken developer community
+
+You will first need git access to the Hansken developer community. Here you can find started guides and examples. If you
+have no access yet, you can get access by following the next steps:
+
+1. Sign up at [git.eminjenv.nl](https://git.eminjenv.nl/)
+2. After you have created your account, you should request access to the "
+   Hansken Community" group . Do this by contacting your organisations Hansken business owner. If you don't know who to
+   contact as your business owner, please read the :doc:`../contact` page.
+
+## Why use Extraction Plugins?
+
+Extraction plugins enable you to run your own extraction code in Hansken.
+
+* Your plugin runs during extraction
+* Extraction plugins are faster than Hansken.py
+* Multiple programming languages are supported
+* Scalability: Extraction plugins can be scaled flexibly on a kubernetes cluster
+
+## What programming languages are supported?
+
+The SDK contains an API and tools to write a Hansken extraction plugin in Java or Python. The Java API can be used to
+develop extraction plugins in JVM-compatible languages, such as Scala and Kotlin.
+
+## Will you support language *foobar*?
+
+Probably not. It takes time and effort to create a proper SDK. If you think there is a good use case to support
+language *foobar*, and there is gRPC support, feel free to contact us. We can discuss the options to add support for
+Hansken extraction plugins with *foobar*.
+
+Under the hood, extraction plugins use gRPC to communicate with Hansken. In theory, all programming languages that have
+a gRPC implementation can be used to write Hansken extraction plugins.
+
+## Can I reuse or modify the Extraction Plugins SDK?
+
+The SDK is distributed under the Apache 2.0 License, see the LICENSE file in the SDK for more details.
+
+## Can I use a plugin that someone else wrote?
+
+Yes, at your own risk. The Hansken Team does not take responsibility for code written by third parties in the form of
+Extraction Plugins.
+
+## What are the legal implications of creating your own Extraction Plugin(s)?
+
+All Extraction Plugins not written by the Hansken Team are considered **third party** Extraction Plugins. Please refer
+to [Can I use a plugin that someone else wrote?](faq.md#can-i-use-a-plugin-that-someone-else-wrote?)
+
+## How safe are Extraction Plugins?
+
+We are doing everything to make sure Extraction Plugins are as safe as possible, however note that the Extraction Plugin
+SDK is still in beta. Use it at your own risk. For more information on security see [Isolation](concepts/isolation.md).
+
+## Can my Extraction Plugin be embedded into Hansken for performance reasons?
+
+Embedding an Extraction Plugin into Hansken requires access to the Hansken source code. If you have access to the source
+code then please `../contact` us for assistance. Please note that embedded Extraction Plugins are **not officially
+supported**.
+
+If you do not have access to the Hansken source code, then please contact your own Business Owner, and ask them to
+contact the Hansken Team.
