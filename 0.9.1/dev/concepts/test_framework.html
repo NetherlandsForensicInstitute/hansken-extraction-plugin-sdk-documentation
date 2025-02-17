@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test framework &mdash; Hansken Extraction Plugins for plugin developers SNAPSHOT
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=b03376c1"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugging locally with Hansken All in One (AIO)" href="all_in_one_debugging.html" />
+    <link rel="prev" title="Data Transformations" href="data_transformations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">General concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="extraction_plugins.html">Hansken Extraction Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anatomy_of_a_plugin.html">Anatomy of a plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin_types.html">Extraction plugin types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin_naming_convention.html">Plugin naming convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="traces.html">Traces &amp; Trace model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hql_lite.html">HQL-Lite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_transformations.html">Data Transformations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Test framework</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-test-data">Creating test data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-test-data-directory-structure">Basic test data directory structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-data-structure-for-deferred-extraction-plugins">Test data structure for deferred extraction plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trace-format">Trace format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-exceptions">Testing exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-test-your-plugin">How to test your plugin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#java">Java</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python">Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="all_in_one_debugging.html">Debugging locally with Hansken All in One (AIO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation.html">Plugin isolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes_autoscaling.html">Kubernetes, Autoscaling, Resourcemanagement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../concepts.html">General concepts</a></li>
+      <li class="breadcrumb-item active">Test framework</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/concepts/test_framework.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-framework">
+<h1>Test framework<a class="headerlink" href="#test-framework" title="Link to this heading"></a></h1>
+<p id="id1">The SDK provides the <em>FLITS Test Framework</em> for integration testing. This allows us to test/validate the plugin input
+and output without having a running Hansken instance.</p>
+<p>To use the test framework, three components are required:</p>
+<ol class="arabic simple">
+<li><p>A running server instance of an extraction plugin. See section <a class="reference internal" href="#howtotestyourplugin"><span class="std std-ref">How to test your plugin</span></a>.</p></li>
+<li><p>Input test data</p></li>
+<li><p>Results (expected output)</p></li>
+</ol>
+<section id="creating-test-data">
+<h2>Creating test data<a class="headerlink" href="#creating-test-data" title="Link to this heading"></a></h2>
+<p>The test data is independent of which programming language is used for the plugin (Java or Python). This section
+describes the setup of the test data, while the sections thereafter will link to the language specific documentation.</p>
+<section id="basic-test-data-directory-structure">
+<span id="basictestdata"></span><h3>Basic test data directory structure<a class="headerlink" href="#basic-test-data-directory-structure" title="Link to this heading"></a></h3>
+<p>Example test data directory structure with an <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">results</span></code> directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tests/
+├── inputs
+│   ├── example1.raw
+│   ├── example1.text
+│   ├── example1.trace
+│   ├── example2.raw
+│   └── example2.trace
+└── results
+    ├── example1.raw.PluginName.trace
+    ├── example1.text.PluginName.trace
+    └── example2.raw.PluginName.trace
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> folder contains all traces that will be processed during the test. These ‘input traces’ are defined in
+files with the ‘.trace’ extension, using JSON. This JSON structure is explained in section
+<a class="reference internal" href="#traceformat"><span class="std std-ref">Trace format</span></a>. Each trace may have various <a class="reference internal" href="traces.html#datastreams"><span class="std std-ref">data-streams</span></a>. The data for each trace
+is put into separate files for each data-stream. The data-stream files need to have the same name as their corresponding
+trace file but differ in extension. They can have any extension, for example ‘raw’, ‘text’ or ‘jpeg’. <strong>Note that one
+input trace will always have one ‘.trace’ file, and can have none, one or many data files.</strong> Also note that if the
+plugin doesn’t match on any of the input files and there are no result files yet, the test will succeed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The test-framework uses the extension of the input test file(s) _(other than __.trace__)_ as type of the
+current data-stream.</p>
+</div>
+<p>The expected results (which are also traces) are stored in a separate <code class="docutils literal notranslate"><span class="pre">results</span></code> folder next to the <code class="docutils literal notranslate"><span class="pre">inputs</span></code> folder. The
+file names in the <code class="docutils literal notranslate"><span class="pre">results</span></code> folder correspond to the file names in the <code class="docutils literal notranslate"><span class="pre">inputs</span></code> folder. Note that the name of the plugin
+is added between the file basename and the file extension. This can be useful if one maintains a single test input and
+output test datasets for multiple extraction plugins.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to let the test framework regenerate the results files automatically. See the
+<a class="reference internal" href="../java/testing.html#java-testing"><span class="std std-ref">Java</span></a> and <a class="reference internal" href="../python/testing.html#python-testing"><span class="std std-ref">Python</span></a> sections on testing on how to do this. If no files are
+being generated, check if the plugin matcher is actually matching the input files.</p>
+</div>
+<p>The test runner will invoke the extraction plugin for each input trace. The test runner collects the plugin output and
+compares it against the trace defined in the <code class="docutils literal notranslate"><span class="pre">results</span></code> folder. If there is a mismatch, the test runner will fail with an
+exit code 1. If all tests pass the test runner will finish with exit code 0.</p>
+<p>Given the files in the example above, the test runner will invoke the extraction plugin three times:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">example1.trace</span></code> with data <code class="docutils literal notranslate"><span class="pre">stream</span> <span class="pre">example1.raw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example1.raw.PluginName.trace</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">example1.trace</span></code> with data <code class="docutils literal notranslate"><span class="pre">stream</span> <span class="pre">example1.text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example1.text.PluginName.trace</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">example2.trace</span></code> with data <code class="docutils literal notranslate"><span class="pre">stream</span> <span class="pre">example2.text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example2.raw.PluginName.trace</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="test-data-structure-for-deferred-extraction-plugins">
+<h3>Test data structure for deferred extraction plugins<a class="headerlink" href="#test-data-structure-for-deferred-extraction-plugins" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="plugin_types.html#deferred-extraction-plugins"><span class="std std-ref">Deferred extration plugins</span></a> have the unique ability to search traces with a query.
+The <code class="docutils literal notranslate"><span class="pre">input</span></code> test data should be extended to contain the results of searches done by deferred extraction plugins. These
+<em>search traces</em> are stored in separate folders that follow the naming format ‘{deferred trace name}/searchtraces/’. Below
+is an example test data directory structure for a deferred extraction plugin that searches for
+a <code class="docutils literal notranslate"><span class="pre">deferredExampleSearch.trace</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tests/
+├── inputs
+│   ├── deferredExample.trace
+│   ├── deferredExample.raw
+│   ├── deferredExample/
+│   │   ├── searchtraces/
+│   │   │   ├── deferredExampleSearch.trace
+└── results
+    └── deferredExample.raw.DeferredPluginName.trace
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The plugin will try to match on all traces in the input folder, including traces used for search results (
+of deferred extraction plugins). This means that it is impossible to search on traces that match the same deferred
+extraction plugin, as it would create an infinite loop.</p>
+</div>
+<p>Given the files in the example above, the test runner will invoke the extraction plugin one time:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">deferredExample.trace</span></code> with data stream <code class="docutils literal notranslate"><span class="pre">deferredExample.raw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">deferredExample.raw.DeferredPluginName.trace</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The search query should be written in HQL, as that is how Hansken will interpret it. However, the test
+framework interprets the query using its HQL-lite interpreter. Therefore, not all queries will be supported.</p>
+</div>
+</section>
+<section id="trace-format">
+<span id="traceformat"></span><h3>Trace format<a class="headerlink" href="#trace-format" title="Link to this heading"></a></h3>
+<p>Input and result traces both stored in a JSON structure. There is however a slight difference between the two: The
+result trace may store additional values that are purely there for testing purposes. The input format will first be
+discussed, followed by the result format.</p>
+<section id="input-trace-json-format">
+<h4>Input trace JSON format<a class="headerlink" href="#input-trace-json-format" title="Link to this heading"></a></h4>
+<p>Input traces start with a <code class="docutils literal notranslate"><span class="pre">trace</span></code> key, which contains a mapping of properties. The property names are split in a
+dictionary structure. The example below shows a serialized trace with six properties: <code class="docutils literal notranslate"><span class="pre">data.raw.mimeClass</span></code> and the five
+data types that are currently supported by the test-framework.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> key defines the <a class="reference internal" href="traces.html#datastreams"><span class="std std-ref">data-streams</span></a> of the trace. When adding a data-stream make sure you also
+add the corresponding input data file, as described <a class="reference internal" href="#basictestdata"><span class="std std-ref">above</span></a>.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;trace&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;raw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;mimeClass&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;supported data types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Boolean&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Integer&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Double&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;String&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;StringList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;b&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;c&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;d&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The extraction plugin SDK and the test framework have no knowledge of the
+<a class="reference internal" href="traces.html#trace-model-and-the-extraction-plugin-sdk"><span class="std std-ref">trace model</span></a>. This means that when properties are used that don’t
+comply with the trace model, this will not cause the test to fail, but it will fail when running your plugin in Hansken.</p>
+</div>
+</section>
+<section id="result-trace-json-format">
+<h4>Result trace JSON format<a class="headerlink" href="#result-trace-json-format" title="Link to this heading"></a></h4>
+<p>The result traces have the same format as the input traces, namely a <code class="docutils literal notranslate"><span class="pre">trace</span></code> key which contains the full input trace
+with all its properties. However, the result traces may have two additional keys <code class="docutils literal notranslate"><span class="pre">children</span></code> and <code class="docutils literal notranslate"><span class="pre">data</span></code> (which are
+explained in-depth below). These are added for testing purposes. If the plugin adds <a class="reference internal" href="traces.html#child-traces"><span class="std std-ref">child traces</span></a>
+or writes <a class="reference internal" href="data_transformations.html"><span class="doc">data transformations</span></a> to Hansken, this would normally not reflect on the JSON of the
+trace. However, the test framework adds these to the result JSON structure to be able to test them.</p>
+<p>Consequently, result traces are stored in a JSON structure that may consist of up to three parts, namely the always
+present <code class="docutils literal notranslate"><span class="pre">trace</span></code> and the occasional <code class="docutils literal notranslate"><span class="pre">children</span></code> and <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trace</span></code>: The key <code class="docutils literal notranslate"><span class="pre">trace</span></code> contains a mapping of its properties, in exactly the same way as is done for input traces.</p></li>
+<li><p><cite>children</cite>: :ref:<code class="docutils literal notranslate"><span class="pre">Child</span> <span class="pre">traces</span> <span class="pre">&lt;child</span> <span class="pre">traces&gt;</span></code> that have been created by the plugin during the test are stored under a
+reserved field <code class="docutils literal notranslate"><span class="pre">children</span></code>, which is a list of traces. The example trace below contains a child trace with a property
+<code class="docutils literal notranslate"><span class="pre">name</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: <a class="reference internal" href="data_transformations.html"><span class="doc">Data transformations</span></a> that have been created by the plugin during the test are
+stored under a reserved field <code class="docutils literal notranslate"><span class="pre">data</span></code>. For each data-stream type there is a <code class="docutils literal notranslate"><span class="pre">descriptor</span></code> field describing the data
+transformation in a JSON format. The example trace has a ranged data transformation for the raw data-stream. Note that
+this <code class="docutils literal notranslate"><span class="pre">data</span></code> is entirely different from the <code class="docutils literal notranslate"><span class="pre">data</span></code> key that may be present <em>inside</em> the <code class="docutils literal notranslate"><span class="pre">trace</span></code>!</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;trace&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;raw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;mimeClass&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;supported data types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Boolean&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Integer&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Double&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;String&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;List&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;b&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;c&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;d&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;trace&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;child trace 1&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;raw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;descriptor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[{\&quot;ranges\&quot;:[{\&quot;length\&quot;:79,\&quot;offset\&quot;:0}]}]&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-exceptions">
+<h3>Testing exceptions<a class="headerlink" href="#testing-exceptions" title="Link to this heading"></a></h3>
+<p>Some scenarios may throw exceptions and this can be part of your tests too. For example, an input file that has the
+wrong format can be part of your integration tests. When an exception occurs during the test, it will be written to the
+result file. This can be deliberately used to test exceptions. However, it is often impractical to match against a full
+exception. For example, the row numbers in the exception are very much prone to change due to circumstances irrelevant
+to the case being tested. Therefore, the testframework provides some options to match only on those parts of result
+files that are relevant to the test.</p>
+<p>The following sections will explain these partial result matchers using the following example exception:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus varius sodales.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="leaving-out-the-message">
+<h4>Leaving out the message<a class="headerlink" href="#leaving-out-the-message" title="Link to this heading"></a></h4>
+<p>It is possible to leave of the message of the exception, which will still result in a valid result:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="the-startswith-partial-result-matcher">
+<h4>The <code class="docutils literal notranslate"><span class="pre">startsWith</span></code> partial result matcher<a class="headerlink" href="#the-startswith-partial-result-matcher" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">startsWith</span></code> partial result matcher requires a string as a parameter. The result will be valid if the actual result
+starts with this string.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message.startsWith&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lorem ipsum dolor sit amet, &quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="the-containsinorder-partial-result-matcher">
+<h4>The <code class="docutils literal notranslate"><span class="pre">containsInOrder</span></code> partial result matcher<a class="headerlink" href="#the-containsinorder-partial-result-matcher" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">containsInOrder</span></code> partial result matcher requires a list of strings as a parameter. The result will be valid if
+every string in the list can be found in that same order in the actual result.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message.containsInOrder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Lorem ipsum dolor sit amet,&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;consectetur adipiscing elit.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Mauris faucibus varius sodales.&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="how-to-test-your-plugin">
+<span id="howtotestyourplugin"></span><h2>How to test your plugin<a class="headerlink" href="#how-to-test-your-plugin" title="Link to this heading"></a></h2>
+<p>Running an integration test for an extraction plugin depends on the language in which the extraction plugin is built.</p>
+<section id="java">
+<h3>Java<a class="headerlink" href="#java" title="Link to this heading"></a></h3>
+<p>The Test Framework itself is built in Java. When building extraction plugins with Java, it can be incorporated in your
+unit tests, as shown in <a class="reference internal" href="../java/testing.html"><span class="doc">Using the Test Framework in Java</span></a>.</p>
+</section>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
+<p>The Python SDK also uses the Java based Test Framework. This is done by providing a wrapper to make calls to an included
+Test Framework ‘jar’ file. See <a class="reference internal" href="../python/testing.html"><span class="doc">Advanced use of the Test Framework in Python</span></a> for documentation
+and examples on how to use FLITS for testing your Python plugin.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="data_transformations.html" class="btn btn-neutral float-left" title="Data Transformations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="all_in_one_debugging.html" class="btn btn-neutral float-right" title="Debugging locally with Hansken All in One (AIO)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

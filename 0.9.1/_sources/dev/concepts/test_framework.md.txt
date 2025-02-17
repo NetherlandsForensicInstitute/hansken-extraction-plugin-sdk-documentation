@@ -1,0 +1,276 @@
+# Test framework
+
+.. _test_framework:
+
+The SDK provides the _FLITS Test Framework_ for integration testing. This allows us to test/validate the plugin input
+and output without having a running Hansken instance.
+
+To use the test framework, three components are required:
+
+1. A running server instance of an extraction plugin. See section :ref:`How to test your plugin <howtotestyourplugin>`.
+2. Input test data
+3. Results (expected output)
+
+## Creating test data
+
+The test data is independent of which programming language is used for the plugin (Java or Python). This section
+describes the setup of the test data, while the sections thereafter will link to the language specific documentation.
+
+.. _basictestdata:
+
+### Basic test data directory structure
+
+Example test data directory structure with an `inputs` and `results` directory:
+
+```text
+tests/
+├── inputs
+│   ├── example1.raw
+│   ├── example1.text
+│   ├── example1.trace
+│   ├── example2.raw
+│   └── example2.trace
+└── results
+    ├── example1.raw.PluginName.trace
+    ├── example1.text.PluginName.trace
+    └── example2.raw.PluginName.trace
+ ```
+
+The `inputs` folder contains all traces that will be processed during the test. These 'input traces' are defined in
+files with the '.trace' extension, using JSON. This JSON structure is explained in section
+:ref:`Trace format<traceformat>`. Each trace may have various :ref:`data-streams<datastreams>`. The data for each trace
+is put into separate files for each data-stream. The data-stream files need to have the same name as their corresponding
+trace file but differ in extension. They can have any extension, for example 'raw', 'text' or 'jpeg'. __Note that one
+input trace will always have one '.trace' file, and can have none, one or many data files.__ Also note that if the
+plugin doesn't match on any of the input files and there are no result files yet, the test will succeed.
+
+.. note:: The test-framework uses the extension of the input test file(s) _(other than __.trace__)_ as type of the
+    current data-stream.
+
+The expected results (which are also traces) are stored in a separate `results` folder next to the `inputs` folder. The
+file names in the `results` folder correspond to the file names in the `inputs` folder. Note that the name of the plugin
+is added between the file basename and the file extension. This can be useful if one maintains a single test input and
+output test datasets for multiple extraction plugins.
+
+.. note:: It is possible to let the test framework regenerate the results files automatically. See the
+   :ref:`Java<java testing>` and :ref:`Python<python testing>` sections on testing on how to do this. If no files are
+   being generated, check if the plugin matcher is actually matching the input files.
+
+The test runner will invoke the extraction plugin for each input trace. The test runner collects the plugin output and
+compares it against the trace defined in the `results` folder. If there is a mismatch, the test runner will fail with an
+exit code 1. If all tests pass the test runner will finish with exit code 0.
+
+Given the files in the example above, the test runner will invoke the extraction plugin three times:
+
+| Input                                                        | Result                                         |
+|--------------------------------------------------------------|------------------------------------------------|
+| `example1.trace` with data `stream example1.raw`             | `example1.raw.PluginName.trace`                |
+| `example1.trace` with data `stream example1.text`            | `example1.text.PluginName.trace`               |
+| `example2.trace` with data `stream example2.text`            | `example2.raw.PluginName.trace`                |
+
+### Test data structure for deferred extraction plugins
+
+:ref:`Deferred extration plugins <deferred extraction plugins>` have the unique ability to search traces with a query.
+The `input` test data should be extended to contain the results of searches done by deferred extraction plugins. These
+_search traces_ are stored in separate folders that follow the naming format '{deferred trace name}/searchtraces/'. Below
+is an example test data directory structure for a deferred extraction plugin that searches for
+a `deferredExampleSearch.trace`:
+
+```text
+tests/
+├── inputs
+│   ├── deferredExample.trace
+│   ├── deferredExample.raw
+│   ├── deferredExample/
+│   │   ├── searchtraces/
+│   │   │   ├── deferredExampleSearch.trace
+└── results
+    └── deferredExample.raw.DeferredPluginName.trace
+```
+
+.. warning:: The plugin will try to match on all traces in the input folder, including traces used for search results (
+   of deferred extraction plugins). This means that it is impossible to search on traces that match the same deferred
+   extraction plugin, as it would create an infinite loop.
+
+Given the files in the example above, the test runner will invoke the extraction plugin one time:
+
+| Input                                                          | Result                                         |
+|----------------------------------------------------------------|------------------------------------------------|
+| `deferredExample.trace` with data stream `deferredExample.raw` | `deferredExample.raw.DeferredPluginName.trace` |
+
+.. warning:: The search query should be written in HQL, as that is how Hansken will interpret it. However, the test
+   framework interprets the query using its HQL-lite interpreter. Therefore, not all queries will be supported.
+
+.. _traceformat:
+
+### Trace format
+
+Input and result traces both stored in a JSON structure. There is however a slight difference between the two: The
+result trace may store additional values that are purely there for testing purposes. The input format will first be
+discussed, followed by the result format.
+
+#### Input trace JSON format
+
+Input traces start with a `trace` key, which contains a mapping of properties. The property names are split in a
+dictionary structure. The example below shows a serialized trace with six properties: `data.raw.mimeClass` and the five
+data types that are currently supported by the test-framework.
+
+The `data` key defines the :ref:`data-streams <datastreams>` of the trace. When adding a data-stream make sure you also
+add the corresponding input data file, as described :ref:`above<basictestdata>`.
+
+```json
+{
+  "trace": {
+    "data": {
+      "raw": {
+        "mimeClass": "text"
+      }
+    },
+    "supported data types": {
+      "Boolean": true,
+      "Integer": 1,
+      "Double": 0.1,
+      "String": "a string",
+      "StringList": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    }
+  }
+}
+```
+
+.. warning:: The extraction plugin SDK and the test framework have no knowledge of the
+   :ref:`trace model <Trace model and the extraction plugin SDK>`. This means that when properties are used that don't
+   comply with the trace model, this will not cause the test to fail, but it will fail when running your plugin in Hansken.
+
+#### Result trace JSON format
+
+The result traces have the same format as the input traces, namely a `trace` key which contains the full input trace
+with all its properties. However, the result traces may have two additional keys `children` and `data` (which are
+explained in-depth below). These are added for testing purposes. If the plugin adds :ref:`child traces <child traces>`
+or writes [data transformations](data_transformations.md) to Hansken, this would normally not reflect on the JSON of the
+trace. However, the test framework adds these to the result JSON structure to be able to test them.
+
+Consequently, result traces are stored in a JSON structure that may consist of up to three parts, namely the always
+present `trace` and the occasional `children` and `data`:
+
+* `trace`: The key `trace` contains a mapping of its properties, in exactly the same way as is done for input traces.
+* `children`: :ref:`Child traces <child traces>` that have been created by the plugin during the test are stored under a
+  reserved field `children`, which is a list of traces. The example trace below contains a child trace with a property
+  `name`.
+* `data`: [Data transformations](data_transformations.md) that have been created by the plugin during the test are
+  stored under a reserved field `data`. For each data-stream type there is a `descriptor` field describing the data
+  transformation in a JSON format. The example trace has a ranged data transformation for the raw data-stream. Note that
+  this `data` is entirely different from the `data` key that may be present _inside_ the `trace`!
+
+```json
+{
+  "trace": {
+    "data": {
+      "raw": {
+        "mimeClass": "text"
+      }
+    },
+    "supported data types": {
+      "Boolean": true,
+      "Integer": 1,
+      "Double": 0.1,
+      "String": "a string",
+      "List": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    }
+  },
+  "children": [
+    {
+      "trace": {
+        "name": "child trace 1"
+      }
+    }
+  ],
+  "data": {
+    "raw": {
+      "descriptor": "[{\"ranges\":[{\"length\":79,\"offset\":0}]}]"
+    }
+  }
+}
+```
+
+### Testing exceptions
+
+Some scenarios may throw exceptions and this can be part of your tests too. For example, an input file that has the
+wrong format can be part of your integration tests. When an exception occurs during the test, it will be written to the
+result file. This can be deliberately used to test exceptions. However, it is often impractical to match against a full
+exception. For example, the row numbers in the exception are very much prone to change due to circumstances irrelevant
+to the case being tested. Therefore, the testframework provides some options to match only on those parts of result
+files that are relevant to the test.  
+
+The following sections will explain these partial result matchers using the following example exception:
+
+```json
+{
+  "class": "org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException",
+  "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus varius sodales."
+}
+```
+
+#### Leaving out the message
+
+It is possible to leave of the message of the exception, which will still result in a valid result:
+
+```json
+{
+  "class": "org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException"
+}
+```
+
+#### The `startsWith` partial result matcher
+
+The `startsWith` partial result matcher requires a string as a parameter. The result will be valid if the actual result
+starts with this string.
+
+```json
+{
+  "class": "org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException",
+  "message.startsWith": "Lorem ipsum dolor sit amet, "
+}
+```
+
+#### The `containsInOrder` partial result matcher
+
+The `containsInOrder` partial result matcher requires a list of strings as a parameter. The result will be valid if
+every string in the list can be found in that same order in the actual result.
+
+```json
+{
+  "class": "org.hansken.plugin.extraction.runtime.grpc.client.ExtractionPluginException",
+  "message.containsInOrder": [
+    "Lorem ipsum dolor sit amet,",
+    "consectetur adipiscing elit.",
+    "Mauris faucibus varius sodales."
+  ]
+}
+```
+
+.. _howtotestyourplugin:
+
+## How to test your plugin
+
+Running an integration test for an extraction plugin depends on the language in which the extraction plugin is built.
+
+### Java
+
+The Test Framework itself is built in Java. When building extraction plugins with Java, it can be incorporated in your
+unit tests, as shown in [Using the Test Framework in Java](../java/testing.md).
+
+### Python
+
+The Python SDK also uses the Java based Test Framework. This is done by providing a wrapper to make calls to an included
+Test Framework 'jar' file. See [Advanced use of the Test Framework in Python](../python/testing.md) for documentation
+and examples on how to use FLITS for testing your Python plugin.
