@@ -1,0 +1,60 @@
+# Extraction plugin types
+
+Currently three types of Hansken Extraction Plugins are supported:
+
+* Standard Extraction Plugins
+* Meta Extraction Plugins
+* Deferred Extraction Plugins
+
+## Standard Extraction Plugins
+
+Standard Extraction Plugins provide enough functionality for most cases. This includes:
+
+* Processing traces
+* Creating child-traces
+* Reading trace properties
+* Adding trace properties
+* Reading data
+* Writing data
+* Writing [data transformations](data_transformations.md)
+
+## Meta Extraction Plugins
+
+Meta Extraction Plugins can only process and produce trace properties without the need  (or possibility) for processing
+actual trace data. This includes:
+
+* Processing traces
+* Creating child-traces
+* Reading trace properties
+* Adding trace properties
+
+.. _deferred extraction plugins:
+
+## Deferred Extraction Plugins
+
+These plugins have two additional features that are not included with Standard Extraction Plugins:
+
+* a developer can choose to *defer* their execution
+* information about other traces can be obtained while processing the current extraction trace. Code examples can be
+  found here: :ref:`Java <java_snippets_deferred>`, :ref:`Python <python_snippets_deferred>`.
+
+*Deferring execution*
+A single Hansken image extraction consists of multiple *iterations*. Within every *iteration*, every Hansken tool and
+plugin is executed on matching traces, which produces new traces or modifies existing traces. If a tool can be executed
+another time because of these additions or modifications, another iteration is started.
+
+A regular plugin is executed in the same iteration a trace is matched. Deferred plugins are executed in a different
+iteration; they are always deferred for at least one iteration. This is very useful when searching for traces, because
+you are certain the deferred plugin is executed after all other tools performed their modifications.
+
+Sometimes, executing your plugin in the next iteration is not enough; it needs to be executed in a different iteration.
+This is why the SDK allows setting a *deferredIterations* parameter in the plugin info. After the plugin matches with a
+trace, it will be executed after *deferredIterations*. The execution can currently be deferred by a maximum of **20**
+iterations and the default is **1**.
+
+*Searching for traces*
+This type of plugin can perform a search to look for extracted traces in the current **image** (default) or
+**project** (optional). This search is performed using a provided **HQL** query.
+A maximum of **50** traces is returned for a given search request.
+
+.. warning:: Please note that HQL-Lite specific syntax such as the `Data` or `DataType` matchers is **NOT** supported.
