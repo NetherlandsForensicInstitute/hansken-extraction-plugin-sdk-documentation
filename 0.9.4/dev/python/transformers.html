@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using Transformers for on-demand execution &mdash; Hansken Extraction Plugins for plugin developers 0.9.3 documentation</title>
+  <title>Using Transformers for on-demand execution &mdash; Hansken Extraction Plugins for plugin developers 0.9.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=0e439607"></script>
+      <script src="../../_static/documentation_options.js?v=61b282d3"></script>
       <script src="../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -62,7 +62,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#limitations-on-transformers">Limitations on Transformers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling-in-transformers">Error handling in Transformers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-transformers">Testing transformers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#calling-transformers">Calling Transformers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calling-transformer-with-tools-transformers">Calling transformer with /tools/transformers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html">Advanced use of the Test Framework in Python</a></li>
@@ -157,7 +157,7 @@ decorating it with the transformer decorator it will automatically be made avail
 <li><p>Transformer may not be static methods.</p></li>
 <li><p>All parameters and the return type must be annotated with type hints (except the <code class="docutils literal notranslate"><span class="pre">self</span></code> parameter).</p></li>
 <li><p>Parameters may not be positional-only or contain variable parameters like <code class="docutils literal notranslate"><span class="pre">*args</span></code> or <code class="docutils literal notranslate"><span class="pre">**kwarg</span></code>.</p></li>
-<li><p>Parameters and return types may only be of the following:</p>
+<li><p>Parameters and return types may only be of the following (returning None is not supported):</p>
 <ul>
 <li><p>bool</p></li>
 <li><p>int</p></li>
@@ -165,7 +165,7 @@ decorating it with the transformer decorator it will automatically be made avail
 <li><p>str</p></li>
 <li><p>bytes</p></li>
 <li><p>bytearray</p></li>
-<li><p>datetime.datetime</p></li>
+<li><p>datetime.datetime (The datetime will be converted to unix time and then converted to datetime with the zone “UTC”. So the zone id is always(“UTC”))</p></li>
 <li><p>hansken.util.GeographicLocation</p></li>
 <li><p>hansken.util.Vector</p></li>
 <li><p>typing.Sequence</p></li>
@@ -186,9 +186,27 @@ debugging purposes.</p>
 <h2>Testing transformers<a class="headerlink" href="#testing-transformers" title="Link to this heading"></a></h2>
 <p>For more information on testing transformers, see the ‘Testing Transformers’ section on the <a class="reference internal" href="testing.html"><span class="doc">page on testing plugins</span></a>.</p>
 </section>
-<section id="calling-transformers">
-<h2>Calling Transformers<a class="headerlink" href="#calling-transformers" title="Link to this heading"></a></h2>
-<p>TODO HANSKEN-21414: This should be implemented once we decide on how we design the REST API.</p>
+<section id="calling-transformer-with-tools-transformers">
+<h2>Calling transformer with /tools/transformers<a class="headerlink" href="#calling-transformer-with-tools-transformers" title="Link to this heading"></a></h2>
+<p>This REST Call calls a specified transformer method on a given tool/plugin with supplied arguments.
+This endpoint allows a transformer to be executed on demand, outside an extraction. The transformer call can be used to transform user input to an output. A tool/plugin can have multiple transformer methods.
+To use /tools/transformers REST CALL you need to know the following (see extractions tool or use the rest call/tools to get the information below):</p>
+<ul class="simple">
+<li><p>The name of the plugin/tool</p></li>
+<li><p>The transformer name</p></li>
+<li><p>The names of the parameters (arguments)</p></li>
+</ul>
+<p>Example JSON request body for the transformer above:</p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value2&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;tool&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ExampleTool&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transformer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;translate_text&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 

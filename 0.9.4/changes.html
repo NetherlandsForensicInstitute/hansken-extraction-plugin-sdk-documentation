@@ -6,8 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Hansken Extraction Plugins for plugin developers 0.9.4
- documentation</title>
+  <title>Changelog &mdash; Hansken Extraction Plugins for plugin developers 0.9.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/wider_pages.css?v=32ad70ab" />
@@ -15,7 +14,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=c5ca06ca"></script>
+      <script src="_static/documentation_options.js?v=61b282d3"></script>
       <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -54,8 +53,8 @@
 <li class="toctree-l1"><a class="reference internal" href="dev/faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#release-version">Release-0.9.4
-</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-version">Release-0.9.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-0-9-4">Release-0.9.4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#release-0-9-2">Release-0.9.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#release-0-9-1">Release-0.9.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#release-0-9-0">Release-0.9.0</a></li>
@@ -140,10 +139,17 @@ For the API changelog pages see:</p>
 <li><p><a class="reference internal" href="dev/python/api_changelog.html"><span class="doc">Python API Changelog</span></a></p></li>
 </ul>
 <section id="release-version">
-<h2>Release-0.9.4
-<a class="headerlink" href="#release-version" title="Link to this heading"></a></h2>
+<h2>Release-0.9.5<a class="headerlink" href="#release-version" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>HANSKEN-21819: Updated documentation of transformer, datetime, supported return type and Rest Call</p></li>
+<li><p>HANSKEN-21840: Fix bug in testing framework that switched around actual and expected</p></li>
+</ul>
+</section>
+<section id="release-0-9-4">
+<h2>Release-0.9.4<a class="headerlink" href="#release-0-9-4" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>HANSKEN-21816: Fix for <code class="docutils literal notranslate"><span class="pre">Stream</span> <span class="pre">is</span> <span class="pre">already</span> <span class="pre">completed,</span> <span class="pre">no</span> <span class="pre">further</span> <span class="pre">calls</span> <span class="pre">are</span> <span class="pre">allowed</span></code> that was caused by an <code class="docutils literal notranslate"><span class="pre">RpcSync</span></code> being sent after <code class="docutils literal notranslate"><span class="pre">RpcFinish</span></code></p></li>
+<li><p>HANSKEN-21436: Update to JDK 21</p></li>
 <li><p>HANSKEN-21803: Fix dict object retrieved when requesting <code class="docutils literal notranslate"><span class="pre">image</span></code> property of trace</p></li>
 <li><p>HANSKEN-21694: Fixed datetime serialization error in Transformer plugins</p></li>
 <li><p>HANSKEN-21540: Support all types of arguments when executing a transformer using execute_transformer</p></li>

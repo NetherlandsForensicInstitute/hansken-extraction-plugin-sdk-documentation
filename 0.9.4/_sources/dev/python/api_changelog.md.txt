@@ -9,7 +9,7 @@ are important to plugin developers. For a full list of changes per version, plea
 .. ## |version|
 
 
-## 0.9.3
+## 0.9.4
 
 * This release supports providing all types of transformer arguments when using the `execute_transformer` script.
 
