@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HQL-Lite &mdash; Hansken Extraction Plugins for plugin developers SNAPSHOT
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=b03376c1"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Data Transformations" href="data_transformations.html" />
+    <link rel="prev" title="Traces &amp; Trace model" href="traces.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">General concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="extraction_plugins.html">Hansken Extraction Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anatomy_of_a_plugin.html">Anatomy of a plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin_types.html">Extraction plugin types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin_naming_convention.html">Plugin naming convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="traces.html">Traces &amp; Trace model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HQL-Lite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-hansken-work">How does Hansken work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-does-can-this-tool-process-the-provided-trace-do">What does <code class="docutils literal notranslate"><span class="pre">can_this_tool_process_the_provided_trace()</span></code> do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-hql-lite">What is HQL-Lite?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-not-just-use-hql-for-plugins">Why not just use HQL for plugins?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hql-lite-syntax">HQL-Lite syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-write-a-matcher">How to write a matcher?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pdfplugin-example">PdfPlugin example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-precise-should-a-matcher-be">How precise should a matcher be?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_transformations.html">Data Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_framework.html">Test framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="all_in_one_debugging.html">Debugging locally with Hansken All in One (AIO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation.html">Plugin isolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes_autoscaling.html">Kubernetes, Autoscaling, Resourcemanagement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../concepts.html">General concepts</a></li>
+      <li class="breadcrumb-item active">HQL-Lite</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/concepts/hql_lite.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hql-lite">
+<h1>HQL-Lite<a class="headerlink" href="#hql-lite" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>HQL-Lite is a query language derived from Hanskens full HQL human. HQL stands for Hansken Query Language and can be
+used to search or match traces. Since not all elements of full HQL can be used in the context of an extraction,
+extraction plugins use HQL-Lite, a lightweight version of HQL. This document describes the usage of HQL-Lite in the
+context of extraction plugins.</p>
+</section>
+<section id="how-does-hansken-work">
+<span id="howdoeshanskenwork"></span><h2>How does Hansken work?<a class="headerlink" href="#how-does-hansken-work" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Let’s say we have a Hansken image <code class="docutils literal notranslate"><span class="pre">hansken_image1</span></code> with 10 pdf files, and 5 jpegs.</p></li>
+<li><p>And our Hansken contains 2 tools:</p>
+<ul>
+<li><p>PdfPlugin</p></li>
+<li><p>JpegTool</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All plugins are Hansken tools, but not all Hansken tools are plugins. Some tools are included in Hansken core.</p>
+</div>
+<p>Let’s look at a (simplified) pseudocode example of the inner workings of Hansken:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">each</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">new_traces</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">each</span> <span class="n">datastream</span> <span class="ow">in</span> <span class="n">trace</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">each</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">hansken_tools</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="n">tool</span><span class="o">.</span><span class="n">can_this_tool_process_the_provided_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">datastream</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">tool</span><span class="o">.</span><span class="n">process_the_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">datastream</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So in this example we know the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">new_traces</span></code> has</p>
+<ul>
+<li><p>10 pdf files</p></li>
+<li><p>5 jpeg files</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hansken_tools</span></code> contains:</p>
+<ul>
+<li><p>PdfPlugin</p></li>
+<li><p>JpegTool</p></li>
+</ul>
+</li>
+</ul>
+<p>So the question here is, how do we prevent that traces are not processed by incompatible tools?</p>
+<p>The answer is the <code class="docutils literal notranslate"><span class="pre">tool.can_this_tool_process_the_provided_trace()</span></code> part of the pseudocode.</p>
+<section id="what-does-can-this-tool-process-the-provided-trace-do">
+<h3>What does <code class="docutils literal notranslate"><span class="pre">can_this_tool_process_the_provided_trace()</span></code> do?<a class="headerlink" href="#what-does-can-this-tool-process-the-provided-trace-do" title="Link to this heading"></a></h3>
+<p>Hansken actually contains many more tools/plugins than these 2, and instead of 15 files/traces, we usually deal with
+millions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If each trace has 1 extra second of overhead, 1 million traces would take 11.5 days of extra CPU time</p>
+</div>
+<section id="matchers-to-the-rescue">
+<h4>Matchers to the rescue<a class="headerlink" href="#matchers-to-the-rescue" title="Link to this heading"></a></h4>
+<p>To reduce the unnecessary overhead of processing all traces (even the ones the tool cannot actually process), Hansken
+implements the concept of a <code class="docutils literal notranslate"><span class="pre">matcher</span></code> for each tool. This <em>matcher</em> basically checks the <em>trace</em> for <em>“matching
+conditions”</em>, that would allow the tool to process it.</p>
+<p>Sometimes these <em>matching conditions</em> can be as simple as a specific <code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">extension</span></code>, but are often more
+elaborate in the sense that they check multiple factors that require some intimate knowledge of Hansken.</p>
+</section>
+</section>
+</section>
+<section id="what-is-hql-lite">
+<h2>What is HQL-Lite?<a class="headerlink" href="#what-is-hql-lite" title="Link to this heading"></a></h2>
+<p>HQL-Lite is a language based on HQL (Hansken Query Language) that allows plugin developers to write <em>matchers</em> for
+Hansken Extraction Plugins. It could be said that HQL-Lite contains a subset of HQL features, plus some HQL-Lite unique
+features that are only interesting for <em>matchers</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that even though the HQL-Lite query is part of the plugin, it is compiled and stored in Hansken during
+startup to achieve performance.</p>
+</div>
+<section id="why-not-just-use-hql-for-plugins">
+<h3>Why not just use HQL for plugins?<a class="headerlink" href="#why-not-just-use-hql-for-plugins" title="Link to this heading"></a></h3>
+<p>HQL was designed to search for traces stored in the Elasticsearch database. As such, some of its features are tightly
+coupled to the Elasticsearch implementation, making it difficult to re-implement them for plugins.</p>
+<p>Also, even though HQL is more complex than the requirements for <em>matching</em> in plugins, a couple of minor features that
+are absolutely necessary for <em>matching</em> are not implemented in HQL, as they don’t make much sense from a search point of
+view. This is because HQL was designed to be used with <em>finished extractions</em> with all the traces stored in the
+database, while HQL-Lite was designed for <em>active extractions</em>.</p>
+</section>
+<section id="hql-lite-syntax">
+<span id="hqllite-syntax"></span><h3>HQL-Lite syntax<a class="headerlink" href="#hql-lite-syntax" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Matcher</p></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>remarks</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>All</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td><p>an empty string translates to match for <strong>all</strong> traces</p></td>
+</tr>
+<tr class="row-odd"><td><p>And</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">foo:1</span> <span class="pre">AND</span> <span class="pre">bar:2</span></code></p></td>
+<td><p>the case-sensitive <code class="docutils literal notranslate"><span class="pre">AND</span></code> operator behaves like a logical AND of 2 conditions</p></td>
+</tr>
+<tr class="row-even"><td><p>Not</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">foo</span></code> or <code class="docutils literal notranslate"><span class="pre">-foo</span></code></p></td>
+<td><p>the case-sensitive <code class="docutils literal notranslate"><span class="pre">NOT</span></code> or <code class="docutils literal notranslate"><span class="pre">-</span></code> negates the expression that follows</p></td>
+</tr>
+<tr class="row-odd"><td><p>Range</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">foo&gt;1</span></code> or <code class="docutils literal notranslate"><span class="pre">1&lt;=foo&lt;10</span></code></p></td>
+<td><p>a numbered-range check with a min or/and max range(s)</p></td>
+</tr>
+<tr class="row-even"><td><p>Or</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">foo:1</span> <span class="pre">OR</span> <span class="pre">bar:2</span></code></p></td>
+<td><p>the case-sensitive <code class="docutils literal notranslate"><span class="pre">OR</span></code> operator behaves like a logical OR of 2 conditions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$data.foo:1</span></code></p></td>
+<td><p>see <code class="docutils literal notranslate"><span class="pre">$data</span></code> section below</p></td>
+</tr>
+<tr class="row-even"><td><p>DataType</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$data.type:raw</span></code></p></td>
+<td><p>this query matches against the type of the current datastream</p></td>
+</tr>
+<tr class="row-odd"><td><p>Types</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">type:email</span></code></p></td>
+<td><p>this query checks if the trace contains a certain trace type as defined in the Hansken trace model</p></td>
+</tr>
+</tbody>
+</table>
+<p>There are also a couple of general guidelines that apply to all matchers:</p>
+<ul>
+<li><p>Equals/not equals:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">:</span></code> or <code class="docutils literal notranslate"><span class="pre">=</span></code> : The most basic of left equals right statements. note that <code class="docutils literal notranslate"><span class="pre">=</span></code> is also valid.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!=</span></code> : The opposite of equals, not equals. Note that <code class="docutils literal notranslate"><span class="pre">!:</span></code> is <strong>NOT</strong> supported.</p></li>
+</ul>
+</li>
+<li><p>Wildcards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">?</span></code> : Match against any single character. E.g. <code class="docutils literal notranslate"><span class="pre">foo:r?w</span></code> will match against <code class="docutils literal notranslate"><span class="pre">raw,</span> <span class="pre">row</span></code> but not against <code class="docutils literal notranslate"><span class="pre">rowing</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code> : Match against any chars. E.g. <code class="docutils literal notranslate"><span class="pre">foo:r*</span></code> will match against <code class="docutils literal notranslate"><span class="pre">r,</span> <span class="pre">ra,</span> <span class="pre">raw,</span> <span class="pre">raaaaaw</span></code> but not against <code class="docutils literal notranslate"><span class="pre">aw</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Exact match: By surrounding a value with quotes, we tell the parser that it is a single value. This is especially
+helpful for values that might contain separators. E.g. <code class="docutils literal notranslate"><span class="pre">foo:'hello</span> <span class="pre">hql-lite'</span></code>.</p></li>
+<li><p>CSV: Currently only the <code class="docutils literal notranslate"><span class="pre">type</span></code> query supports multiple values to check against. E.g. <code class="docutils literal notranslate"><span class="pre">type:email,chatMessage</span></code> will only
+return <code class="docutils literal notranslate"><span class="pre">true</span></code> if both types exist for this trace.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">()</span></code> grouping: You can group statements by putting brackets around them. E.g. <code class="docutils literal notranslate"><span class="pre">foo:1</span> <span class="pre">AND</span> <span class="pre">(bar:2</span> <span class="pre">OR</span> <span class="pre">bla:3)</span></code> which
+translates to <code class="docutils literal notranslate"><span class="pre">foo:1</span></code> plus one of the statements in the brackets.</p></li>
+<li><p>Escaping <code class="docutils literal notranslate"><span class="pre">\&quot;\.\t\r\n:=&gt;&lt;!()~/,[]{}</span></code>: Some characters are used internally by HQL-Lite, and need to be escaped if they
+are used in the value side of the key-value pair. These values can be escaped by adding prepending <code class="docutils literal notranslate"><span class="pre">\\</span></code> to the
+character(s). Example: <code class="docutils literal notranslate"><span class="pre">foo:foo</span> <span class="pre">bar</span></code> should be <code class="docutils literal notranslate"><span class="pre">foo:foo\\</span> <span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">foo.bar:foo:bar</span></code> should be <code class="docutils literal notranslate"><span class="pre">foo.bar:foo\\:bar</span></code>
+…etc.</p>
+<ul>
+<li><p>The only exceptions to this rule are <strong>unix paths</strong>:</p>
+<ul>
+<li><p>Acceptable paths:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:bar/baz</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:/bar/baz</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:'/bar/baz/he</span> <span class="pre">llo'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:*bar/baz*</span></code></p></li>
+</ul>
+</li>
+<li><p>Unacceptable paths:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:/bar/</span></code> -&gt; this is the regex matcher, which is unsupported in HQL-lite</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:c:\</span></code>   -&gt; should be <code class="docutils literal notranslate"><span class="pre">foo:c\:\\</span></code>, both the <code class="docutils literal notranslate"><span class="pre">colon</span></code> and the <code class="docutils literal notranslate"><span class="pre">slash</span></code> need to be escaped</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo:'c:\'</span></code> -&gt; should be <code class="docutils literal notranslate"><span class="pre">foo:'c:\\'</span></code>, the <code class="docutils literal notranslate"><span class="pre">slash</span></code> still needs to be escaped</p>
+<ul>
+<li><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>the backslash is the universal escape character, so it <strong>always</strong> needs to be escaped.</p>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="data-matchers">
+<h4>$data matchers<a class="headerlink" href="#data-matchers" title="Link to this heading"></a></h4>
+<p>In Hansken, a trace can have multiple <a class="reference internal" href="traces.html#datastreams"><span class="std std-ref">datastreams</span></a>. The exact content of said datastreams is
+discussed elsewhere, but the basic idea is that a trace can have multiple representations. For example, a trace might
+have a <code class="docutils literal notranslate"><span class="pre">raw</span></code> datastream, but after we identify that the raw bytes contain a <strong>text</strong> file, we might add a separate
+datastream <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>process()</cite> method of each plugin is called for each datastream of each trace. This is explained
+in <a class="reference internal" href="#howdoeshanskenwork"><span class="std std-ref">How does Hansken work?</span></a> . Subsequently, you might have the same property for a
+different datastream. For example: you might have a <cite>data.raw.size</cite> and a <cite>data.text.size</cite> property. The reason you
+might have the same property multiple times, is because it could have a different meaning.</p>
+</div>
+<p>For example:</p>
+<ul class="simple">
+<li><p>data.raw.size: is the size in bytes</p></li>
+<li><p>data.text.size: is the number of bytes in the text representation of the raw stream</p></li>
+</ul>
+<p>If we want to check if either of these properties is not empty by using a <code class="docutils literal notranslate"><span class="pre">$data</span></code> matcher, we do:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$data.size&gt;0
+</pre></div>
+</div>
+<section id="when-is-it-useful-to-use-a-data-matcher">
+<h5>When is it useful to use a $data matcher?<a class="headerlink" href="#when-is-it-useful-to-use-a-data-matcher" title="Link to this heading"></a></h5>
+<p>For example, there is a simple plugin called <code class="docutils literal notranslate"><span class="pre">LetterCountPlugin</span></code>, that counts the letters in text based datastreams.</p>
+<p>So to match on these text based datastreams, we have 2 choices:</p>
+<ul class="simple">
+<li><p>List all the possibilities</p>
+<ul>
+<li><p>Which is too tedious, and not very flexible when new types are supported</p></li>
+</ul>
+</li>
+<li><p>Match on a common property</p>
+<ul>
+<li><p>More compact, but sometimes difficult to find a common property</p></li>
+</ul>
+</li>
+</ul>
+<p>In this case we might match on mimeType, which we know is <code class="docutils literal notranslate"><span class="pre">text/plain</span></code> or <code class="docutils literal notranslate"><span class="pre">text/x-log</span></code> for 2 of types we want to match:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$data.mimeType=text\\/*
+</pre></div>
+</div>
+<p>This will match the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data.text.mimeType=text\\/plain</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.text.mimeType=text\\/not\\</span> <span class="pre">plain</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.pdf.mimeType=text\\/encoded</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.foo.mimeType=text\\/bar</span></code></p></li>
+</ul>
+<p>But will <strong>not</strong> match any of the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data.text.mimeType=txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.text.mimeType=pdf</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.text.mime=text\\/plain</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.foo.bar=text\\/plain</span></code></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="how-to-write-a-matcher">
+<h2>How to write a matcher?<a class="headerlink" href="#how-to-write-a-matcher" title="Link to this heading"></a></h2>
+<p>The functional requirements for writing a matcher can be summarized in the following:</p>
+<ol class="arabic simple">
+<li><p>What does my plugin expect as input?</p></li>
+<li><p>How can I describe that input with the information Hansken provides?</p></li>
+</ol>
+<section id="pdfplugin-example">
+<h3>PdfPlugin example<a class="headerlink" href="#pdfplugin-example" title="Link to this heading"></a></h3>
+<p>Let’s say we just finished writing a <code class="docutils literal notranslate"><span class="pre">PdfPlugin</span></code>. This is a simple plugin that checks if pdf files contain the
+word <code class="docutils literal notranslate"><span class="pre">the</span></code>.</p>
+<p>So let’s go over our checklist:</p>
+<section id="what-does-my-plugin-expect-as-input">
+<h4><em>What does my plugin expect as input?</em><a class="headerlink" href="#what-does-my-plugin-expect-as-input" title="Link to this heading"></a></h4>
+<p>PDF files.</p>
+</section>
+<section id="how-can-i-describe-that-input-with-the-information-hansken-provides">
+<h4><em>How can I describe that input with the information Hansken provides?</em><a class="headerlink" href="#how-can-i-describe-that-input-with-the-information-hansken-provides" title="Link to this heading"></a></h4>
+<p>Hansken consumes and produces <a class="reference internal" href="traces.html#traces"><span class="std std-ref">Traces</span></a>. To that effect, we can only match on trace properties that are
+available in Hansken.</p>
+<section id="match-on-extension">
+<h5>Match on extension<a class="headerlink" href="#match-on-extension" title="Link to this heading"></a></h5>
+<p>The easiest way would be to only allow traces with the <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> extension. Looking at the <a class="reference internal" href="traces.html#hansken-trace-model"><span class="std std-ref">Hansken trace model</span></a> (or a
+Hansken extraction), we can see that there’s a property <code class="docutils literal notranslate"><span class="pre">file</span></code>
+which contains a property <code class="docutils literal notranslate"><span class="pre">extension</span></code>.</p>
+<p>So what would that look like in HQL-lite? Something like</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file.extension=pdf
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This of course <strong>only</strong> works if the file has the correct extension (note that matchers are case-sensitive).</p>
+</div>
+<p>So what do we do, if we also want to match pdf files that are (un)intentionally misnamed?</p>
+</section>
+<section id="match-on-mime-type">
+<h5>Match on mime-type<a class="headerlink" href="#match-on-mime-type" title="Link to this heading"></a></h5>
+<p>Looking at Wikipedia, we see that <code class="docutils literal notranslate"><span class="pre">pdf</span></code> has a couple of mime-types. In return looking at our extraction and the
+trace-model, we see both at <code class="docutils literal notranslate"><span class="pre">data.raw.mimeType</span></code>, with a further explanation in the <a class="reference internal" href="traces.html#hansken-trace-model"><span class="std std-ref">Hansken trace model</span></a> that
+the <code class="docutils literal notranslate"><span class="pre">raw</span></code> portion of the property is the <strong>data type</strong> of the datastream.</p>
+<p>If we don’t know which datastream has the <code class="docutils literal notranslate"><span class="pre">mimeType</span></code> property beforehand, we could use the broad-scoped <code class="docutils literal notranslate"><span class="pre">$data.</span></code> matcher
+to look at every datastream.</p>
+<p>So our matcher becomes:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file.extension=pdf OR
+(
+  $data.mimeType=application\\/pdf OR
+  $data.mimeType=application\\/x-pdf
+)
+</pre></div>
+</div>
+</section>
+<section id="match-on-data-size">
+<h5>Match on data size<a class="headerlink" href="#match-on-data-size" title="Link to this heading"></a></h5>
+<p>Some pdf files can be huge, meaning that parsing them will need a lot of resources. Could we add a data size check to
+the matcher? According to the <a class="reference internal" href="traces.html#hansken-trace-model"><span class="std std-ref">Hansken trace model</span></a> <code class="docutils literal notranslate"><span class="pre">data</span></code> has a property <code class="docutils literal notranslate"><span class="pre">size</span></code> (similar to <code class="docutils literal notranslate"><span class="pre">mimeType</span></code>) that we
+could use for this.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is also a good way to check if a file is empty or not.</p>
+</div>
+<p>Let’s say our cutoff limit is 1 MB, meaning our matcher becomes:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>0 &lt; $data.size &lt; 1000000 AND
+(
+  file.extension=pdf OR
+  (
+    $data.mimeType=application\\/pdf OR
+    $data.mimeType=application\\/x-pdf
+  )
+)
+</pre></div>
+</div>
+</section>
+<section id="match-if-property-is-set">
+<h5>Match if ‘property is set’<a class="headerlink" href="#match-if-property-is-set" title="Link to this heading"></a></h5>
+<p>It is not uncommon to have some overlap between tools/plugins. For example:</p>
+<ul class="simple">
+<li><p>PdfPlugin: a plugin that only supports pdf documents</p></li>
+<li><p>DocumentPlugin: this plugin supports a lot of document types, including <code class="docutils literal notranslate"><span class="pre">pdf</span></code>.</p></li>
+</ul>
+<p>So how would we prevent our plugin from processing a trace that has already been processed by the <code class="docutils literal notranslate"><span class="pre">DocumentPlugin</span></code>?</p>
+<p>The easiest solution would be to check if a certain property has already been set. Meaning, that if both plugins set
+the <code class="docutils literal notranslate"><span class="pre">foo.bar</span></code> property, we check if said property has already been set.</p>
+<p>So we <strong>only</strong> process the trace if <code class="docutils literal notranslate"><span class="pre">foo.bar</span></code> is <strong>empty</strong>, meaning our matcher becomes:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>foo.bar!=* AND
+0 &lt; $data.size &lt; 1000000 AND
+(
+  file.extension=pdf OR
+  (
+    $data.mimeType=application\\/pdf OR
+    $data.mimeType=application\\/x-pdf
+  )
+)
+</pre></div>
+</div>
+</section>
+<section id="match-on-excluding-a-certain-path">
+<h5>Match on excluding a certain path<a class="headerlink" href="#match-on-excluding-a-certain-path" title="Link to this heading"></a></h5>
+<p>It is also not uncommon to exclude certain paths from your plugin. These paths might contain invalid or encrypted files,
+for example.</p>
+<p>So let’s say we want to exclude all files under in the <code class="docutils literal notranslate"><span class="pre">/tmp/virus</span></code> path. How do we go about it?</p>
+<p>Again, we check our extraction/<a class="reference internal" href="traces.html#hansken-trace-model"><span class="std std-ref">Hansken trace model</span></a>, and we see that <code class="docutils literal notranslate"><span class="pre">file.path</span></code> looks promising.</p>
+<p>So excluding <code class="docutils literal notranslate"><span class="pre">/tmp/virus</span></code> would look something like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-file.path=/tmp/virus* AND
+foo.bar!=* AND
+0 &lt; $data.size &lt; 1000000 AND
+(
+  file.extension=pdf OR
+  (
+    $data.mimeType=application\\/pdf OR
+    $data.mimeType=application\\/x-pdf
+  )
+)
+</pre></div>
+</div>
+</section>
+<section id="match-on-specific-datastream-type-an-anti-pattern">
+<span id="hql-datastreams"></span><h5>Match on specific datastream type, an anti-pattern<a class="headerlink" href="#match-on-specific-datastream-type-an-anti-pattern" title="Link to this heading"></a></h5>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Matching on specific datastream types is an anti-pattern! It is not recommended to match on a datastream
+type. Instead one should match on other datastream properties, such as <cite>fileType</cite>, <cite>mimeType</cite> or <cite>mimeClass</cite>.
+The reason for this is explained in the paragraph below.</p>
+</div>
+<p>Using a matcher that is too loose or too tight can yield unexpected results. Usually one will match on properties
+of a datastream like <code class="docutils literal notranslate"><span class="pre">fileType</span></code>, <code class="docutils literal notranslate"><span class="pre">mimeType</span></code> or <code class="docutils literal notranslate"><span class="pre">mimeClass</span></code> as these are reliable properties that have been added by
+Hansken tools. Matching on a specific datastream says nothing about the type of file. For example a PDF file may be
+available in a <code class="docutils literal notranslate"><span class="pre">raw</span></code> as well as in a <code class="docutils literal notranslate"><span class="pre">decrypted</span></code> datastream. By matching on the datastream type one may exclude traces
+that were not intended to be excluded.
+Contrarily, note that matching on a datastream type may include <em>more</em> traces than you expected as well. For example,
+someone may think “Plugin A puts data on the <code class="docutils literal notranslate"><span class="pre">plain</span></code> datastream, so I’ll match on the <code class="docutils literal notranslate"><span class="pre">plain</span></code> datastream with Plugin B”,
+forgetting that <code class="docutils literal notranslate"><span class="pre">plain</span></code> may be used by other tools as well. In other words, there may be traces with that datastream
+type that you did not know of, potentially crashing your plugin. See <a class="reference internal" href="traces.html#datastreams"><span class="std std-ref">Data streams</span></a> for more information.</p>
+<p>Now that you know why it is an anti-pattern, lets explain how it would be done (for those edge cases where it’s needed):
+Lets say we want our <code class="docutils literal notranslate"><span class="pre">PdfPlugin</span></code> to <strong>ONLY</strong> process <code class="docutils literal notranslate"><span class="pre">raw</span></code> datastreams.
+The best way to do this would be to match
+on <code class="docutils literal notranslate"><span class="pre">$data.type:raw</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">$data.type</span></code> matches against the type of the current datastream, so in this case it
+matches only when the current datastream is of type <code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p>
+<p>An <strong>incorrect</strong> way to do it would be to replace <code class="docutils literal notranslate"><span class="pre">$data.</span></code> matcher(s) with <code class="docutils literal notranslate"><span class="pre">data.raw.</span></code>. This means the matcher
+will match whenever a trace has this datastream type, even if the current datastream type is different.
+Remember that the <code class="docutils literal notranslate"><span class="pre">process</span></code> method of an extraction plugin is always called once for each datastream on each trace.
+For example, lets say a trace has two datastreams, <code class="docutils literal notranslate"><span class="pre">raw</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code>. The matcher would match for both the datastreams
+because the trace has a <code class="docutils literal notranslate"><span class="pre">raw</span></code> datastream (even though the current datastream type may be <code class="docutils literal notranslate"><span class="pre">text</span></code>). This results in the
+<code class="docutils literal notranslate"><span class="pre">process</span></code> method being called twice (for <code class="docutils literal notranslate"><span class="pre">raw</span></code> and for <code class="docutils literal notranslate"><span class="pre">text</span></code>), which may lead to other bugs if the developer doesn’t
+know this. For example, the second time the plugin may be trying to overwrite data on a trace which is prohibited.</p>
+<p>So, using <code class="docutils literal notranslate"><span class="pre">$data.type</span></code>, our matcher would look like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$data.type:raw AND
+-file.path=/tmp/virus* AND
+foo.bar!=* AND
+0 &lt; $data.size &lt; 1000000 AND
+(
+  file.extension=pdf OR
+  (
+    $data.mimeType=application\\/pdf OR
+    $data.mimeType=application\\/x-pdf
+  )
+)
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="how-precise-should-a-matcher-be">
+<h2>How precise should a matcher be?<a class="headerlink" href="#how-precise-should-a-matcher-be" title="Link to this heading"></a></h2>
+<p>In practice, only you as the plugin dev can answer this question.</p>
+<p>Know that from the point of view of Hansken, we only care that the plugin:</p>
+<ul class="simple">
+<li><p><strong>Should not crash</strong>: If a matcher does not compile, then your plugin will not be available in Hansken. Tip: be sure
+to test your plugin with the <a class="reference internal" href="test_framework.html#id1"><span class="std std-ref">test framework</span></a>.</p></li>
+<li><p><strong>Should not be slow</strong>: Matching is designed to be extremely fast, but of course, if you make it too complex it can
+take longer than we want. In the example above, we calculated that 1 second extra for 1 million traces is 11 days of
+extra CPU time. Unlike processing, matching is done for <strong>every trace</strong>, in every extraction iteration, so be careful!</p></li>
+<li><p><strong>Should match on the bare minimum</strong>: Don’t go too far by matching 50 different criteria before allowing a trace to be
+processed. Note that a lot of (if not all) of these criteria depend on properties set by other tools, and you don’t
+really have any control on how these tools work.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="traces.html" class="btn btn-neutral float-left" title="Traces &amp; Trace model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data_transformations.html" class="btn btn-neutral float-right" title="Data Transformations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
