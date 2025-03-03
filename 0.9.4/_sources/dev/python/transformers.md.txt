@@ -47,14 +47,14 @@ However, there are some limitations on which methods can be turned into a decora
 - Transformer may not be static methods.
 - All parameters and the return type must be annotated with type hints (except the `self` parameter).
 - Parameters may not be positional-only or contain variable parameters like `*args` or `**kwarg`.
-- Parameters and return types may only be of the following:
+- Parameters and return types may only be of the following (returning None is not supported):
   - bool
   - int
   - float
   - str
   - bytes
   - bytearray
-  - datetime.datetime
+  - datetime.datetime (The datetime will be converted to unix time and then converted to datetime with the zone "UTC". So the zone id is always("UTC"))
   - hansken.util.GeographicLocation
   - hansken.util.Vector
   - typing.Sequence
@@ -71,5 +71,22 @@ debugging purposes.
 ## Testing transformers
 For more information on testing transformers, see the 'Testing Transformers' section on the [page on testing plugins](testing.md).
 
-## Calling Transformers
-TODO HANSKEN-21414: This should be implemented once we decide on how we design the REST API.
+## Calling transformer with /tools/transformers
+This REST Call calls a specified transformer method on a given tool/plugin with supplied arguments.
+This endpoint allows a transformer to be executed on demand, outside an extraction. The transformer call can be used to transform user input to an output. A tool/plugin can have multiple transformer methods.
+To use /tools/transformers REST CALL you need to know the following (see extractions tool or use the rest call/tools to get the information below):
+- The name of the plugin/tool
+- The transformer name 
+- The names of the parameters (arguments)
+
+Example JSON request body for the transformer above:
+```JSON
+{
+  "arguments": {
+    "text": "value1",
+    "language": "value2"
+  },
+  "tool": "ExampleTool",
+  "transformer": "translate_text"
+}
+```
