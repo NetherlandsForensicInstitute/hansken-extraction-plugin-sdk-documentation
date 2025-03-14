@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Java API Changelog &mdash; Hansken Extraction Plugins for plugin developers 0.9.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=61b282d3"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Prerequisites" href="prerequisites.html" />
+    <link rel="prev" title="Java" href="../java.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">General concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../java.html">Java</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Java API Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">0.9.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">0.8.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">0.7.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">0.6.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">0.6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">0.6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">0.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">0.4.13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">0.4.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">0.4.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">0.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">0.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">0.2.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snippets.html">Java code snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Using the Test Framework in Java</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">How to debug an Extraction Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javadoc.html">Javadoc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../java.html">Java</a></li>
+      <li class="breadcrumb-item active">Java API Changelog</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/java/api_changelog.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="java-api-changelog">
+<h1>Java API Changelog<a class="headerlink" href="#java-api-changelog" title="Link to this heading"></a></h1>
+<p>This document summarizes all important API changes in the Extraction Plugin API. This document only shows changes that
+are important to plugin developers. For a full list of changes per version, please refer to the general
+<a class="reference internal" href="../../changes.html#changelog"><span class="std std-ref">changelog</span></a>.</p>
+<section id="id1">
+<h2>0.9.5<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The internal (de)serialization of some types has changed. Please update the extraction plugin sdk to match the one used in Hansken.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>0.8.0<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul>
+<li><p>The trace property <code class="docutils literal notranslate"><span class="pre">imageId</span></code> is renamed to <code class="docutils literal notranslate"><span class="pre">image</span></code>. This is to be in line with the Hansken REST API and Python API.
+When updating your plugin, please update your calls <code class="docutils literal notranslate"><span class="pre">trace.get(&quot;imageId&quot;)</span></code> to <code class="docutils literal notranslate"><span class="pre">trace.get(&quot;image&quot;)</span></code>.</p></li>
+<li><p><a class="reference external" href="https://git.eminjenv.nl/hansken/hbacklog/-/issues/774">#774</a>
+By default, deferred extraction plugin searches are now scoped to the image
+of the trace that is currently being processed. Optionally, a project-wide
+search can be done by passing an optional scope argument.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Trace</span><span class="w"> </span><span class="n">trace</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ExtractionContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">TraceSearcher</span><span class="w"> </span><span class="n">searcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// only search for traces inside the same image as the trace that is being processed</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">SearchResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searcher</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="s">&quot;file.extension=asc&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">SearchResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searcher</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="s">&quot;file.extension=asc&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">TraceSearcher</span><span class="p">.</span><span class="na">SearchScope</span><span class="p">.</span><span class="na">IMAGE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// search for all traces inside the same project as the trace that is being processed</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">SearchResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searcher</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="s">&quot;file.extension=asc&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">TraceSearcher</span><span class="p">.</span><span class="na">SearchScope</span><span class="p">.</span><span class="na">PROJECT</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Support trace properties of type <code class="docutils literal notranslate"><span class="pre">List&lt;Integer&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">List&lt;Double&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">List&lt;Float&gt;</span></code>.
+This enables you to write multiple offsets and confidence scores in tracelets of type prediction.</p>
+<p>For example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">addTracelet</span><span class="p">(</span><span class="s">&quot;prediction&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tracelet</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;modelName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my_cat_detector&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;modelVersion&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0.0.BETA&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;classification&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;label&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cat&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;offset&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;confidence&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;offsets&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0</span><span class="p">,</span><span class="w"> </span><span class="mf">9.0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">tracelet</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;confidences&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w"> </span><span class="mf">0.09</span><span class="p">));</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h2>0.7.0<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Escaping the <code class="docutils literal notranslate"><span class="pre">/</span></code> character in matchers is optional.
+This simplifies and aims for better HQL and HQL-Lite compatability.
+See for more information and examples the <a class="reference internal" href="../concepts/hql_lite.html#hqllite-syntax"><span class="std std-ref">HQL-Lite syntax documentation</span></a>.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file.path:\\/Users\\/*\\/AppData</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">file.path:/Users/*/AppData</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">registryEntry.key:\\/Software\\/Dropbox\\/ks*\\/Client-p</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">registryEntry.key:/Software/Dropbox/ks*/Client-p</span></code></p></li>
+</ul>
+</li>
+<li><p>Hansken returns <code class="docutils literal notranslate"><span class="pre">file.path</span></code> properties as a <code class="docutils literal notranslate"><span class="pre">String</span></code> property, instead of a <code class="docutils literal notranslate"><span class="pre">List&lt;String&gt;</span></code>.
+Example: <code class="docutils literal notranslate"><span class="pre">trace.get(&quot;file.path&quot;)</span></code> now returns <code class="docutils literal notranslate"><span class="pre">&quot;/dev/null&quot;</span></code>, this was <code class="docutils literal notranslate"><span class="pre">[&quot;dev&quot;,</span> <span class="pre">&quot;null&quot;]</span></code>.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>0.6.3<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>A plugin can now write multiple data streams to a single trace concurrently,
+e.g. write both <code class="docutils literal notranslate"><span class="pre">decrypted</span></code> and <code class="docutils literal notranslate"><span class="pre">ocr</span></code> at the same time. See the “<a class="reference internal" href="snippets.html#datastreams-java"><span class="std std-ref">Adding data to a trace</span></a>” code snippets for
+general examples on adding data to a trace.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>0.6.1<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The JAVA SDK is now distributed through maven central instead of the Hansken community.</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>0.6.0<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is highly recommended to upgrade your plugin to this new version.
+See the migration steps below.</p>
+</div>
+<ul>
+<li><p>Extraction plugin container images are now labeled with PluginInfo. This
+allows Hansken to efficiently load extraction plugins.</p></li>
+<li><p>By default, extraction plugin version is managed in the plugin’s <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">.pluginVersion(..)</span></code> can be removed from the PluginInfo builder.</p></li>
+<li><p><strong>Migration steps from earlier versions</strong> – for plugins that use the Java
+extraction plugin SuperPOM:</p>
+<ol class="arabic">
+<li><p>Update the SDK version in your <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code></p></li>
+<li><p>If you come from a version prior to <code class="docutils literal notranslate"><span class="pre">0.4.0</span></code>, or if you use a plugin name
+instead of a plugin id in your <code class="docutils literal notranslate"><span class="pre">pluginInfo()</span></code>, switch to the plugin id style
+(read  instructions for version <code class="docutils literal notranslate"><span class="pre">0.4.0</span></code>)</p></li>
+<li><p>Set your plugin version in your project’s <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code>, and remove the
+following from your <code class="docutils literal notranslate"><span class="pre">PluginInfo.Builder</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="na">pluginVersion</span><span class="p">(...)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Update your build scripts to build your plugin (Docker) container image.
+You should build your plugin container image with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>package<span class="w"> </span>docker:build<span class="sb">`</span>
+</pre></div>
+</div>
+<p>This will generate a plugin image:</p>
+<ul class="simple">
+<li><p>The extraction plugin is added to your local image registry
+(<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code>),</p></li>
+<li><p>The image name is <code class="docutils literal notranslate"><span class="pre">extraction-plugin/PLUGINID</span></code>, e.g.
+<code class="docutils literal notranslate"><span class="pre">extraction-plugin/nfi.nl/extract/chat/whatsapp</span></code>,</p></li>
+<li><p>The image is tagged with two tags: <code class="docutils literal notranslate"><span class="pre">latest</span></code>, and your plugin version.</p></li>
+</ul>
+<p>Nb. If Docker is not available in your environment, <code class="docutils literal notranslate"><span class="pre">podman</span></code> can be used
+as an alternative. See <a class="reference internal" href="packaging.html#java-superpom-podman"><span class="std std-ref">packaging</span></a> for more
+details.</p>
+</li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="id8">
+<h2>0.5.0<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Add new tracelet api <code class="docutils literal notranslate"><span class="pre">Trace.addTracelet(type,</span> <span class="pre">consumer)</span></code>.
+It can be used like this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">addTracelet</span><span class="p">(</span><span class="s">&quot;prediction&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tracelet</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tracelet</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;classification&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;label&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;label&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;confidence&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;embedding&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vector</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;modelName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;yolo&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;modelVersion&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2.0&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</li>
+<li><p>Deprecate Trace.addTracelet(Trace)</p></li>
+<li><p>Support vector data type in trace properties.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>0.4.13<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>When writing input search traces for tests, it is no longer required to explicitly set an <code class="docutils literal notranslate"><span class="pre">id</span></code> property.
+These are automatically generated when executing tests.</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>0.4.7<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul>
+<li><p>A new convenience method <code class="docutils literal notranslate"><span class="pre">id(String,</span> <span class="pre">String,</span> <span class="pre">String)</span></code> is added to the PluginInfo builder. This removes some
+boilerplate code when setting the pluginId. More details on the plugin naming conventions can be found at the
+<a class="reference internal" href="../concepts/plugin_naming_convention.html"><span class="doc">Plugin naming convention</span></a> section.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">PluginInfo</span><span class="p">.</span><span class="na">builderFor</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">id</span><span class="p">(</span><span class="s">&quot;nfi.nl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;extract&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TestPlugin&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// new style</span>
+<span class="w">          </span><span class="p">.</span><span class="na">id</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PluginId</span><span class="p">(</span><span class="s">&quot;nfi.nl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;extract&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TestPlugin&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// old style, but also works</span>
+<span class="w">          </span><span class="p">...</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id11">
+<h2>0.4.6<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul>
+<li><p>It is now possible to specify maximum system resources in the <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>. To run a plugin with 0.5 cpu (= 0.5
+vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration can be added to <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">PluginInfo</span><span class="p">.</span><span class="na">builderFor</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="p">.</span><span class="na">pluginResources</span><span class="p">(</span><span class="n">PluginResources</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">maximumCpu</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">maximumMemory</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">())</span>
+<span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id12">
+<h2>0.4.0<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Extraction Plugins are now identified with a <code class="docutils literal notranslate"><span class="pre">PluginInfo.PluginId</span></code> containing a domain, category and name. The
+method <code class="docutils literal notranslate"><span class="pre">PluginInfo.name(pluginName)</span></code> has been replaced by <code class="docutils literal notranslate"><span class="pre">PluginInfo.id(new</span> <span class="pre">PluginId(domain,</span> <span class="pre">category,</span> <span class="pre">name)</span></code>. More
+details on the plugin naming conventions can be found at the <a class="reference internal" href="../concepts/plugin_naming_convention.html"><span class="doc">Plugin naming convention</span></a> section.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PluginInfo.name()</span></code> is now deprecated (but will still work for backwards compatibility).</p></li>
+<li><p>A new license field <code class="docutils literal notranslate"><span class="pre">PluginInfo.license</span></code> has also been added in this release.</p></li>
+<li><p>The following example creates a PluginInfo for a plugin with the name <code class="docutils literal notranslate"><span class="pre">TestPlugin</span></code>, licensed under
+the <code class="docutils literal notranslate"><span class="pre">Apache</span> <span class="pre">License</span> <span class="pre">2.0</span></code> license:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">PluginInfo</span><span class="p">.</span><span class="na">builderFor</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">id</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PluginId</span><span class="p">(</span><span class="s">&quot;nfi.nl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;extract&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TestPlugin&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// id.domain: nfi.nl, id.category: extract, id.name: TestPlugin</span>
+<span class="w">          </span><span class="c1">// .name(&quot;TestPlugin&quot;) // no longer supported</span>
+<span class="w">          </span><span class="p">.</span><span class="na">pluginVersion</span><span class="p">(</span><span class="s">&quot;0.4.1&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">author</span><span class="p">(</span><span class="n">Author</span><span class="p">.</span><span class="na">builder</span><span class="p">()...</span><span class="na">build</span><span class="p">())</span>
+<span class="w">          </span><span class="p">.</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;A plugin for testing.&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">maturityLevel</span><span class="p">(</span><span class="n">MaturityLevel</span><span class="p">.</span><span class="na">PROOF_OF_CONCEPT</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">hqlMatcher</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">webpageUrl</span><span class="p">(</span><span class="s">&quot;https://www.hansken.org&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">license</span><span class="p">(</span><span class="s">&quot;Apache License 2.0&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id13">
+<h2>0.3.0<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Extraction Plugins can now create new datastreams on a Trace through data transformations. Data transformations
+describe how data can be obtained from a source.</p>
+<p>An example case is an extraction plugin that processes an archive file. The plugin creates a child trace per entry in
+the archive file. Each child trace will have a datastream that is a transformation that marks the start and length of
+the entry in the original archive data. By just describing the data instead of specifying the actual data, a lot of
+space is saved.</p>
+<p>Although Hansken supports various transformations, the Extraction Plugins SDK for now only supports ranged data
+transformations. Ranged data transformations define data as a list of ranges, each range with an offset and length in
+a bytearray.</p>
+<p>The following example sets a new datastream with dataType <code class="docutils literal notranslate"><span class="pre">html</span></code> on a trace, by setting a ranged data transformation:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="s">&quot;html&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RangedDataTransformation</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">addRange</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">).</span><span class="na">build</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The following example creates a child trace and sets a new datastream with dataType <code class="docutils literal notranslate"><span class="pre">raw</span></code> on it, by setting a ranged
+data transformation with two ranges:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">.</span><span class="na">newChild</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;lineNumber %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lineNumber</span><span class="p">),</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">child</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="s">&quot;raw&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RangedDataTransformation</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+<span class="w">      </span><span class="p">.</span><span class="na">addRange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="na">addRange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="na">build</span><span class="p">());</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>More detailed documentation will follow in an upcoming SDK release.</p>
+</li>
+</ul>
+</section>
+<section id="id14">
+<h2>0.2.0<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is an API breaking change. Plugins created with an earlier version of the extraction plugin SDK are
+not compatible with Hansken that uses <cite>0.2.0</cite> or later.</p>
+</div>
+<ul>
+<li><p>Introduced a new extraction plugin type <code class="docutils literal notranslate"><span class="pre">DeferredExtractioPlugin</span></code>. Deferred Extraction plugins can be run at a
+different extraction stage. This type of plugin also allows accessing other traces using the searcher.</p></li>
+<li><p>The class <code class="docutils literal notranslate"><span class="pre">ExtractionContext</span></code> has been renamed to <code class="docutils literal notranslate"><span class="pre">DataContext</span></code>. The new name <code class="docutils literal notranslate"><span class="pre">DataContext</span></code> represents the class
+contents better. Plugins have to update matching import statements and the type in <code class="docutils literal notranslate"><span class="pre">ExtractionPlugin.process()</span></code>
+implementation in the same way. This change has no functional side effects.</p>
+<p>Old:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.hansken.plugin.extraction.api.ExtractionContext</span><span class="p">;</span>
+
+<span class="nd">@Override</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Trace</span><span class="w"> </span><span class="n">trace</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ExtractionContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>New:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.hansken.plugin.extraction.api.DataContext</span><span class="p">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Trace</span><span class="w"> </span><span class="n">trace</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DataContext</span><span class="w"> </span><span class="n">dataContext</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../java.html" class="btn btn-neutral float-left" title="Java" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="prerequisites.html" class="btn btn-neutral float-right" title="Prerequisites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traces &amp; Trace model &mdash; Hansken Extraction Plugins for plugin developers 0.9.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/wider_pages.css?v=32ad70ab" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=61b282d3"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="HQL-Lite" href="hql_lite.html" />
+    <link rel="prev" title="Plugin naming convention" href="plugin_naming_convention.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hansken Extraction Plugins for plugin developers
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">General concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="extraction_plugins.html">Hansken Extraction Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anatomy_of_a_plugin.html">Anatomy of a plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin_types.html">Extraction plugin types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin_naming_convention.html">Plugin naming convention</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Traces &amp; Trace model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#traces">Traces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#types-and-properties">Types and Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intrinsic-properties">Intrinsic properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-streams">Data streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#child-traces">Child traces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trace-property-types">Trace property types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hansken-trace-model">Hansken trace model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#trace-model-and-the-extraction-plugin-sdk">Trace model and the extraction plugin SDK</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hql_lite.html">HQL-Lite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_transformations.html">Data Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_framework.html">Test framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="all_in_one_debugging.html">Debugging locally with Hansken All in One (AIO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation.html">Plugin isolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes_autoscaling.html">Kubernetes, Autoscaling, Resourcemanagement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Extraction Plugin specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Hansken Extraction Plugins for plugin developers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../concepts.html">General concepts</a></li>
+      <li class="breadcrumb-item active">Traces &amp; Trace model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/dev/concepts/traces.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="traces-trace-model">
+<h1>Traces &amp; Trace model<a class="headerlink" href="#traces-trace-model" title="Link to this heading"></a></h1>
+<section id="traces">
+<span id="id1"></span><h2>Traces<a class="headerlink" href="#traces" title="Link to this heading"></a></h2>
+<p>Traces are structured data objects produced by tools/plugins during an extraction. A trace represents a piece of
+information found in an evidence file.</p>
+<p>The following figure shows the main elements of a trace. Each element is described in more detail in the following
+paragraphs.</p>
+<a class="reference external image-reference" href="trace.svg"><img alt="trace.svg" src="../../_images/trace.svg" /></a>
+<section id="types-and-properties">
+<h3>Types and Properties<a class="headerlink" href="#types-and-properties" title="Link to this heading"></a></h3>
+<p>A trace has properties that describe the information of it by means of a property value. Trace properties are grouped by
+a trace type. A trace can have multiple types.</p>
+<p>All types and properties that can be set are defined in the <a class="reference internal" href="#hansken-trace-model"><span class="std std-ref">Hansken trace model</span></a>.</p>
+<p>An example of a type is <code class="docutils literal notranslate"><span class="pre">document</span></code>, which could have the properties <code class="docutils literal notranslate"><span class="pre">application</span></code> and <code class="docutils literal notranslate"><span class="pre">createdOn</span></code>. The trace will have a
+type <code class="docutils literal notranslate"><span class="pre">document</span></code>, and can the following properties with values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">document</span><span class="o">.</span><span class="n">application</span><span class="p">:</span> <span class="n">Libre</span> <span class="n">Office</span>
+<span class="n">document</span><span class="o">.</span><span class="n">createdOn</span><span class="p">:</span> <span class="mi">2021</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">18</span> <span class="mi">20</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+</section>
+<section id="intrinsic-properties">
+<h3>Intrinsic properties<a class="headerlink" href="#intrinsic-properties" title="Link to this heading"></a></h3>
+<p>A trace has several <em>intrinsic</em> properties. These are properties that are not related to a trace type. The intrinsic
+properties available to extraction plugins are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: a unique identifier of the trace, generated when a trace is created</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a name given to a trace when it is created</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: a logical path of the trace, of which the elements are the names of traces from the root trace until this
+trace</p></li>
+</ul>
+</section>
+<section id="data-streams">
+<span id="datastreams"></span><h3>Data streams<a class="headerlink" href="#data-streams" title="Link to this heading"></a></h3>
+<p>Typically, a trace represents a piece of data found in an evidence file. This data is part of the trace and available as
+a data stream. A trace can have multiple data streams. Each data stream has a type. Data streams can also have
+properties that apply to the data stream itself. The data stream properties are modeled as properties of the trace, in
+the following pattern:
+<code class="docutils literal notranslate"><span class="pre">data.&lt;datastreamtype&gt;.propertyname</span></code> (where <code class="docutils literal notranslate"><span class="pre">&lt;datastreamtype&gt;</span></code> is substituted by the actual type of the data stream).</p>
+<p>The set of data stream types and data stream properties is fixed. All allowed types and properties are defined in the
+<a class="reference internal" href="#hansken-trace-model"><span class="std std-ref">Hansken trace model</span></a> (see <code class="docutils literal notranslate"><span class="pre">data</span></code>).</p>
+<p>An important data stream property is the <code class="docutils literal notranslate"><span class="pre">fileType</span></code> property. This property contains a textual description of the
+<em>detected</em> file type for the data stream. An example of a <code class="docutils literal notranslate"><span class="pre">fileType</span></code> is  ‘Adobe Pdf’. The <code class="docutils literal notranslate"><span class="pre">fileType</span></code> is a good candidate
+to use in a extraction plugin ‘matcher’. This <code class="docutils literal notranslate"><span class="pre">fileType</span></code> is detected by Hansken using file type heuristics, which are
+primarily based on the data stream bytes itself, and secondarily on other metadata such as a file extension.
+(N.B. The <code class="docutils literal notranslate"><span class="pre">fileType</span></code> is detected in Hansken by the extraction tool <code class="docutils literal notranslate"><span class="pre">Firefli</span></code>.) For more information on how datastream
+properties can be used for matching, see <a class="reference internal" href="hql_lite.html#hql-datastreams"><span class="std std-ref">here</span></a>.</p>
+<p>Note that not all traces have data streams. In these cases it is a trace of meta-data derived from another trace.</p>
+<p>Usually, each trace with data has a data stream of type <code class="docutils literal notranslate"><span class="pre">raw</span></code>. This data stream contains the bytes of the traces as they
+were found when the trace was created. In some occasions, the <code class="docutils literal notranslate"><span class="pre">raw</span></code> data can be represented in a different form before it
+can be processed further, for example if the data can be decoded or decrypted. Hansken tools and plugins can decode
+the <code class="docutils literal notranslate"><span class="pre">raw</span></code> data stream to a standard UTF-8 data stream, or can decrypt the data if a decryption key is present. Hansken
+tools and extraction plugins can store the new data at the new trace in a new data stream. This new data stream has a
+different type than the <code class="docutils literal notranslate"><span class="pre">raw</span></code> type.</p>
+<p>Examples in code can be found here:</p>
+<ul class="simple">
+<li><p>Adding a Datastream <a class="reference internal" href="../java/snippets.html#datastreams-java"><span class="std std-ref">Java</span></a></p></li>
+<li><p>Adding a Datastream <a class="reference internal" href="../python/snippets.html#datastreams-python"><span class="std std-ref">Python</span></a></p></li>
+</ul>
+</section>
+<section id="child-traces">
+<span id="id2"></span><h3>Child traces<a class="headerlink" href="#child-traces" title="Link to this heading"></a></h3>
+<p>A trace can have child traces. For example, a trace of type <code class="docutils literal notranslate"><span class="pre">archive</span></code> can have children, where each child is a trace
+that represents an entry in the archive.</p>
+<p>With an extraction plugin it is possible to create child traces for a trace that is being processed. New properties,
+data streams, and other child traces can be set on the new child traces. When a child trace is created, the plugin
+should provide a <code class="docutils literal notranslate"><span class="pre">name</span></code> for the child trace. The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the child trace is generated, in the following
+form: <code class="docutils literal notranslate"><span class="pre">parenttraceid-childnumber</span></code>. For example, if the parent has an id <code class="docutils literal notranslate"><span class="pre">0-0-0-0-0:0-9</span></code>, the first child gets the
+id <code class="docutils literal notranslate"><span class="pre">0-0-0-0-0:0-9-1</span></code>, the second child gets the id <code class="docutils literal notranslate"><span class="pre">0-0-0-0-0:0-9-2</span></code>, and so on.</p>
+<p>Note that a trace does not have (direct) access to its parent trace.</p>
+</section>
+<section id="trace-property-types">
+<h3>Trace property types<a class="headerlink" href="#trace-property-types" title="Link to this heading"></a></h3>
+<p>The SDK supports the following property types for traces:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>binary</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">byte[]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>boolean</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>integer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code> / <code class="docutils literal notranslate"><span class="pre">long</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>real</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>date &amp; time</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list</span></code> / <code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>mapping</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Map</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>location</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LatLong</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GeographicLocation</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>vector</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Vector</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Vector</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>tracelet</p></td>
+<td><p><em>see Tracelets below</em></p></td>
+<td><p><em>see Tracelets below</em></p></td>
+</tr>
+</tbody>
+</table>
+<p>Both location and vector types are available from the SDK, Java package <code class="docutils literal notranslate"><span class="pre">org.hansken.plugin.extraction.api</span></code> or Python module <code class="docutils literal notranslate"><span class="pre">hansken.util</span></code>.</p>
+<section id="vector">
+<span id="id3"></span><h4>Vector<a class="headerlink" href="#vector" title="Link to this heading"></a></h4>
+<p>A vector is a data type that can be used to store points in n-dimensional space as an array of floating point values.
+Once indexed, the vectors can then be used in a gui or other client to search for traces that have a nearby vectors.
+For example, it is possible to use a neural network that provides embeddings of human faces as vectors. Once indexed,
+the vectors can then be used to find pictures with similar faces. To do this, the search rest api can be used to
+sort by the euclidean- or manhattan distance, or cosine similarity to a given vector.</p>
+</section>
+<section id="tracelets">
+<span id="id4"></span><h4>Tracelets<a class="headerlink" href="#tracelets" title="Link to this heading"></a></h4>
+<p>A Tracelet is a bundle of property values that belong to a single type. It is a property on a trace that can have
+multiple properties itself, making it a list of key/value pairs. The API doesn’t specify the cardinality, but the
+implementation is limited to cardinality ‘Few’. In Hansken these are called FVT’s (Few Valued Types).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MVT’s (Many Valued Types) are currently not supported in the SDK and will be added in a future release.</p>
+</div>
+<p>An example of a tracelet is the <code class="docutils literal notranslate"><span class="pre">prediction</span></code> property, which describes a category or class a trace belongs to. It is
+possible for a trace to have multiple predictions. Therefore <code class="docutils literal notranslate"><span class="pre">prediction</span></code> is a tracelet. Other examples of
+tracelets are <code class="docutils literal notranslate"><span class="pre">identity</span></code> and <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p>
+<p>Examples in code can be found here:</p>
+<ul class="simple">
+<li><p>Adding tracelets in <a class="reference internal" href="../java/snippets.html#tracelets-java"><span class="std std-ref">Java</span></a></p></li>
+<li><p>Adding tracelets in <a class="reference internal" href="../python/snippets.html#tracelets-python"><span class="std std-ref">Python</span></a></p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="hansken-trace-model">
+<span id="id5"></span><h2>Hansken trace model<a class="headerlink" href="#hansken-trace-model" title="Link to this heading"></a></h2>
+<p>All traces in Hansken are based on a specific version of the trace model, and must comply to that version of the trace
+model. This is a nested data structure composed of origins, categories, types and properties.</p>
+<p>All non-inrinsic trace properties are optional and are grouped by <strong>type</strong>. These types are defined under the trace
+model section ‘categories’. Every <strong>category</strong> has a list of allowed types. When a trace is identified as being a
+document, it will get this set of predefined document properties. Trace types can have different <strong>origins</strong>. The
+possible origins are defined in the trace model section ‘origins’. An example of this is the processed types that are
+always generated by the system during an extraction.</p>
+<p>The details of the current trace model can be retrieved using the <code class="docutils literal notranslate"><span class="pre">/tracemodel</span></code>
+REST call on the Gatekeeper endpoint of Hansken, or check the Hansken Documentation on the trace model.</p>
+<section id="trace-model-and-the-extraction-plugin-sdk">
+<span id="id6"></span><h3>Trace model and the extraction plugin SDK<a class="headerlink" href="#trace-model-and-the-extraction-plugin-sdk" title="Link to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The extraction plugin SDK has no knowledge of the trace model</p>
+</div>
+<p>The Extraction Plugins SDK has no knowledge of the trace model at this time. It is however possible to create new traces
+with plugins. If any newly created Traces don’t comply to the model, Hansken will not accept them and mark the plugin
+execution as failed. The Extraction Plugins SDK and the provided <a class="reference internal" href="test_framework.html"><span class="doc">Test Framework</span></a> don’t check this.
+Please make sure to use the right naming when creating new Traces, as provided by the trace model.</p>
+<p>If an erroneous trace property is set, Hansken will show an error. The error can be found in the Hansken Expert UI
+interface by double-clicking on the trace. Then the trace details screen will be opened and the error will be displayed
+as follows:</p>
+<img alt="../../_images/toolrun_error.png" src="../../_images/toolrun_error.png" />
+<p>This error describes that a property does not exist in the trace model. To get more information about the error, the
+extraction log can be viewed. In the extraction log you have to search
+for <code class="docutils literal notranslate"><span class="pre">java.lang.IllegalArgumentException:</span> <span class="pre">no</span> <span class="pre">such</span> <span class="pre">type</span></code> to find out which property is not supported by the trace model.</p>
+<p>In the example extraction log below, the property <code class="docutils literal notranslate"><span class="pre">this_property_does_not_exist</span></code> could not be found 681 times.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cumulative</span> <span class="n">warnings</span><span class="p">,</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">message</span> <span class="n">without</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">uuids</span> <span class="ow">and</span> <span class="n">trace</span> <span class="n">objects</span><span class="o">.</span> <span class="n">Only</span> <span class="n">showing</span> <span class="n">full</span> <span class="n">message</span> <span class="k">for</span> <span class="n">first</span> <span class="n">warning</span> <span class="n">of</span> <span class="n">this</span> <span class="nb">type</span><span class="o">.</span>
+      <span class="n">Count</span> <span class="o">|</span> <span class="n">Key</span>                                                   <span class="o">|</span> <span class="n">Message</span>
+        <span class="mi">681</span> <span class="o">|</span> <span class="n">org</span><span class="o">.</span><span class="n">hansken</span><span class="o">.</span><span class="n">ep</span><span class="o">.</span><span class="n">shade</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">StatusRuntimeException</span>   <span class="o">|</span> <span class="n">CANCELLED</span><span class="p">:</span> <span class="n">Cancelled</span> <span class="n">by</span> <span class="n">client</span> <span class="k">with</span> <span class="n">StreamObserver</span><span class="o">.</span><span class="n">onError</span><span class="p">();</span> <span class="n">org</span><span class="o">.</span><span class="n">hansken</span><span class="o">.</span><span class="n">ep</span><span class="o">.</span><span class="n">shade</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">StatusRuntimeException</span><span class="p">:</span> <span class="n">ABORTED</span><span class="p">:</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">IllegalArgumentException</span><span class="p">:</span> <span class="n">no</span> <span class="n">such</span> <span class="nb">type</span><span class="p">:</span> <span class="n">this_property_does_not_exist</span>
+          <span class="mi">7</span> <span class="o">|</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">IllegalStateException</span>                       <span class="o">|</span> <span class="n">call</span> <span class="n">was</span> <span class="n">cancelled</span>
+          <span class="mi">1</span> <span class="o">|</span> <span class="n">org</span><span class="o">.</span><span class="n">hansken</span><span class="o">.</span><span class="n">ep</span><span class="o">.</span><span class="n">shade</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">StatusRuntimeException</span>   <span class="o">|</span> <span class="n">UNAVAILABLE</span><span class="p">:</span> <span class="n">HTTP</span><span class="o">/</span><span class="mi">2</span> <span class="n">error</span> <span class="n">code</span><span class="p">:</span> <span class="n">NO_ERROR</span> <span class="n">Received</span> <span class="n">Rst</span> <span class="n">Stream</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plugin_naming_convention.html" class="btn btn-neutral float-left" title="Plugin naming convention" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hql_lite.html" class="btn btn-neutral float-right" title="HQL-Lite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025 Netherlands Forensic Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

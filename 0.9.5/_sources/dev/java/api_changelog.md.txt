@@ -1,0 +1,271 @@
+# Java API Changelog
+
+This document summarizes all important API changes in the Extraction Plugin API. This document only shows changes that
+are important to plugin developers. For a full list of changes per version, please refer to the general
+:ref:`changelog <changelog>`.
+
+.. If present, remove `..` before `## |version|` if you create a new entry after a previous release.
+
+.. ## |version|
+
+
+## 0.9.5
+
+* The internal (de)serialization of some types has changed. Please update the extraction plugin sdk to match the one used in Hansken.
+
+## 0.8.0
+
+* The trace property `imageId` is renamed to `image`. This is to be in line with the Hansken REST API and Python API.
+  When updating your plugin, please update your calls `trace.get("imageId")` to `trace.get("image")`.
+
+* [#774](https://git.eminjenv.nl/hansken/hbacklog/-/issues/774)
+  By default, deferred extraction plugin searches are now scoped to the image
+  of the trace that is currently being processed. Optionally, a project-wide
+  search can be done by passing an optional scope argument.
+
+  ```java
+  @Override
+  public void process(final Trace trace, final ExtractionContext context, final TraceSearcher searcher) {
+      // only search for traces inside the same image as the trace that is being processed
+      final SearchResult result = searcher.search("file.extension=asc", 10);
+      final SearchResult result = searcher.search("file.extension=asc", 10, TraceSearcher.SearchScope.IMAGE);
+  
+      // search for all traces inside the same project as the trace that is being processed
+      final SearchResult result = searcher.search("file.extension=asc", 10, TraceSearcher.SearchScope.PROJECT);
+  }
+  ```
+
+* Support trace properties of type `List<Integer>`, `List<Double>`, and `List<Float>`.
+  This enables you to write multiple offsets and confidence scores in tracelets of type prediction.
+
+  For example:
+
+  ```java
+  trace.addTracelet("prediction", tracelet -> {
+      tracelet.set("modelName", "my_cat_detector");
+      tracelet.set("modelVersion", "0.0.BETA");
+      tracelet.set("type", "classification");
+      tracelet.set("label", "cat");
+
+      tracelet.set("offset", 3.0);
+      tracelet.set("confidence", 0.4);
+
+      tracelet.set("offsets", List.of(0.0, 3.0, 6.0, 9.0));
+      tracelet.set("confidences", List.of(0.1, 0.4, 0.03, 0.09));
+  })
+  ```
+
+## 0.7.0
+
+* Escaping the `/` character in matchers is optional.
+  This simplifies and aims for better HQL and HQL-Lite compatability.
+  See for more information and examples the :ref:`HQL-Lite syntax documentation<hqllite syntax>`.
+
+  Examples:
+
+  * `file.path:\\/Users\\/*\\/AppData` -> `file.path:/Users/*/AppData`
+  * `registryEntry.key:\\/Software\\/Dropbox\\/ks*\\/Client-p` -> `registryEntry.key:/Software/Dropbox/ks*/Client-p`
+
+* Hansken returns `file.path` properties as a `String` property, instead of a `List<String>`.
+  Example: `trace.get("file.path")` now returns `"/dev/null"`, this was `["dev", "null"]`.
+
+## 0.6.3
+
+* A plugin can now write multiple data streams to a single trace concurrently,
+  e.g. write both `decrypted` and `ocr` at the same time. See the ":ref:`datastreams java`" code snippets for
+  general examples on adding data to a trace.
+
+## 0.6.1
+
+* The JAVA SDK is now distributed through maven central instead of the Hansken community.
+
+## 0.6.0
+
+.. warning:: It is highly recommended to upgrade your plugin to this new version.
+             See the migration steps below.
+
+* Extraction plugin container images are now labeled with PluginInfo. This
+  allows Hansken to efficiently load extraction plugins.
+
+* By default, extraction plugin version is managed in the plugin's `pom.xml`.
+  The `.pluginVersion(..)` can be removed from the PluginInfo builder.
+
+* **Migration steps from earlier versions** -- for plugins that use the Java
+  extraction plugin SuperPOM:
+
+  1. Update the SDK version in your `pom.xml`
+  2. If you come from a version prior to `0.4.0`, or if you use a plugin name
+     instead of a plugin id in your `pluginInfo()`, switch to the plugin id style
+     (read  instructions for version `0.4.0`)
+  3. Set your plugin version in your project's `pom.xml`, and remove the
+     following from your `PluginInfo.Builder`:
+
+     ```java
+     .pluginVersion(...)
+     ```
+
+  4. Update your build scripts to build your plugin (Docker) container image.
+     You should build your plugin container image with the following command:
+
+     ```bash
+     mvn package docker:build`
+     ```
+
+     This will generate a plugin image:
+
+     * The extraction plugin is added to your local image registry
+       (`docker images`),
+     * The image name is `extraction-plugin/PLUGINID`, e.g.
+       `extraction-plugin/nfi.nl/extract/chat/whatsapp`,
+     * The image is tagged with two tags: `latest`, and your plugin version.
+
+     Nb. If Docker is not available in your environment, `podman` can be used
+     as an alternative. See :ref:`packaging <java_superpom_podman>` for more
+     details.
+
+## 0.5.0
+
+* Add new tracelet api `Trace.addTracelet(type, consumer)`.
+  It can be used like this:
+
+  ```java
+  trace.addTracelet("prediction", tracelet -> tracelet
+       .set("type", "classification")
+       .set("label", "label")
+       .set("confidence", 0.8f)
+       .set("embedding", Vector.of(1,2,3))
+       .set("modelName", "yolo")
+       .set("modelVersion", "2.0"));
+  ```
+
+* Deprecate Trace.addTracelet(Trace)
+* Support vector data type in trace properties.
+
+## 0.4.13
+
+* When writing input search traces for tests, it is no longer required to explicitly set an `id` property.
+  These are automatically generated when executing tests.
+
+## 0.4.7
+
+* A new convenience method `id(String, String, String)` is added to the PluginInfo builder. This removes some
+  boilerplate code when setting the pluginId. More details on the plugin naming conventions can be found at the
+  :doc:`../concepts/plugin_naming_convention` section.
+
+  ```java
+  PluginInfo.builderFor(this)
+            .id("nfi.nl", "extract", "TestPlugin") // new style
+            .id(new PluginId("nfi.nl", "extract", "TestPlugin")) // old style, but also works
+            ...
+  ```
+
+## 0.4.6
+
+* It is now possible to specify maximum system resources in the `PluginInfo`. To run a plugin with 0.5 cpu (= 0.5
+  vCPU/Core/hyperthread) and 1 gb memory, for example, the following configuration can be added to `PluginInfo`:
+
+  ```java
+  PluginInfo.builderFor(this)
+      ...
+      .pluginResources(PluginResources.builder()
+          .maximumCpu(0.5f)
+          .maximumMemory(1000)
+          .build())
+      .build();
+  ```
+
+## 0.4.0
+
+* Extraction Plugins are now identified with a `PluginInfo.PluginId` containing a domain, category and name. The
+  method `PluginInfo.name(pluginName)` has been replaced by `PluginInfo.id(new PluginId(domain, category, name)`. More
+  details on the plugin naming conventions can be found at the :doc:`../concepts/plugin_naming_convention` section.
+
+* `PluginInfo.name()` is now deprecated (but will still work for backwards compatibility).
+
+* A new license field `PluginInfo.license` has also been added in this release.
+
+* The following example creates a PluginInfo for a plugin with the name `TestPlugin`, licensed under
+  the `Apache License 2.0` license:
+
+  ```java
+  PluginInfo.builderFor(this)
+            .id(new PluginId("nfi.nl", "extract", "TestPlugin")) // id.domain: nfi.nl, id.category: extract, id.name: TestPlugin
+            // .name("TestPlugin") // no longer supported
+            .pluginVersion("0.4.1")
+            .author(Author.builder()...build())
+            .description("A plugin for testing.")
+            .maturityLevel(MaturityLevel.PROOF_OF_CONCEPT)
+            .hqlMatcher("*")
+            .webpageUrl("https://www.hansken.org")
+            .license("Apache License 2.0")
+            .build();
+  ```
+
+## 0.3.0
+
+* Extraction Plugins can now create new datastreams on a Trace through data transformations. Data transformations
+  describe how data can be obtained from a source.
+
+  An example case is an extraction plugin that processes an archive file. The plugin creates a child trace per entry in
+  the archive file. Each child trace will have a datastream that is a transformation that marks the start and length of
+  the entry in the original archive data. By just describing the data instead of specifying the actual data, a lot of
+  space is saved.
+
+  Although Hansken supports various transformations, the Extraction Plugins SDK for now only supports ranged data
+  transformations. Ranged data transformations define data as a list of ranges, each range with an offset and length in
+  a bytearray.
+
+  The following example sets a new datastream with dataType `html` on a trace, by setting a ranged data transformation:
+
+  ```java
+  trace.setData("html", RangedDataTransformation.builder().addRange(offset, length).build());
+  ```
+
+  The following example creates a child trace and sets a new datastream with dataType `raw` on it, by setting a ranged
+  data transformation with two ranges:
+
+  ```java
+  trace.newChild(format("lineNumber %d", lineNumber), child -> {
+      child.setData("raw", RangedDataTransformation.builder()
+        .addRange(10, 20)
+        .addRange(50, 30)
+        .build());
+  });
+  ```
+
+  More detailed documentation will follow in an upcoming SDK release.
+
+## 0.2.0
+
+.. warning:: This is an API breaking change. Plugins created with an earlier version of the extraction plugin SDK are
+   not compatible with Hansken that uses `0.2.0` or later.
+
+* Introduced a new extraction plugin type `DeferredExtractioPlugin`. Deferred Extraction plugins can be run at a
+  different extraction stage. This type of plugin also allows accessing other traces using the searcher.
+
+* The class `ExtractionContext` has been renamed to `DataContext`. The new name `DataContext` represents the class
+  contents better. Plugins have to update matching import statements and the type in `ExtractionPlugin.process()`
+  implementation in the same way. This change has no functional side effects.
+
+  Old:
+
+  ```java
+  import org.hansken.plugin.extraction.api.ExtractionContext;
+
+  @Override
+
+  public void process(final Trace trace, final ExtractionContext context) throws IOException {
+
+  }
+  ```
+
+  New:
+
+  ```java
+  import org.hansken.plugin.extraction.api.DataContext;
+
+  @Override
+  public void process(final Trace trace, final DataContext dataContext) throws IOException {
+
+  }
+  ```
