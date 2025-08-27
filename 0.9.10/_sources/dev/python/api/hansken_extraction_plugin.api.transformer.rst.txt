@@ -1,0 +1,29 @@
+hansken\_extraction\_plugin.api.transformer
+===========================================
+
+.. automodule:: hansken_extraction_plugin.api.transformer
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Transformer
+   
+   
+
+   
+   
+   
+
+
+

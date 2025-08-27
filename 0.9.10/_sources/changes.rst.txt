@@ -1,0 +1,15 @@
+.. _changelog:
+
+Changelog
+=========
+
+The following page lists all (technical) changes in the extraction plugin SDK.
+
+Programming language specific API changes are described in more detail on API changelog pages.
+These pages list new API functionalities, and describe how to update your plugins when API changes are in order.
+For the API changelog pages see:
+
+* :doc:`dev/java/api_changelog`
+* :doc:`dev/python/api_changelog`
+
+.. mdinclude:: ../CHANGES.md
