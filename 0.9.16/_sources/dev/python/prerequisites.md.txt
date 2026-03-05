@@ -1,0 +1,9 @@
+# Prerequisites
+
+All required project dependencies to build extraction plugins are published on the public [PyPI](https://pypi.org/project/hansken-extraction-plugin/).
+
+Required:
+
+* Python 3.10 or higher
+* Java 11 (for running the test-framework, which is implemented in Java)
+* Docker (for packaging and deploying extraction plugins in containers, can be omitted if you have an external build pipeline that provides Docker)

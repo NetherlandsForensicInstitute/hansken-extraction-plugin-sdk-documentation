@@ -1,0 +1,30 @@
+hansken\_extraction\_plugin.api.search\_sort\_option
+====================================================
+
+.. automodule:: hansken_extraction_plugin.api.search_sort_option
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Direction
+      SearchSortOption
+   
+   
+
+   
+   
+   
+
+
+
