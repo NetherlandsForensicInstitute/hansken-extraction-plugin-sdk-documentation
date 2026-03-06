@@ -1,0 +1,5 @@
+# Examples
+
+Extraction Plugin Examples in both Java and Python can be found in the
+[Hansken Extraction Plugin Examples Repository](https://github.com/NetherlandsForensicInstitute/hansken-extraction-plugin-sdk-examples)
+hosted on Github.

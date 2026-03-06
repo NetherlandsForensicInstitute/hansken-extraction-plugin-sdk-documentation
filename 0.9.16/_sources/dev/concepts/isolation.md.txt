@@ -1,0 +1,28 @@
+# Plugin isolation
+
+Extraction plugins allows arbitrary code to be executed during a Hansken extraction. This code is executed inside the
+Hansken cluster. Extraction plugins are subjected
+to [Hanskens design principles](https://www.sciencedirect.com/science/article/pii/S1742287615000857?via%3Dihub)
+such as security, privacy and transparency. To ensure that plugins are compliant to these principles, each plugin will
+be executed in isolation. This page describes the isolation measures that are in place.
+
+## User isolation
+
+The following user restrictions are implied on the plugin:
+
+* The plugin can not run as `root`.
+* Instead, the plugin will run as user `1000`
+* and with group `2000`
+* and with fsgroup `3000`
+
+## System calls
+
+Plugins are only allowed to call a limited set of (Linux) system calls. This ensures that a plugin can be executed in a
+secure manner within the Hansken platform.
+
+Hansken uses Kubernetes to run extraction plugins. The Kubernetes `RuntimeDefault` secure computing mode (`seccomp`) is
+enabled to provide a sane default of available system calls.
+
+## Network isolation
+
+Plugins are not allowed to communicate over the network.
